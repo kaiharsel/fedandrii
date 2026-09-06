@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>VelvetCake: Website, Catalog and CRM for a Lviv Confectionery / FED.ANDRII</title>
+  <meta name="description" content="FED.ANDRII case study: VelvetCake, a React and Firebase application for a Lviv confectionery. Dessert catalog, request forms, master-class booking and a private CRM where orders from the site, Instagram and Telegram meet in one pipeline. Live at velvetcake.site">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://fedandrii.me/case-confectionery.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VelvetCake: Website, Catalog and CRM for a Lviv Confectionery">
+  <meta property="og:description" content="Dessert catalog, request forms, master-class booking and a private CRM: orders from the site, Instagram and Telegram in one pipeline. React, Vite, Firebase. Live at velvetcake.site">
+  <meta property="og:url" content="https://fedandrii.me/case-confectionery.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="FED.ANDRII / Design &amp; Development">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=95">
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://fedandrii.me/case-confectionery.html">
+  <link rel="alternate" hreflang="uk" href="https://fedandrii.me/ua/case-confectionery.html">
+  <link rel="alternate" hreflang="pl" href="https://fedandrii.me/pl/case-confectionery.html">
+  <link rel="alternate" hreflang="de" href="https://fedandrii.me/de/case-confectionery.html">
+  <link rel="alternate" hreflang="x-default" href="https://fedandrii.me/case-confectionery.html">
+  <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
+       (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
+       поважати. Інакше посилання на польську версію, надіслане клієнтові,
+       кидало б його на ту мову, яку він колись обрав тут раніше.
+       Пошукових роботів не перекидаємо взагалі. -->
+  <script>(function(){try{
+var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"index.html";
+var D={uk:"ua",pl:"pl",de:"de"},cur="en",k;
+for(k in D){if(new RegExp("(^|/)"+D[k]+"/").test(p))cur=k;}
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(cur!=="en")return;
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
+  (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
+  (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
+if(!D[w])return;
+location.replace(D[w]+"/"+f);
+}catch(e){}})();</script>
+</head>
+<body class="case-page">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html#about" class="nav__link" data-text="About"><span>About</span></a>
+        <a href="index.html#services" class="nav__link" data-text="Services"><span>Services</span></a>
+        <a href="index.html#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Message on Telegram</span></a>
+
+        <p class="nav__time">
+          <span>My local time</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
+            <span class="lang__cur">EN</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="case-confectionery.html" class="lang__item is-on" hreflang="en" data-lang="en" aria-current="page">English</a></li>
+            <li><a href="ua/case-confectionery.html" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+            <li><a href="pl/case-confectionery.html" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
+            <li><a href="de/case-confectionery.html" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Contact me</span></a>
+        <button class="burger" id="burger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+
+
+
+  <!-- Page navigation, like Notion's floating table of contents -->
+  <nav class="toc" aria-label="Page navigation">
+    <a href="#brand" class="toc__item"><span class="toc__label">About the brand</span><span class="toc__line"></span></a>
+    <a href="#task" class="toc__item"><span class="toc__label">The task</span><span class="toc__line"></span></a>
+    <a href="#solution" class="toc__item"><span class="toc__label">The solution</span><span class="toc__line"></span></a>
+    <a href="#catalog" class="toc__item"><span class="toc__label">Catalog</span><span class="toc__line"></span></a>
+    <a href="#order" class="toc__item"><span class="toc__label">Ordering</span><span class="toc__line"></span></a>
+    <a href="#crm" class="toc__item"><span class="toc__label">CRM</span><span class="toc__line"></span></a>
+    <a href="#tech" class="toc__item"><span class="toc__label">Technically</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">The result</span><span class="toc__line"></span></a>
+    <a href="#screens" class="toc__item"><span class="toc__label">Screens</span><span class="toc__line"></span></a>
+  </nav>
+  <main>
+    <!-- Case header. Same block order as the Melumé case:
+         title, cover, subtitle, property table. -->
+    <section class="case-hero container">
+      <a href="index.html#works" class="case-back">
+        <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
+        Back to portfolio
+      </a>
+
+      <h1 class="case-hero__title case-hero__title--lead">VelvetCake</h1>
+
+      <div class="case-cover reveal" data-parallax>
+        <img src="img/velvet-home.jpg" alt="VelvetCake home page on a laptop" loading="lazy" width="1440" height="900">
+      </div>
+
+      <p class="case-lead reveal">A website, catalog and CRM for a Lviv confectionery: orders from the site, Instagram and Telegram in one place</p>
+
+      <div class="case-facts reveal">
+        <div class="case-facts__row">
+          <span class="case-facts__key">City</span>
+          <span class="case-facts__val">Lviv</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Platform</span>
+          <span class="case-facts__val">React, Vite, Firebase</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Scope</span>
+          <span class="case-facts__val">Design, website, catalog, CRM</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Site</span>
+          <span class="case-facts__val"><a href="https://velvetcake.site" target="_blank" rel="noopener">velvetcake.site</a></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About the brand -->
+    <section class="section container" id="brand">
+      <div class="section__head reveal">
+        <h2 class="section__label">About the brand</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>VelvetCake is a confectionery from Lviv: custom cakes, bento cakes, cupcakes, candy bars, desserts and bento-decorating master classes. Visually the brand rests on a dark-luxury mood: a dark palette, restrained typography, the dessert itself carrying the frame</p>
+        <p>Desserts here are bought with the eyes, so the showcase works exactly as well as it looks. But behind the showcase there is a second half of the business the customer never sees: orders arriving every day from three different channels</p>
+      </div>
+    </section>
+
+    <!-- The task -->
+    <section class="section container" id="task">
+      <div class="section__head reveal">
+        <h2 class="section__label">The task</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>Orders in a confectionery come from everywhere: someone writes on Instagram, someone on Telegram, someone wants to order right on the site. While all of that lives in chat threads, things get lost and the picture of the day is kept in someone's head</p>
+        <p>They needed a site that carries the brand mood and takes orders, and at the same time a workplace for the pastry chef where every request lands and where she can change the menu, prices and master classes herself, without a developer</p>
+      </div>
+    </section>
+
+    <!-- The solution -->
+    <section class="section container" id="solution">
+      <div class="section__head reveal">
+        <h2 class="section__label">The solution</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>Not a landing page with a "message us" button, but an application with two entrances: a public site for customers and a private CRM for the team at /admin</p>
+        <p>The site is a dessert catalog, a dedicated page for every dessert, master classes and an FAQ. A request from any form on the site instantly becomes a card in the CRM. Orders from Instagram and Telegram go into the same pipeline by hand, so every customer is visible in one list</p>
+        <p>Menu, prices, photos and master-class themes are edited in the CRM: change it in the panel and the site updates</p>
+      </div>
+    </section>
+
+    <!-- Catalog -->
+    <section class="section container" id="catalog">
+      <div class="section__head reveal">
+        <h2 class="section__label">Catalog</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>Five categories: cakes, bento, cupcakes, candy bars, desserts. Search by name and a category filter on top</p>
+        <p><span class="lead-in">Categories</span>The entry point for someone who doesn't know yet what they want and is simply browsing the showcase</p>
+        <p><span class="lead-in">Search</span>For those who came for a specific dessert or are picking one for an occasion</p>
+        <p><span class="lead-in">Dessert page</span>Photos, weight, portions, allergens, a "from" price. Every dessert gets its own page, not a line in a list</p>
+        <p><span class="lead-in">FAQ</span>Lead times, delivery across Lviv in branded packaging or pickup, multi-tier cakes of 8-12 kg, a design from a reference or from the portfolio</p>
+      </div>
+
+      <blockquote class="case-quote reveal">
+        Questions about ingredients, allergens and lead times are the most common ones a confectionery gets. When the page answers them instead of a chat thread, far more orders make it to the end
+      </blockquote>
+    </section>
+
+    <!-- Ordering -->
+    <section class="section container" id="order">
+      <div class="section__head reveal">
+        <h2 class="section__label">Ordering</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>The dessert page has one button: "Leave a request". A short form opens: name and phone, no registration, no cart. After sending, the customer sees that they will be contacted within an hour during working hours</p>
+        <p><span class="lead-in">Master classes</span>A dedicated page with decorating themes, price, number of seats and the steps of the session. Booking uses the same short form plus the number of seats</p>
+        <p><span class="lead-in">Instagram and Telegram</span>Stay fully working channels: the contacts are in the header, on the menu page and in the footer. Those orders the pastry chef enters into the CRM by hand so the pipeline is complete</p>
+        <p>Every request from the site is saved with a mark of where it came from: the dessert page or the master-class page. The CRM shows it right away</p>
+      </div>
+    </section>
+
+    <!-- CRM -->
+    <section class="section container" id="crm">
+      <div class="section__head reveal">
+        <h2 class="section__label">CRM</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>The panel lives on the same domain at /admin, login with email and password. Four sections</p>
+        <p><span class="lead-in">Requests</span>Every form from the site lands here. Status counters sit on top: new, in progress, done, cancelled; below them a search by name, phone or product. Each request is a card with its type (order or master class), date, contact, dessert and the customer's note, and the status changes right on the card. The pastry chef takes an order from the first call to handover and always sees what is in progress right now</p>
+        <p><span class="lead-in">Menu</span>Products, prices, descriptions, photos and visibility in the catalog. A product can be hidden from the site with one switch, without deleting it</p>
+        <p><span class="lead-in">Master classes</span>Decorating themes: names, duration, number of seats, prices and visibility</p>
+        <p><span class="lead-in">For the developer</span>Service actions: reset the menu or master classes to the base state from code, load demo requests for a showcase</p>
+        <p>Everything changed in the CRM is stored in Firestore and shows up on the site without a rebuild and without a developer</p>
+      </div>
+    </section>
+
+    <!-- Technically -->
+    <section class="section container" id="tech">
+      <div class="section__head reveal">
+        <h2 class="section__label">Technically</h2>
+      </div>
+
+      <ul class="case-list reveal">
+        <li>A React application built with Vite; pages load as separate chunks, so the CRM costs a regular visitor nothing</li>
+        <li>Firebase: Auth for the CRM login, Firestore for requests, menu and master classes, Storage for product photos</li>
+        <li>Real-time updates: a new request appears in the CRM without a reload</li>
+        <li>Catalog with categories and search, a dedicated route per dessert</li>
+        <li>The base menu and master classes are seeded in code and CRM edits are layered on top: there is always something to roll back to</li>
+        <li>Lenis smooth scroll, GSAP and Motion animations, responsive for phone, meta tags and canonical on every page</li>
+      </ul>
+    </section>
+
+    <!-- Result -->
+    <section class="section container" id="result">
+      <div class="section__head reveal">
+        <h2 class="section__label">The result</h2>
+      </div>
+
+      <div class="case-text reveal">
+        <p>The confectionery got a system, not just a site: the showcase takes requests around the clock, and every order, from the site, Instagram and Telegram, is collected in one CRM with statuses</p>
+        <p>Menu, prices, photos and master classes are managed by the team themselves. A developer is no longer needed to add a cake or change a price</p>
+      </div>
+
+      <a href="https://velvetcake.site" target="_blank" rel="noopener" class="case-outlink reveal">
+        velvetcake.site
+        <svg class="cta-arr" width="22" height="20" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+      </a>
+    </section>
+
+    <!-- Screens of the live site -->
+    <section class="section container" id="screens">
+      <div class="section__head reveal">
+        <h2 class="section__label">Screens</h2>
+      </div>
+
+      <div class="case-gallery">
+        <a href="https://velvetcake.site" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-home.jpg" alt="VelvetCake home page with the hero screen and showcase" loading="lazy" width="1440" height="900">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Home page</span>
+            <span class="case-shot__tag">First screen &amp; showcase</span>
+          </div>
+        </a>
+
+        <a href="https://velvetcake.site/menu" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-menu-tablet.jpg" alt="VelvetCake dessert catalog on a tablet" loading="lazy" width="900" height="1200">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Dessert catalog</span>
+            <span class="case-shot__tag">Five categories and search</span>
+          </div>
+        </a>
+
+        <a href="https://velvetcake.site/menu/klasychnyi-tort" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-product.jpg" alt="VelvetCake dessert page with weight, portions, allergens and price" loading="lazy" width="1440" height="900">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Dessert page</span>
+            <span class="case-shot__tag">Weight, portions, allergens, price and the request form</span>
+          </div>
+        </a>
+
+        <a href="https://velvetcake.site/masterclasses" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-masterclass.jpg" alt="VelvetCake master class page" loading="lazy" width="1440" height="900">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Master classes</span>
+            <span class="case-shot__tag">Themes, price, seats and booking</span>
+          </div>
+        </a>
+
+        <!-- CRM: screens from the Figma design. Files: img/velvet-crm-*.jpg -->
+        <div class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-crm-leads.jpg" alt="VelvetCake CRM, the Requests section on a laptop" loading="lazy" width="1440" height="1022">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">CRM / Requests</span>
+            <span class="case-shot__tag">Status counters, search, request cards with a status switch</span>
+          </div>
+        </div>
+
+        <div class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-crm-menu.jpg" alt="VelvetCake CRM, the Menu section: products, prices, photos, visibility" loading="lazy" width="1440" height="1515">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">CRM / Menu</span>
+            <span class="case-shot__tag">Products, prices, photos and catalog visibility</span>
+          </div>
+        </div>
+
+        <div class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+            <img src="img/velvet-crm-masterclasses.jpg" alt="VelvetCake CRM, the Master classes section: themes, duration, seats, prices" loading="lazy" width="1440" height="949">
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">CRM / Master classes</span>
+            <span class="case-shot__tag">Decorating themes, duration, seats, prices</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal">
+        <span class="footer__cta-label">Have an idea?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          Contact me
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#works">Portfolio</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          My local time:
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/script.js?v=95"></script>
+</body>
+</html>

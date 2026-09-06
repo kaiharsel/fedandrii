@@ -1,0 +1,4893 @@
+/* ============================================
+   ANDRII FEDYSHYN | UI/UX DESIGNER PORTFOLIO
+   Dark monochrome theme · Editorial typography
+   ============================================ */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-soft: #101010;
+  --bg-card: #000000;
+  --line: rgba(240, 238, 232, 0.13);
+  --line-strong: rgba(240, 238, 232, 0.32);
+  --text: #f0eee8;
+  --text-dim: rgba(240, 238, 232, 0.52);
+  --accent: #ffffff;
+  --glow: rgba(255, 255, 255, 0.16);
+  --font-display: "Tektur", "Arial Black", sans-serif;
+  --font-body: "Onest", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Courier New", Consolas, monospace;
+  --font-hand: "Caveat", "Segoe Script", "Comic Sans MS", cursive;
+  --ease: cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis {
+  height: auto;
+  scroll-behavior: auto;
+}
+
+/* На сенсорному екрані Lenis вимкнений, тож класу .lenis немає і базовий
+   scroll-behavior: smooth знову діє - а він анімує КОЖЕН програмний перехід,
+   зокрема миттєвий стрибок під шторкою, який має бути миттєвим. Ті переходи,
+   що справді мають бути плавними, просять behavior: "smooth" явно. */
+@media (hover: none) and (pointer: coarse) {
+  html { scroll-behavior: auto; }
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--accent);
+  color: #0a0a0a;
+}
+
+/* Scrollbar hidden: the key indicator on the right shows scroll progress */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 64px);
+}
+
+/* ============ PRELOADER ============ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 40px clamp(24px, 4vw, 60px);
+  transition: opacity 0.85s var(--ease), visibility 0.85s;
+}
+
+.preloader.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Лічильник грає лише раз за візит: інлайн-скрипт у <head> ставить .warm,
+   щойно sessionStorage каже, що якусь сторінку вже бачили. Ховаємо ще до
+   першого кадру, щоб не блимнуло "0%". */
+html.warm .preloader { display: none; }
+
+/* На першому заході (прелоадер грає) вступна анімація героя стоїть на
+   паузі й рушає з класом .intro-ready - його вішає той самий таймер, що
+   прибирає завісу. На повторних заходах прелоадера немає, класу .warm
+   досить, щоб це правило не спрацювало, і все йде як раніше. */
+html:not(.warm) .hero__cta,
+html:not(.warm) .hero__scroll { animation-play-state: paused; }
+
+html.intro-ready .hero__cta {
+  animation-play-state: running;
+  animation-delay: 0.15s;
+}
+
+html.intro-ready .hero__scroll {
+  animation-play-state: running;
+  animation-delay: 0.3s;
+}
+
+.preloader__name {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.5vw, 18px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  padding-bottom: 14px;
+}
+
+.preloader__count {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 12vw, 160px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+/* ============ PAGE VEIL (переходи між сторінками) ============ */
+/* Один лист грає обидві половини переходу: клік по внутрішньому посиланню
+   піднімає його знизу і закриває сторінку, наступна сторінка вантажиться
+   вже накритою і відпускає лист далі вгору, відкриваючи себе. Створюється
+   скриптом на кожній сторінці; без JS не показується ніколи. */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: #050505;
+  transform: translateY(102%);
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.page-veil.is-closing {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.55s var(--ease);
+  pointer-events: auto;
+}
+
+.page-veil.is-covering {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.page-veil.is-leaving {
+  transform: translateY(-102%);
+  transition: transform 0.65s var(--ease) 0.15s;
+}
+
+/* ============ HEADER ============ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+  background: rgba(8, 8, 8, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--line);
+}
+
+
+/* While the mobile menu is open the header must stay on screen and free of
+   transform/backdrop-filter: both turn the header into the containing block
+   for the fixed fullscreen nav inside it, breaking the menu below the fold */
+.header.menu-open {
+  transform: none !important;
+  transition: none;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header__logo {
+  font-family: var(--font-display);
+  /* Більший логотип. Стелю задає висота шапки: її тримає кнопка "Contact me"
+     (41px), тож поки рядок логотипа нижчий за неї, шапка не росте - а від
+     її висоти залежать і відступ героя, і позиція смужки прокрутки. */
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.header__logo span { color: var(--text-dim); }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 36px);
+}
+
+/* Rolling text link */
+.nav__link {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  display: inline-block;
+  padding: 2px 0;
+  transition: color 0.3s var(--ease);
+}
+
+/* the rule sweeps in from the left and, on the way out, retreats to the right */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  /* Розрядка додає порожнє місце ПІСЛЯ останньої літери, і воно входить у
+     ширину посилання. Лінія на всю ширину виходила довшою за сам напис і
+     стояла не по центру - тут ми віднімаємо рівно один крок розрядки. */
+  right: 0.12em;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s var(--ease);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible { color: var(--text); }
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Активний пункт: та сама лінія, що й при наведенні, лише постійна. Клас
+   вішає скрипт за тим, якої секції зараз найбільше видно на екрані. */
+.nav__link.is-active { color: var(--text); }
+
+.nav__link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.lang-switch a,
+.lang-switch span.current {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: all 0.3s;
+  color: var(--text-dim);
+}
+
+.lang-switch span.current {
+  background: var(--text);
+  color: #0a0a0a;
+  border-color: var(--text);
+}
+
+.lang-switch a:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header__cta {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: #000;
+  transition: all 0.35s var(--ease);
+  white-space: nowrap;
+}
+
+.header__cta:hover {
+  background: var(--text);
+  border-color: var(--text);
+  color: #0a0a0a;
+  box-shadow: 0 0 30px var(--glow);
+}
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 110;
+}
+
+.burger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.35s var(--ease), opacity 0.3s;
+}
+
+.burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.hero__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(16px, 2.2vh, 26px);
+  margin-bottom: clamp(24px, 4vh, 60px);
+}
+
+.hero__tags {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: clamp(12px, 1.1vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.hero__tags span {
+  display: block;
+  opacity: 0;
+  transform: translateX(-24px);
+  animation: tagIn 0.7s var(--ease) forwards;
+}
+
+.hero__tags span:nth-child(1) { animation-delay: 0.5s; }
+.hero__tags span:nth-child(2) { animation-delay: 0.62s; }
+.hero__tags span:nth-child(3) { animation-delay: 0.74s; }
+.hero__tags span:nth-child(4) { animation-delay: 0.86s; }
+
+@keyframes tagIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.hero__tags .accent { color: var(--text); }
+
+.hero__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.2vw, 15px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px 20px;
+  background: #000;
+  opacity: 0;
+  animation: tagIn 0.7s var(--ease) 0.9s forwards;
+}
+
+/* Пігулку статусу знято з очей, але її смуга лишається в потоці. Герой
+   вирівняний по низу, тож якби вузол зник зовсім, теги з'їхали б униз на
+   її висоту разом із проміжком - на 1440x900 це 70px. Анімації глушимо,
+   щоб невидимий вузол не крутив кадри. Щоб прибрати й порожнє місце -
+   видалити .hero__status з розмітки index.html та en.html. */
+.hero__status {
+  visibility: hidden;
+  animation: none;
+}
+
+.hero__status .pulse,
+.hero__status .pulse::after { animation: none; }
+
+.hero__status .pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 0;
+  background: var(--text);
+  position: relative;
+}
+
+.hero__status .pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 0;
+  border: 1px solid var(--text);
+  animation: pulseRing 1.8s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 10.5vw, 168px);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(24px, 4vh, 56px);
+}
+
+.hero__title .line {
+  display: block;
+}
+
+.hero__title .line > span {
+  display: block;
+}
+
+/* другий рядок стоїть з відступом праворуч — сходинкою під першим.
+   Селектор через ~, а не :nth-child: друкування обгортає пробіли між
+   рядками у власні span і збиває нумерацію дітей */
+.hero__title .line ~ .line {
+  margin-left: 0.7em;
+}
+
+.hero__title .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+/* друкується тим самим механізмом, що й решта тексту на сайті
+   ([data-typeintro]); курсор під заголовок береться товщий */
+.hero__title .tw-caret {
+  width: 0.06em;
+  margin-left: 0.06em;
+}
+
+.hero__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  padding-bottom: clamp(28px, 5vh, 64px);
+  /* keeps the title exactly where it sat when the intro line lived here */
+  min-height: 113px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__scroll {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 1.15s forwards;
+}
+
+.hero__scroll svg {
+  animation: bounceDown 1.8s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Scroll hint: "down" text/arrow by default, "right" pair in horizontal mode */
+.hero__scroll-txt--h,
+.hero__scroll-arr--h { display: none; }
+
+@keyframes bounceRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+/* Shared marquee keyframes (footer name strip) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============ TYPEWRITER HEADINGS ============ */
+.typewrite {
+  min-height: 1.25em;
+  min-width: 4px;
+}
+
+.typewrite.typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.09em;
+  height: 0.82em;
+  background: var(--text);
+  margin-left: 0.12em;
+  animation: caretBlink 0.85s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  50% { opacity: 0; }
+}
+
+/* ============ SECTIONS COMMON ============ */
+.section {
+  padding-block: clamp(80px, 12vh, 160px);
+}
+
+.section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: clamp(40px, 7vh, 90px);
+  padding-bottom: 4px;
+}
+
+.section__label {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* ============ SCROLL PROGRESS BAR (top) ============ */
+/* Смужка стоїть у самій шапці й чіпляється за її НИЖНІЙ край, а не за
+   число. Раніше тут було top: 80px і окреме top: 74px для телефона: варто
+   було змінитись висоті шапки (а вона змінилась, коли текстовий напис
+   замінили картинкою), і смужка або відставала на кілька пікселів, або
+   ховалась під шапкою зовсім. bottom: -1px садить її рівно на лінію
+   нижньої межі. Бічні поля ті самі, що в контейнера шапки. */
+.scroll-key {
+  position: absolute;
+  bottom: -1px;
+  left: clamp(24px, 5vw, 64px);
+  right: clamp(24px, 5vw, 64px);
+  height: 1px;
+  z-index: 90;
+  pointer-events: none;
+}
+
+/* Масштаб, а не ширина. Ширина - це розкладка: браузер мусив
+   перераховувати її на кожну подію прокрутки, та ще й перехід 0.15s
+   щоразу стартував наново і не встигав догоряти, через що смуга тягнулась
+   ривками. scaleX робить те саме зображення (градієнт стискається так
+   само, як стискалась ширина), але вже на композиторі, і без переходу
+   смуга йде за пальцем один в один. */
+.scroll-key__thread {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(var(--sp, 0));
+  transform-origin: left center;
+  will-change: transform;
+  background: linear-gradient(90deg, transparent, rgba(240, 238, 232, 0.55));
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(46px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94) translateY(30px);
+  /* 0.6s замість 1s: картки портфоліо великі, і за секунду проявлення при
+     швидкій прокрутці встигали піднятися на пів екрана ще напівпрозорими */
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Word-by-word split animation */
+.split .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.split .word > i {
+  display: inline-block;
+  font-style: normal;
+  transform: translateY(115%);
+  transition: transform 0.8s var(--ease);
+}
+
+.split.visible .word > i { transform: translateY(0); }
+
+/* A guaranteed break after the hero: the About section must stay out of
+   sight until the visitor actually scrolls, on every viewport height.
+   Neutralised inside the horizontal track, where panels set margin: 0. */
+/* ===== About over hero (вертикальна розкладка) =====
+   Той самий прийом, що і з секцією букв: герой прилипає на місці, а
+   "Про мене" наїжджає на нього зверху при скролі. Стосується лише
+   вертикальної розкладки - на широких екранах герой їде горизонтальним
+   треком і цей блок не застосовується. */
+body[data-hscroll]:not(.hscroll-on) main > * { position: relative; }
+
+body[data-hscroll]:not(.hscroll-on) .hero {
+  position: sticky;
+  /* вищий за екран герой спершу догортується, потім липне низом */
+  top: min(0px, calc(100vh - 100%));
+}
+
+body[data-hscroll]:not(.hscroll-on) #about {
+  z-index: 5;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+/* герой лишається приклеєним за рештою сторінки, тож усе після нього
+   мусить бути непрозорим і мати власний шар */
+body[data-hscroll]:not(.hscroll-on) .statement { background: var(--bg); }
+body[data-hscroll]:not(.hscroll-on) .footer { position: relative; }
+
+/* Перший екран "залипає": поки снап заряджений (сторінка на самому
+   верху), палець не гортає сторінку сам - весь жест віддається
+   проїзду до наступної секції. Клас знімає js/script.js одразу
+   після проїзду, далі прокрутка звичайна. */
+html.snap-armed,
+html.snap-armed body { touch-action: none; }
+
+/* ============ ABOUT ============ */
+.about__hello {
+  font-family: var(--font-display);
+  /* Більший напис. Стелю задає найдовший рядок: «a designer and developer»
+     зі зсувом сходинки займає 14.4em, а поле панелі - 1312px на 1440,
+     тож понад ~91px рядок ламався б надвоє. Обмеження по vh - через
+     горизонтальний трек: панель рівно на екран, тож всі 5 рядків
+     мусять влазити і в невисокий монітор. */
+  font-size: clamp(30px, min(6vw, 9.6vh), 88px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.08;
+  margin-bottom: clamp(48px, 8vh, 100px);
+}
+
+.about__hello .accent {
+  color: transparent;
+  /* Обведення без заливки. Товщина в em, щоб контур не тоншав на великих
+     кеглях і не зливався на малих */
+  -webkit-text-stroke: 0.022em var(--text);
+  text-stroke: 0.022em var(--text);
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.stat {
+  background: #000;
+  padding: clamp(28px, 4vw, 48px);
+  text-align: center;
+  transition: background 0.4s;
+}
+
+.stat:hover { background: var(--bg-soft); }
+
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.stat__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ============ WORKS ============ */
+.works__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.work {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  transition: border-color 0.4s, box-shadow 0.4s;
+  display: block;
+}
+
+.work:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+.work__visual {
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+}
+
+/* real screenshot in a portfolio card: fills the frame, top of the page
+   stays in view, gentle zoom on hover */
+.work__visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ease);
+}
+
+.work:hover .work__visual img { transform: scale(1.04); }
+
+.work__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 0;
+  border: 1px solid var(--line-strong);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+/* --- CSS device mockups (replace with real screenshots later) --- */
+.mock {
+  transform: translateY(var(--py, 0px));
+  transition: transform 0.25s ease-out;
+  will-change: transform;
+}
+
+.work:hover .mock {
+  transform: translateY(calc(var(--py, 0px) - 8px)) scale(1.03);
+}
+
+/* Browser mockup */
+.mock-browser {
+  width: 72%;
+  background: #121212;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.mock-browser__bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #0c0c0c;
+}
+
+.mock-browser__bar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  background: #333;
+}
+
+.mock-browser__body { padding: 14px; }
+
+.mock-line {
+  height: 8px;
+  border-radius: 0;
+  background: #2a2a2a;
+  margin-bottom: 8px;
+}
+
+.mock-line--hero {
+  height: 26px;
+  width: 70%;
+  background: linear-gradient(90deg, #3a3a3a, #222);
+  margin-bottom: 12px;
+}
+
+.mock-line--sm { width: 45%; }
+
+.mock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mock-grid i {
+  aspect-ratio: 1;
+  border-radius: 0;
+  background: linear-gradient(135deg, #242424, #161616);
+  border: 1px solid var(--line);
+}
+
+.mock-grid i:nth-child(2) { background: linear-gradient(135deg, #2e2e2e, #1a1a1a); }
+
+/* Phone mockup */
+.mock-phone {
+  width: 34%;
+  aspect-ratio: 9 / 18;
+  background: #121212;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 12px 10px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.mock-phone::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 5px;
+  border-radius: 0;
+  background: #000;
+  border: 1px solid var(--line);
+}
+
+.mock-phone__body { padding-top: 14px; }
+
+.mock-card {
+  border-radius: 0;
+  background: linear-gradient(135deg, #262626, #151515);
+  border: 1px solid var(--line);
+  height: 44px;
+  margin-bottom: 8px;
+}
+
+.mock-card--big { height: 72px; background: linear-gradient(135deg, #303030, #191919); }
+
+/* UI kit mockup */
+.mock-kit {
+  width: 72%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mock-kit__cell {
+  background: #121212;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.mock-btn {
+  height: 22px;
+  border-radius: 0;
+  background: #f0eee8;
+}
+
+.mock-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+}
+
+.mock-toggle {
+  width: 40px;
+  height: 20px;
+  border-radius: 0;
+  background: #333;
+  position: relative;
+}
+
+.mock-toggle::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: #f0eee8;
+}
+
+.mock-swatches {
+  display: flex;
+  gap: 6px;
+}
+
+.mock-swatches i {
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  border: 1px solid var(--line);
+}
+
+.mock-swatches i:nth-child(1) { background: #f0eee8; }
+.mock-swatches i:nth-child(2) { background: #8a8a8a; }
+.mock-swatches i:nth-child(3) { background: #3a3a3a; }
+.mock-swatches i:nth-child(4) { background: #000; }
+
+.work__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px 8px;
+}
+
+.work__title {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.4vw, 19px);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.work__tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.work__desc {
+  padding: 0 24px 22px;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+.works__note {
+  margin-top: clamp(32px, 5vh, 56px);
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.works__note a {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-strong);
+  transition: opacity 0.3s;
+}
+
+.works__note a:hover { opacity: 0.7; }
+
+/* ============ SERVICES ============ */
+.service {
+  border-top: 1px solid var(--line);
+  padding: clamp(32px, 5vh, 56px) 0;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(20px, 3vw, 56px);
+  align-items: start;
+  transition: background 0.4s, padding-left 0.4s var(--ease);
+  position: relative;
+}
+
+
+.service:hover {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent 60%);
+  padding-left: 12px;
+}
+
+.service__title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.service__stack-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.service__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.service__list li {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 6px 14px;
+  transition: all 0.3s;
+  background: #000;
+}
+
+.service:hover .service__list li {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+.service__desc {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+/* ============ PROCESS ============ */
+.process__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2.5vw, 40px);
+}
+
+.process__step {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: clamp(24px, 2.5vw, 36px);
+  background: var(--bg-card);
+  transition: border-color 0.4s, transform 0.4s var(--ease), box-shadow 0.4s;
+}
+
+.process__step:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 255, 255, 0.04);
+}
+
+.process__step .num {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text);
+  display: block;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.process__step h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.process__step p {
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* Pricing: pick a service on the left, its receipt prints on the right */
+.price {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 400px);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: start;
+}
+
+.price__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.price__opt {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--line);
+  padding: clamp(14px, 1.8vh, 20px) 4px clamp(14px, 1.8vh, 20px) 20px;
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: color 0.3s, background 0.35s;
+}
+
+
+/* the marker that walks down the list with the choice */
+.price__opt::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  background: var(--text);
+  transform: translateY(-50%);
+  transition: height 0.35s var(--ease);
+}
+
+.price__opt:hover { color: var(--text); }
+
+.price__opt.is-active {
+  color: var(--text);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 70%);
+}
+
+.price__opt.is-active::before { height: 62%; }
+
+.price__opt-num {
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.price__opt-name {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  flex: 1;
+  padding: 0 4px 0 14px;
+}
+
+.price__opt-sum {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Receipt panels: only the chosen one is printed */
+.price__paper { position: relative; }
+
+.price__paper .receipt--panel { display: none; }
+
+.price__paper .receipt--panel.is-active {
+  display: flex;
+  animation: receiptIn 0.4s var(--ease);
+}
+
+@keyframes receiptIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+.receipt {
+  background: #131313;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 40px clamp(26px, 2.6vw, 36px) 34px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.4s var(--ease), background 0.4s;
+  clip-path: polygon(0% 6px, 6% 2px, 11% 9px, 18% 3px, 24% 10px, 31% 1px, 38% 7px, 45% 3px, 52% 9px, 59% 2px, 66% 6px, 73% 10px, 80% 3px, 87% 7px, 93% 2px, 100% 6px, 100% calc(100% - 5px), 94% calc(100% - 10px), 88% calc(100% - 2px), 81% calc(100% - 7px), 74% calc(100% - 3px), 67% calc(100% - 9px), 60% calc(100% - 4px), 53% calc(100% - 10px), 46% calc(100% - 2px), 39% calc(100% - 6px), 32% calc(100% - 9px), 25% calc(100% - 3px), 18% calc(100% - 7px), 12% calc(100% - 2px), 6% calc(100% - 9px), 0% calc(100% - 4px));
+}
+
+.receipt:hover {
+  transform: translateY(-6px);
+  background: #181818;
+}
+
+.receipt__item {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  padding: 0 0 24px;
+  border-bottom: 1px solid rgba(240, 238, 232, 0.12);
+  margin-bottom: 24px;
+}
+
+.receipt__lines {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 30px;
+}
+
+.receipt__lines li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 13.5px;
+}
+
+.receipt__lines .k { color: var(--text-dim); white-space: nowrap; }
+
+.receipt__lines .dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(240, 238, 232, 0.18);
+  transform: translateY(-4px);
+  min-width: 14px;
+}
+
+.receipt__lines .v { white-space: nowrap; }
+
+.receipt__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  border-top: 1px solid rgba(240, 238, 232, 0.12);
+  padding-top: 26px;
+  margin-top: auto;
+}
+
+.receipt__total-label {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.receipt__sum {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.8vw, 38px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.receipt__sum--sm { font-size: clamp(20px, 2vw, 26px); }
+
+.receipt__uah {
+  text-align: right;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  padding-top: 10px;
+}
+
+.receipt__btn {
+  display: block;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--text);
+  color: #0a0a0a;
+  padding: 14px 18px;
+  margin-top: 26px;
+  transition: opacity 0.3s;
+}
+
+.receipt__btn:hover { opacity: 0.82; }
+
+.pricing__note {
+  margin-top: clamp(24px, 4vh, 40px);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+
+/* ============ SECTION LINKS ON THE HOME PAGE ============ */
+.explore {
+  display: flex;
+  flex-direction: column;
+}
+
+.explore__item {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 44px);
+  border-top: 1px solid var(--line);
+  padding: clamp(26px, 4vh, 44px) 4px;
+  color: var(--text-dim);
+  transition: color 0.35s, padding-left 0.4s var(--ease), background 0.4s;
+}
+
+
+.explore__item:hover {
+  color: var(--text);
+  padding-left: 14px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent 60%);
+}
+
+.explore__num {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+.explore__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.explore__name {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.4vw, 46px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.explore__desc {
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.explore__arrow {
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease);
+}
+
+.explore__item:hover .explore__arrow { transform: translate(6px, -6px); }
+
+/* ============ INNER PAGES (works, services, pricing) ============ */
+.inner-page__top { padding-top: clamp(104px, 14vh, 150px); }
+
+.inner-page .section:first-of-type { padding-top: clamp(16px, 3vh, 32px); }
+
+@media (max-width: 768px) {
+  .explore__item { gap: 14px; padding: 22px 2px; }
+  .explore__item:hover { padding-left: 2px; }
+  .explore__arrow { width: 26px; height: 26px; }
+}
+
+/* ============ CONTACT ============ */
+.contact {
+  text-align: center;
+  padding-block: clamp(100px, 16vh, 200px);
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6.5vw, 96px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: clamp(36px, 6vh, 64px);
+}
+
+.contact__title .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+.contact__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.6vw, 20px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: none;
+  color: var(--text);
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 12px;
+}
+
+.contact__btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+.contact__btn:hover::after,
+.contact__btn:focus-visible::after,
+.contact__btn:active::after,
+.contact__btn.tap-press::after { transform: scaleX(1); }
+
+.contact__alt {
+  margin-top: 28px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact__alt a {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-strong);
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.contact__alt a:hover { opacity: 0.7; }
+
+/* ============ FOOTER ============ */
+.footer {
+  border-top: 1px solid var(--line);
+  background: #000;
+  overflow: hidden;
+}
+
+.footer__cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: clamp(28px, 4.5vh, 52px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer__cta-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.footer__cta-link {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4.5vw, 64px);
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.3s;
+  position: relative;
+}
+
+.footer__cta-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease);
+}
+
+.footer__cta-link:hover::after,
+.footer__cta-link:focus-visible::after,
+.footer__cta-link:active::after,
+.footer__cta-link.tap-press::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.footer__cta-link .cta-arr { position: relative; }
+
+.footer__cta-link:hover .cta-arr,
+.footer__cta-link:focus-visible .cta-arr,
+.footer__cta-link:active .cta-arr,
+.footer__cta-link.tap-press .cta-arr { transform: rotate(0deg); }
+
+/* Giant scrolling name */
+.footer__name-marquee {
+  overflow: hidden;
+  padding: clamp(16px, 2.6vh, 30px) 0;
+}
+
+.footer__name-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.footer__name-track span {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.5vw, 104px);
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(240, 238, 232, 0.4);
+  transition: -webkit-text-stroke-color 0.4s;
+}
+
+.footer__name-marquee:hover .footer__name-track span {
+  -webkit-text-stroke-color: var(--text);
+}
+
+/* розділювачі — намальовані іконки: пензлик (дизайн) і дужки коду
+   (розробка) чергуються між фразами; той самий тонкий контур, що і в
+   букв, при ховері прокидаються разом із текстом */
+.footer__name-track .sep {
+  width: clamp(24px, 3.2vw, 50px);
+  height: clamp(24px, 3.2vw, 50px);
+  flex-shrink: 0;
+  color: rgba(240, 238, 232, 0.4);
+  transition: color 0.4s;
+}
+
+.footer__name-marquee:hover .footer__name-track .sep {
+  color: var(--text);
+}
+
+.footer__mid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: clamp(22px, 3.6vh, 40px) 0;
+}
+
+.footer__col h4 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.footer__col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__col a {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  transition: opacity 0.3s;
+}
+
+.footer__col a:hover { opacity: 0.6; }
+
+.footer__time {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.footer__time strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* ============ TABLET (<=1024) ============ */
+@media (max-width: 1024px) {
+  /* Full nav does not fit next to logo and CTA: burger + fullscreen overlay */
+  .burger { display: flex; }
+
+  .nav {
+    position: fixed;
+    inset: 0;
+    background: #050505;
+    flex-direction: column;
+    justify-content: center;
+    /* Повітря між пунктами. Нижня межа 26px, а не більша: у телефона, що
+       лежить боком, висота падає до 375px, і при більшому кроці пункти
+       вилізли б за екран. */
+    gap: clamp(26px, 6vh, 60px);
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition: transform 0.5s var(--ease), visibility 0s 0.5s;
+    z-index: 105;
+    /* Страховка: якщо вміст колись не влізе, меню прокрутиться, а не
+       зріжеться. safe center дублює звичайний center - там, де він
+       підтримується, вміст не тікає за верхній край при переповненні;
+       де ні, рядок просто ігнорується і лишається поведінка як була. */
+    overflow-y: auto;
+    justify-content: safe center;
+  }
+
+  .nav.open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.5s var(--ease), visibility 0s 0s;
+  }
+
+  .nav__link {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4.5vw, 34px);
+    color: var(--text);
+  }
+
+  /* Кнопка написати. У шапці на телефоні її немає (там не лишається місця
+     біля лого), тож у меню вона і є головною дією. Пігулка та сама, що на
+     ПК у шапці, лише крупніша. */
+  .nav__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: #000;
+    white-space: nowrap;
+    transition: background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
+  }
+
+  .nav__cta .tg-ico { width: 1.5em; height: 1.5em; }
+
+  .process__grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Телефон боком: висоти всього 375px, і повний набір пунктів у неї не
+   влазить. Зменшуємо крок і самі пункти рівно настільки, щоб усе було
+   видно без прокрутки. */
+@media (max-width: 1024px) and (max-height: 500px) {
+  .nav { gap: 14px; }
+  .nav__link { font-size: 22px; }
+
+  .nav__cta {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+
+  .nav__time { margin-top: 4px; font-size: 12px; }
+  .nav__time strong { font-size: 20px; }
+}
+
+/* На ПК меню горизонтальне, і кнопка там уже є в шапці */
+@media (min-width: 1025px) {
+  .nav__cta { display: none; }
+}
+
+/* Заливка лише під справжньою мишкою: на дотик :hover залипає після
+   натискання, а відгук на палець дає загальна анімація .tap-press */
+@media (hover: hover) and (pointer: fine) {
+  .nav__cta:hover {
+    background: var(--text);
+    border-color: var(--text);
+    color: #0a0a0a;
+  }
+}
+
+@media (max-width: 900px) {
+  .service {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service:hover { padding-left: 0; }
+
+  .about__hello { font-size: clamp(28px, 6vw, 88px); }
+}
+
+/* ============ MOBILE (<=768) ============ */
+@media (max-width: 768px) {
+  .price {
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vh, 40px);
+  }
+
+  .price__opt-name { font-size: 14px; padding-left: 12px; }
+  .header__cta { display: none; }
+
+  .lang-switch { font-size: 12px; }
+
+  .hero__top { flex-direction: column; gap: 20px; }
+  .hero__title { font-size: clamp(33px, 11vw, 80px); }
+  .hero__bottom { flex-direction: column; align-items: flex-start; gap: 28px; min-height: 183px; }
+
+  .about__stats { grid-template-columns: 1fr; }
+  .process__grid { grid-template-columns: 1fr; }
+
+  .works__grid { grid-template-columns: 1fr; }
+
+  .work__info {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    padding: 18px 20px 6px;
+  }
+
+  .work__tag { white-space: normal; }
+  .work__desc { padding: 0 20px 20px; }
+
+  .footer__cta { flex-direction: column; align-items: flex-start; }
+  .footer__mid { flex-direction: column; }
+}
+
+/* ============ SMALL PHONES (<=640) ============ */
+@media (max-width: 640px) {
+
+
+
+  .section { padding-block: clamp(64px, 10vh, 110px); }
+
+  .contact { padding-block: clamp(80px, 14vh, 150px); }
+
+  /* Long words like "починається" must fit narrow screens */
+  .contact__title { font-size: clamp(25px, 8.2vw, 56px); }
+}
+
+/* ============ NARROW PHONES (<=380) ============ */
+@media (max-width: 380px) {
+  .header__logo { font-size: 17px; }
+
+  .lang-switch a,
+  .lang-switch span.current { padding: 5px 9px; }
+
+  .burger { padding: 8px 2px; }
+
+  .header__right { gap: 10px; }
+}
+
+/* ============ CASE PAGE ============ */
+.case-hero {
+  padding-top: clamp(140px, 18vh, 190px);
+}
+
+/* Та сама кнопка-посилання, що й на решті сайту: напис і стрілка, у спокої
+   лінії немає, при наведенні вона виїжджає зліва направо, а стрілка доїжджає
+   до горизонталі. Раніше це був просто дрібний сірий текст зі стрілкою і
+   вибивався з усього іншого. */
+.case-back {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 9px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+.case-back::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+.case-back:hover::after,
+.case-back:focus-visible::after,
+.case-back:active::after,
+.case-back.tap-press::after { transform: scaleX(1); }
+
+/* Стрілку повертає базове правило .cta-arr на -45 градусів; для лівої
+   стрілки це вліво-вгору, тобто дзеркало до кнопок, що ведуть уперед. */
+.case-back:hover .cta-arr,
+.case-back:focus-visible .cta-arr,
+.case-back:active .cta-arr,
+.case-back.tap-press .cta-arr { transform: rotate(0deg); }
+
+
+
+.case-hero__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.case-hero__label,
+.case-hero__tags {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.case-hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(34px, 7.5vw, 110px);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(32px, 6vh, 56px);
+}
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.case-meta__item {
+  background: #000;
+  padding: 22px 24px;
+}
+
+.case-meta__item h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.case-meta__item p {
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* live-site pill in the case hero: the case has a real address now */
+.case-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 12px 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.case-live:hover,
+.case-live:focus-visible {
+  background: var(--text);
+  color: #0a0a0a;
+  border-color: var(--text);
+}
+
+.case-live svg { display: block; }
+
+.case-cover {
+  margin-top: clamp(40px, 7vh, 72px);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 8.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+}
+
+.case-cover .mock-browser { width: 74%; }
+
+.case-cover img,
+.case-shot__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Two-column text: task / solution */
+.case-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4.5vw, 72px);
+}
+
+.case-cols h3,
+.case-cols h4 {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.case-cols p {
+  font-size: 14.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+/* Screens gallery */
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vh, 48px) clamp(24px, 3vw, 48px);
+}
+
+.case-shot { display: block; }
+
+.case-shot--wide { grid-column: 1 / -1; }
+
+.case-shot__frame {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+  transition: border-color 0.4s;
+}
+
+.case-shot--wide .case-shot__frame { aspect-ratio: 16 / 7.5; }
+
+.case-shot:hover .case-shot__frame { border-color: var(--line-strong); }
+
+.case-shot__frame .mock-browser { width: 72%; }
+
+.case-shot--wide .case-shot__frame .mock-browser { width: 56%; }
+
+.case-shot__cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 14px;
+}
+
+.case-shot__title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.case-shot__tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* Feature list */
+.case-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 clamp(28px, 4.5vw, 72px);
+}
+
+.case-features li {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.case-features li .num {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+/* Extra mock pieces for gallery placeholders */
+.mock-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mock-nav i {
+  height: 6px;
+  width: 34px;
+  border-radius: 0;
+  background: #2a2a2a;
+}
+
+.mock-cta {
+  height: 20px;
+  width: 40%;
+  border-radius: 0;
+  background: #f0eee8;
+  margin-top: 12px;
+}
+
+.mock-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mock-row:last-child { border-bottom: none; }
+
+.mock-row .sq {
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  background: linear-gradient(135deg, #2a2a2a, #181818);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.mock-row .mock-line {
+  flex: 1;
+  margin: 0;
+}
+
+.mock-row .mock-line--sm {
+  flex: 0 0 18%;
+}
+
+.mock-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.mock-split__img {
+  aspect-ratio: 1;
+  border-radius: 0;
+  background: linear-gradient(135deg, #2e2e2e, #161616);
+  border: 1px solid var(--line);
+}
+
+/* Case page responsive */
+@media (max-width: 900px) {
+  .case-meta { grid-template-columns: 1fr 1fr; }
+  .case-cols { grid-template-columns: 1fr; }
+  .case-features { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  /* Long words like "кондитерської" must fit the narrow screen */
+  .case-hero__title { font-size: clamp(22px, 7.5vw, 56px); }
+
+  .case-gallery { grid-template-columns: 1fr; }
+  .case-shot--wide .case-shot__frame { aspect-ratio: 4 / 3; }
+  .case-shot--wide .case-shot__frame .mock-browser { width: 72%; }
+  .case-cover { aspect-ratio: 4 / 3; }
+  .case-cover .mock-browser { width: 84%; }
+
+  .case-shot__cap {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+
+  .case-shot__tag { white-space: normal; }
+}
+
+@media (max-width: 480px) {
+  .case-meta { grid-template-columns: 1fr; }
+}
+
+/* ============ HORIZONTAL TRACK + VERTICAL TAIL ============ */
+/* Only the panels left inside <main> ride the horizontal track; every
+   section moved out of it by the script keeps its normal vertical layout,
+   so all panel rules below are scoped to `main`.
+
+   Трек десктопний: на телефоні його вело дьоргано (transform пише JS, а
+   прокрутку - композитор), тож там лишається вертикальне накриття. */
+@media (min-width: 1025px) {
+  body.hscroll-on main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    gap: clamp(96px, 10vw, 180px);
+    will-change: transform;
+  }
+
+  body.hscroll-on main > * { flex-shrink: 0; }
+
+  /* Hero panel */
+  body.hscroll-on main .hero {
+    max-width: none;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 0;
+    padding-top: 118px;
+  }
+
+  body.hscroll-on main .hero__title {
+    font-size: clamp(44px, 8vw, 118px);
+    margin-bottom: 26px;
+  }
+
+  body.hscroll-on main .hero__bottom { padding-bottom: 26px; }
+
+  /* Підказка "Гортайте вправо" стоїть при правому краї посередині висоти.
+     Центрується парою top:0/bottom:0 з auto-полями, а не translateY: анімація
+     появи fadeUp тримає власний transform і затерла б зсув. */
+  body.hscroll-on main .hero__scroll {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: max-content;
+    margin-block: auto;
+    right: calc(max(0px, (100vw - 1440px) / 2) + clamp(24px, 5vw, 64px));
+    animation-name: fadeUp;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--text);
+    gap: 14px;
+  }
+
+  body.hscroll-on main .hero__scroll-txt--v,
+  body.hscroll-on main .hero__scroll-arr--v { display: none; }
+
+  body.hscroll-on main .hero__scroll-txt--h { display: inline; }
+
+  body.hscroll-on main .hero__scroll-arr--h {
+    display: block;
+    animation: bounceRight 1.8s ease-in-out infinite;
+  }
+
+  /* Section panels inside the track */
+  body.hscroll-on main .section {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    margin: 0;
+    padding: 118px clamp(32px, 4vw, 72px) 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  body.hscroll-on main .section__head { margin-bottom: clamp(28px, 4vh, 48px); }
+
+  body.hscroll-on main .about__hello { margin-bottom: clamp(24px, 4vh, 44px); }
+
+  body.hscroll-on main .about__stats .stat { padding: clamp(18px, 2.2vw, 28px); }
+
+  /* Panels are full-bleed, but their content sits on exactly the same grid
+     as .container — i.e. the header and footer — at every width. */
+  body.hscroll-on main .hero,
+  body.hscroll-on main .section {
+    padding-inline: calc(max(0px, (100vw - 1440px) / 2) + clamp(24px, 5vw, 64px));
+  }
+
+  /* "Про мене" наїжджає на герой і на треку: скрипт контр-зсуває герой,
+     тож він стоїть під в'юпортом, а ця панель із непрозорим фоном
+     насувається справа і закриває його (горизонтальний варіант
+     вертикального ефекту накриття) */
+  body.hscroll-on main #about {
+    position: relative;
+    z-index: 2;
+    background: var(--bg);
+    border-left: 1px solid var(--line);
+  }
+
+  /* The spacer reserves the scroll distance the pinned track consumes;
+     everything after it scrolls top to bottom as usual. */
+  body.hscroll-on .hspacer {
+    width: 100%;
+    pointer-events: none;
+  }
+}
+
+
+/* ============ SECTION SNAPPING (one wheel notch = one screen) ============ */
+/* Every section after the horizontal track becomes a full-screen panel, so a
+   single wheel notch lands exactly on the next one, like flipping a page. */
+@media (min-width: 1025px) and (min-height: 700px) {
+  body.snap-on > .section,
+  body.snap-on > .contact,
+  body.snap-on > .footer {
+    height: 100vh;
+    padding-block: 112px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  body.snap-on > .section .section__head { margin-bottom: clamp(24px, 3.5vh, 44px); }
+
+
+  /* Footer as the closing screen */
+  body.snap-on > .footer { border-top: none; }
+  body.snap-on > .footer .footer__cta { padding: clamp(20px, 3.5vh, 44px) 0; }
+  body.snap-on > .footer .footer__name-marquee { padding: clamp(18px, 3vh, 40px) 0; }
+  body.snap-on > .footer .footer__mid { padding: clamp(20px, 3.5vh, 44px) 0; }
+}
+
+
+/* Short laptop screens: trim the panels so nothing gets clipped */
+@media (min-width: 1025px) and (min-height: 700px) and (max-height: 900px) {
+  body.snap-on > .section,
+  body.snap-on > .contact,
+  body.snap-on > .footer { padding-block: 92px 28px; }
+
+  body.snap-on > .section .section__head { margin-bottom: 12px; }
+
+
+
+}
+
+
+/* ============ CASE PAGES: NOTION-LIKE DOCUMENT ============ */
+/* A quiet reading layout: one narrow column, plain sentence-case type,
+   hairline dividers instead of frames, no display-size headings. */
+/* Only the document column narrows: the header and footer keep the
+   landing container (1440px) and its side padding. */
+body.case-page main .container { max-width: 900px; }
+
+body.case-page .section {
+  padding-block: clamp(34px, 5vh, 56px);
+}
+
+body.case-page .section__head {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 16px;
+  display: block;
+}
+
+body.case-page .section__label {
+  font-family: var(--font-body);
+  font-size: clamp(19px, 2vw, 25px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* Page head */
+body.case-page .case-hero { padding-top: clamp(104px, 14vh, 150px); }
+
+/* На сторінках кейсів лишається тільки поле знизу: раніше тут напис ще й
+   переводився в звичайний регістр і худішав, через що кнопка й не була
+   схожа на інші. */
+body.case-page .case-back {
+  margin-bottom: clamp(28px, 5vh, 44px);
+}
+
+body.case-page .case-hero__top {
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+body.case-page .case-hero__label,
+body.case-page .case-hero__tags {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text-dim);
+}
+
+body.case-page .case-hero__title {
+  font-family: var(--font-body);
+  font-size: clamp(30px, 4.6vw, 52px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  margin-bottom: clamp(26px, 4vh, 40px);
+}
+
+/* Page properties, like Notion's property rows */
+body.case-page .case-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+
+body.case-page .case-meta__item {
+  background: none;
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+body.case-page .case-meta__item h4 {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+body.case-page .case-meta__item p {
+  font-size: 14.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.6;
+}
+
+/* Cover and screenshots read as inline blocks in the document */
+body.case-page .case-cover,
+/* Кадр галереї більше не рамка і не сцена, а просто місце під картинку.
+   Раніше тут була межа й темне тло: вони мали сенс, поки всередині стояв
+   намальований пристрій, за яким потрібен був фон. Тепер усередині сам
+   скріншот, і будь-яка облямівка навколо нього читається як зайва рамка. */
+body.case-page .case-shot__frame {
+  border: 0;
+  background: none;
+  display: block;
+  overflow: visible;
+}
+
+/* Пропорція не задана: висоту диктує сама картинка. Інакше все зводилось
+   до 16:9, а з дванадцяти скріншотів у цю пропорцію потрапляють лише
+   чотири - решту або обрізало, або обрамляло темними полями згори й знизу. */
+body.case-page .case-shot__frame,
+body.case-page .case-shot--wide .case-shot__frame { aspect-ratio: auto; }
+
+body.case-page .case-shot__frame img {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  object-fit: fill;
+}
+
+body.case-page .case-cover {
+  margin-top: clamp(28px, 4vh, 44px);
+  aspect-ratio: 16 / 9;
+}
+
+body.case-page .case-gallery {
+  grid-template-columns: 1fr;
+  gap: clamp(26px, 4vh, 40px);
+}
+
+body.case-page .case-shot--wide { grid-column: auto; }
+
+body.case-page .case-shot__cap {
+  display: block;
+  padding-top: 10px;
+}
+
+body.case-page .case-shot__title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+body.case-page .case-shot__tag {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-dim);
+  white-space: normal;
+  margin-top: 2px;
+}
+
+/* Body copy */
+body.case-page .case-cols {
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 3vh, 30px);
+}
+
+body.case-page .case-cols h3 {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+}
+
+body.case-page .case-cols p {
+  font-size: 15.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-dim);
+}
+
+/* Checklist, like Notion's to-do blocks */
+body.case-page .case-features { grid-template-columns: 1fr; gap: 0; }
+
+body.case-page .case-features li {
+  gap: 12px;
+  border-bottom: none;
+  padding: 7px 0;
+  font-size: 15.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  align-items: baseline;
+}
+
+body.case-page .case-features li .num {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0;
+  min-width: 22px;
+}
+
+/* Result: three quiet stats, no boxes */
+body.case-page .about__stats {
+  background: none;
+  border: none;
+  border-radius: 0;
+  border-top: 1px solid var(--line);
+  gap: clamp(20px, 3vw, 44px);
+}
+
+body.case-page .about__stats .stat {
+  background: none;
+  text-align: left;
+  padding: 18px 0 0;
+}
+
+body.case-page .about__stats .stat:hover { background: none; }
+
+body.case-page .stat__num {
+  font-family: var(--font-body);
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+body.case-page .stat__label {
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-dim);
+}
+
+/* Closing call to action, styled like a Notion callout */
+body.case-page .contact {
+  text-align: left;
+  padding-block: clamp(40px, 6vh, 70px) clamp(56px, 9vh, 100px);
+}
+
+body.case-page .contact > .reveal,
+body.case-page .contact__title { max-width: 640px; }
+
+body.case-page .contact__title {
+  font-family: var(--font-body);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  margin-bottom: 22px;
+}
+
+body.case-page .contact__title .outline {
+  -webkit-text-stroke: 0;
+  color: var(--text-dim);
+}
+
+body.case-page .contact__btn {
+  font-size: clamp(14px, 1.5vw, 17px);
+  padding: 0 0 10px;
+  gap: 13px;
+}
+
+body.case-page .contact__btn .cta-arr { width: 19px; height: 17px; }
+
+body.case-page .contact__alt {
+  font-size: 13.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: 18px;
+}
+
+/* The header and footer stay exactly as on the landing: same fonts, same
+   1440px container and side padding. Only the document body is Notion-like. */
+
+@media (max-width: 768px) {
+  body.case-page .case-meta__item { grid-template-columns: 1fr; gap: 2px; }
+}
+
+
+/* Floating page navigation on the right, like Notion's table of contents:
+   quiet dashes that reveal their headings on hover, active one highlighted. */
+.toc {
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+  position: fixed;
+  top: 50%;
+  /* Колонка притиснута до самого краю вікна, а відступ перенесено в
+     правий padding пунктів. Виглядає так само, але мишку тепер можна
+     просто кинути в край екрана - вона все одно влучить у пункт. */
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Проміжку між пунктами немає: він перенесений усередину самих пунктів
+     як вертикальний padding. Раніше 13px між ними були мертвою зоною, і
+     мишею доводилось цілитись у смужку заввишки 16px. */
+  gap: 0;
+}
+
+.toc.is-gone {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50%) translateX(14px);
+  pointer-events: none;
+}
+
+.toc__item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  /* висота мішені 32px замість 16, і сусідні пункти стикаються впритул */
+  padding-block: 8px;
+  padding-right: clamp(18px, 2.6vw, 40px);
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.2;
+  transition: color 0.3s;
+}
+
+.toc__label {
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.toc:hover .toc__label,
+.toc__item:focus-visible .toc__label { opacity: 1; transform: translateX(0); }
+
+.toc__line {
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+  transition: width 0.35s var(--ease), background 0.3s;
+}
+
+.toc__item:hover { color: var(--text); }
+.toc__item:hover .toc__line { width: 28px; }
+
+.toc__item.is-active { color: var(--text); }
+.toc__item.is-active .toc__line { width: 28px; }
+
+/* No room for it next to the document column on narrow screens */
+@media (max-width: 1180px) {
+  .toc { display: none; }
+}
+
+
+/* Case pages are a quiet document: no scroll-reveal, everything is simply there */
+body.case-page .reveal,
+body.case-page .reveal-scale,
+body.case-page .split {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+body.case-page .split .word > i {
+  transform: none;
+  transition: none;
+}
+
+
+/* Preview that follows the cursor over the services list */
+.cursor-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: clamp(210px, 19vw, 290px);
+  aspect-ratio: 4 / 3;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(var(--x, 0px), var(--y, 0px)) translate(-50%, -50%) scale(0.9);
+  transition: opacity 0.3s var(--ease), transform 0.18s ease-out;
+}
+
+.cursor-card.is-on {
+  opacity: 1;
+  transform: translate(var(--x, 0px), var(--y, 0px)) translate(-50%, -50%) scale(1);
+}
+
+.cursor-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Touch and coarse pointers never see it */
+@media (hover: none), (pointer: coarse), (max-width: 1024px) {
+  .cursor-card { display: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Artwork drawn in code =====
+   The site ships no photo files: each .art plate is an SVG generated at
+   runtime by the [data-art] module in script.js. */
+.art {
+  position: relative;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* line work fades into the frame instead of stopping at a hard edge */
+.art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 38%, transparent 30%, rgba(10, 10, 10, 0.8) 100%);
+}
+
+/* ===== Hero background layer =====
+   A looping video sits behind the title when video/hero.mp4 is supplied;
+   until then (and on phones, and with reduced motion) the generated plate
+   below it shows through instead. Both live under the same darkening scrim,
+   so the headline keeps its contrast either way. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  /* behind the content without making its siblings positioned */
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__video,
+.hero__bg .art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__video {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+}
+
+.hero__video.is-ready { opacity: 1; }
+
+.hero__bg .art {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+  animation: fadeIn 1.4s var(--ease) 0.5s forwards;
+}
+
+.hero__bg .art::after { display: none; }
+
+/* once the video is playing the drawn plate steps aside */
+.hero__bg.has-video .art {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--bg) 2%, rgba(10, 10, 10, 0.74) 46%, rgba(10, 10, 10, 0.4) 100%),
+    linear-gradient(0deg, var(--bg) 1%, rgba(10, 10, 10, 0.3) 42%, rgba(10, 10, 10, 0.66) 100%);
+}
+
+@media (max-width: 1024px) {
+  .hero__scrim {
+    background:
+      linear-gradient(90deg, var(--bg) 0%, rgba(10, 10, 10, 0.78) 60%, rgba(10, 10, 10, 0.6) 100%),
+      linear-gradient(0deg, var(--bg) 2%, rgba(10, 10, 10, 0.42) 46%, rgba(10, 10, 10, 0.7) 100%);
+  }
+}
+
+
+/* ===== Section background layer =====
+   Same idea as the hero: an out-of-flow plate behind the content, so adding
+   it moves nothing in a panel that has to stay exactly one screen tall. */
+.section--art { position: relative; }
+
+.section__bg {
+  position: absolute;
+  inset: 0;
+  /* behind the content without making its siblings positioned */
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.section__bg .art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  opacity: 0;
+  animation: fadeIn 1.6s var(--ease) 0.35s forwards;
+}
+
+.section__bg .art::after { display: none; }
+
+.section__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.62) 52%, rgba(10, 10, 10, 0.34) 100%),
+    linear-gradient(0deg, var(--bg) 0%, rgba(10, 10, 10, 0.25) 34%, rgba(10, 10, 10, 0.55) 100%);
+}
+
+/* canvas-drawn plates (the waves) fill their host the same way the SVGs do */
+.art__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .section__scrim {
+    background:
+      linear-gradient(90deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.74) 60%, rgba(10, 10, 10, 0.5) 100%),
+      linear-gradient(0deg, var(--bg) 0%, rgba(10, 10, 10, 0.34) 36%, rgba(10, 10, 10, 0.6) 100%);
+  }
+}
+
+@keyframes fadeUpCentred {
+  from { opacity: 0; transform: translateY(calc(-50% + 28px)); }
+  to { opacity: 1; transform: translateY(-50%); }
+}
+
+/* ===== Telegram mark on the links that open a chat ===== */
+.tg-ico {
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+}
+
+.header__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* This sheet already hides the CTA on phones, but that rule sits earlier in
+   the file, so the display above would have resurrected it — and the revived
+   button then squeezed the logo down to zero width. */
+@media (max-width: 768px) {
+  .header__cta { display: none; }
+}
+
+/* the wordmark used to hold its width through white-space: nowrap; an image
+   has no such floor and will happily be crushed by its flex neighbours */
+.header__logo { flex-shrink: 0; }
+
+.receipt__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* The landing footer was forced to 100vh while holding ~667px of content, so
+   a whole dead band came with it. It is the last thing on the page and sits
+   under nothing, so it needs neither the full screen nor the 92px of header
+   clearance the other panels get. */
+body.snap-on > .footer {
+  height: auto;
+  padding-block: 0 28px;
+}
+
+/* ===== Logo image =====
+   Applied only once script.js finds img/logo.svg or img/logo.png; without a
+   file none of this matches and the text wordmark is untouched. */
+.has-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-img {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+/* the mark is a two-line lockup, so it needs more height than the single
+   line of type it replaces before the letters become legible */
+.header__logo .logo-img { height: 40px; }
+
+.preloader__name .logo-img { height: clamp(26px, 3.2vw, 40px); }
+
+/* the marquee type around it is outlined, not solid: matching that weight
+   keeps the solid mark from shouting over the rest of the ribbon */
+.footer__name-track .logo-img {
+  height: 0.85em;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .header__logo .logo-img { height: 30px; }
+}
+
+@media (max-width: 768px) {
+  /* Stacked, the five footer links alone ran ~200px tall on a phone, which
+     made the footer 85% of the screen. Two columns take three rows instead
+     of five without shrinking a single tap target. */
+  .footer__col ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+
+  .footer__mid { gap: 24px; }
+}
+
+/* ===== Per-service call to action ===== */
+.service__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(18px, 2.4vh, 28px);
+}
+
+.service__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 11px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  white-space: nowrap;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s;
+}
+
+.service__cta:hover,
+.service__cta:focus-visible {
+  background: var(--text);
+  color: #0a0a0a;
+  border-color: var(--text);
+}
+
+/* ===== Statement =====
+   Two tones held steady: the claim reads bright, the connective between the
+   two halves stays dim. No entrance of its own - the drama is the letters
+   falling once the pinned section takes over. */
+.statement {
+  position: relative;   /* the free letters are placed against this box */
+  overflow: hidden;     /* a thrown letter never escapes into a neighbour */
+  padding-block: clamp(110px, 22vh, 240px);
+}
+
+.statement__text {
+  font-family: var(--font-display);
+  /* 7.2vw замість 8vw: довгий рядок "гарної співпраці" має влазити
+     цілком, інакше остання буква тікає на окремий рядок */
+  font-size: clamp(38px, 7.2vw, 150px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 0;
+}
+
+.statement__line { display: block; }
+
+.statement__line > span { display: block; }
+
+.statement__line > span.dim {
+  /* 0.42 keeps the dimmed half above a 3:1 contrast ratio */
+  color: rgb(240 238 232 / 0.42);
+}
+
+/* ===== Statement pin =====
+   Only when the physics is live: the wrapper grows taller than a screen and
+   the section rides sticky inside it, so it holds still for a stretch of
+   scrolling while the letters fall and get pushed around. Without JS (or
+   with reduced motion) neither class appears and this is a normal section. */
+/* 100vh on screen + 250vh of pinned travel: release at 0.5vh, the next
+   section slides over the pile from 1.5vh to 2.5vh, unpin exactly as it
+   finishes covering (reference site timings: start top -50%) */
+.statement-pin--on { height: 350dvh; }
+
+.statement-pin--on .statement {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  /* dvh, а не vh: саме його міряє window.innerHeight у скрипті */
+  min-height: 100dvh;
+}
+
+/* ===== Statement physics =====
+   The canvas replaces the DOM sentence once matter-js takes over; until then
+   (and with reduced motion, or no JS) the split spans render as plain text. */
+.statement__ch { display: inline-block; }
+
+/* слова нерозривні: інакше інлайн-блокові букви переносяться будь-де
+   і остання буква слова опиняється сиротою на власному рядку */
+.statement__word { display: inline-block; white-space: nowrap; }
+
+.statement--physics {
+  display: flex;
+  align-items: center;
+}
+
+.statement__canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* the exit: the NEXT section slides up over the pinned letter pile.
+   A -100vh margin pulls it into the pin, so it enters one viewport
+   before the pin ends (p 1.5 → 2.5) and buries the letters exactly as
+   the sticky releases. Min-height keeps the pile fully covered: the
+   section is never shorter than the screen it has to close. */
+.statement-pin--on + .services-pin {
+  position: relative;
+  z-index: 5;
+  /* dvh, а не vh: пін над ним заданий у dvh (350dvh), а на телефоні vh - це
+     висота зі схованим адресним рядком, тобто завжди більша. Рядок тепер не
+     ховається ніколи, тож розходження не самозакривається, і поле тягнуло б
+     секцію на висоту панелі браузера більше, ніж треба. */
+  margin-top: -100vh;
+  margin-top: -100dvh;
+}
+
+.services-pin > .section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* full-bleed: закриває екран від краю до краю навіть ширше за 1440px,
+     а контент лишається на тій самій сітці, що хедер і футер */
+  max-width: none;
+  padding-inline: calc(max(0px, (100vw - 1440px) / 2) + clamp(24px, 5vw, 64px));
+}
+
+/* ===== Typed intro =====
+   The about greeting writes itself out. Split into per-character spans that
+   flip from hidden to visible on a clock, so a throttled background tab
+   catches up instantly instead of crawling. Reveal is by visibility: the
+   layout never shifts, the text just appears in place. */
+.tw-ch { visibility: hidden; }
+.tw-ch.on { visibility: visible; }
+
+.tw-caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  margin-left: 3px;
+  vertical-align: baseline;
+  transform: translateY(0.08em);
+  background: var(--text);
+  animation: twBlink 0.9s steps(1) infinite;
+}
+
+@keyframes twBlink {
+  50% { opacity: 0; }
+}
+
+/* ===== Custom cursor =====
+   Visuals carried over from the reference component: difference-blend dot,
+   mono tag in a black box. The native cursor disappears only where a real
+   mouse is driving. */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-dot__dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  background: #fff;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.cursor-dot.is-on .cursor-dot__dot { opacity: 1; }
+
+.cursor-dot.is-hover .cursor-dot__dot,
+.cursor-dot.is-note .cursor-dot__dot {
+  transform: translate(-50%, -50%) scale(2.2);
+}
+
+.cursor-dot__tag {
+  position: absolute;
+  left: 18px;
+  top: 14px;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #fff;
+  background: #000;
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cursor-dot.is-on.is-hover .cursor-dot__tag,
+.cursor-dot.is-on.is-note .cursor-dot__tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============ ДОВГІ СЕКЦІЇ ЛЕНДІНГА ============ */
+/* Хвіст після горизонтального треку задумувався як набір панелей рівно на
+   екран: body.snap-on > .section дає height:100vh і overflow:hidden, щоб один
+   рух колеса гортав рівно одну панель. «Портфоліо» (чотири кейси) і «Послуги»
+   (шість категорій) у цей формат не влазять - панельний режим відрізав би все
+   нижче першого екрана, - тож вони позначені .section--long і гортаються
+   як звичайні довгі секції. */
+@media (min-width: 1025px) and (min-height: 700px) {
+  body.snap-on > .section--long {
+    height: auto;
+    overflow: visible;
+    /* колонка з центруванням: коротка секція (як 'Послуги') не
+       притискається до верху, коли правило накриття цитати тягне їй
+       min-height на екран, а довга просто росте під вміст */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+
+
+/* ============ ЗАГОЛОВОК ГЕРОЯ КАРТИНКОЮ ============ */
+/* Замість набраного "Дизайн & Розробка" в <h1> лежить рукописний
+   леттеринг. Текст нікуди не подівся: він у alt, тож заголовок
+   лишається заголовком і для пошуку, і для читалок екрана. */
+.hero__title-img {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  /* на низьких вікнах картинка не має з'їдати колонку героя;
+     contain лишає пропорції, position тримає напис при лівому краї */
+  max-height: 38vh;
+  object-fit: contain;
+  object-position: left center;
+  /* напис у файлі чисто білий і перетягував увагу на себе; brightness
+     гасить його до сірого, лишаючи прозорий фон недоторканим */
+  filter: brightness(0.72);
+  /* дописується зліва направо, як від руки */
+  animation: heroWrite 1.15s var(--ease) 0.35s both;
+}
+
+/* прямокутник обрізання їде вправо, відкриваючи напис штрих за штрихом.
+   Від'ємні поля згори й знизу, щоб не зрізати виносні елементи літер,
+   і -4% справа, аби останній штрих не лишився під краєм маски. */
+@keyframes heroWrite {
+  from { clip-path: inset(-10% 100% -10% 0); }
+  to { clip-path: inset(-10% -4% -10% 0); }
+}
+
+/* На горизонтальному треку панель героя рівно на екран, тож тут заголовок
+   міряється висотою, а не шириною - так він займає ту саму смугу, що
+   раніше займали два рядки набраного тексту. */
+@media (min-width: 769px) {
+  body.hscroll-on main .hero__title-img {
+    width: auto;
+    max-width: 100%;
+    /* нахил крутіший за vh: на 900px висоти дає 350px, на 650px - 150px,
+       інакше на низькому вікні теги героя лізуть під шапку */
+    height: clamp(140px, calc(80vh - 370px), 380px);
+    max-height: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title-img { animation: none; clip-path: none; }
+}
+
+/* ============ ПОСЛУГИ ============ */
+/* Список у дві колонки: ліворуч назва категорії, праворуч стек, під кожним
+   рядком тонка лінія. Заголовок секції стоїть у правій колонці, тож він і
+   стек вирівняні по одній вертикалі, а ліва половина шапки лишається
+   вільною - туди може стати кнопка на резюме. */
+.skills__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 48px);
+  align-items: start;
+  margin-bottom: clamp(48px, 8vh, 96px);
+}
+
+.skills {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+/* Рядок послуги: назва і людський опис. Опис пояснює послугу словами
+   замовника, а не переліком технологій - назви інструментів лишились
+   тільки там, де вибір платформи справді щось означає для клієнта. */
+.skills__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(16px, 3vw, 44px);
+  align-items: start;
+  padding: clamp(18px, 2.4vh, 28px) 0;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.4s;
+}
+
+/* Наведення тільки для мишки: на сенсорному екрані :hover залипає після
+   дотику, і рядок лишався підсвіченим, ніби сам собою анімується. */
+@media (hover: hover) and (pointer: fine) {
+  .skills__row:hover { border-color: var(--line-strong); }
+}
+
+.skills__name {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.7vw, 24px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.skills__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skills__desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  transition: color 0.4s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skills__row:hover .skills__desc { color: var(--text); }
+}
+
+/* Ліва колонка шапки більше не порожня: там коротко, що це за розділ */
+.skills__lead {
+  max-width: 30ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+/* ============ ІНСТРУМЕНТИ ============ */
+/* Смужка під списком послуг: чим саме це робиться. Сітка та сама, що в
+   рядка послуги, тож підпис ліворуч стоїть під назвами послуг, а знаки -
+   під описами. Лінії немає: останній рядок списку вже її має, і смужка
+   читається як його продовження, а не як шостий пункт. */
+.tools {
+  /* знаки йдуть на всю ширину секції, а не тиснуться у праву колонку:
+     їх шість, і кожен помітно більший за рядок тексту */
+  --tool-h: clamp(24px, 2.3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.8vh, 20px);
+  /* повітря лише зверху: знизу секція має власне поле, і подвоєння
+     з'їдало б висоту там, де панель рівно на екран */
+  padding: clamp(18px, 2.4vh, 30px) 0 0;
+}
+
+/* Той самий дрібний розряджений набір, що раніше тримав технічні рядки */
+.tools__label,
+.tools__name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.tools__label { color: rgb(240 238 232 / 0.34); }
+
+.tools__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* Вузький ПК (1025px) - найтісніший випадок: панель рівно на екран,
+     і перенесення знаків у другий рядок зрізало б низ. Проміжок стискається
+     разом із вікном, тож усі шість лишаються в один рядок. */
+  gap: clamp(12px, 1.6vh, 18px) clamp(20px, 2.9vw, 52px);
+}
+
+.tools__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(240 238 232 / 0.34);
+  transition: color 0.4s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tools__item:hover { color: var(--text); }
+}
+
+/* Ширина в кожного своя: Figma і Framer вужчі за квадрат, Webflow навпаки
+   широкий, і розтягувати їх до спільного боксу означало б зламати логотип.
+   Тому спільна тут висота, а поправки нижче вирівнюють оптичну вагу: круглі
+   знаки при однаковій висоті здаються більшими, широкий - меншим. */
+.tools__icon {
+  flex: 0 0 auto;
+  height: var(--tool-h);
+  width: auto;
+  fill: currentColor;
+}
+
+.tools__icon--wide { height: calc(var(--tool-h) * 0.74); }
+.tools__icon--round { height: calc(var(--tool-h) * 0.94); }
+
+/* Знак коду мальований лінією, а не заливкою */
+.tools__icon--code {
+  height: calc(var(--tool-h) * 0.92);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* На вузьких екранах дві колонки лишають на стек пів рядка: назва і стек
+   стають одна під одною, лінія так само розділяє категорії. */
+@media (max-width: 900px) {
+  .skills__head { grid-template-columns: 1fr; }
+  .skills__lead { max-width: none; }
+
+  /* Опис переходить під назву */
+  .skills__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+}
+
+/* Кнопка переходу на сторінку кейсу. Це <span> усередині картки-посилання,
+   а не окреме посилання: клікабельна вся картка, а кнопка лише показує, що
+   за нею є повний розбір. Тому й реагує на наведення на картку, не на себе. */
+/* Кнопки-посилання: напис і стрілка. У спокої лінії немає, а стрілка
+   дивиться вправо-вгору - це той самий значок, просто повернутий на 45
+   градусів. При наведенні (а на телефоні - поки палець тримає кнопку)
+   лінія виїжджає зліва направо, а стрілка доїжджає до горизонталі. */
+.cta-arr {
+  flex-shrink: 0;
+  transform: rotate(-45deg);
+  transition: transform 0.4s var(--ease);
+}
+
+.work:hover .cta-arr,
+.work:focus-visible .cta-arr,
+.work.tap-press .cta-arr,
+.hero__cta:hover .cta-arr,
+.hero__cta:focus-visible .cta-arr,
+.hero__cta:active .cta-arr,
+.hero__cta.tap-press .cta-arr,
+.contact__btn:hover .cta-arr,
+.contact__btn:focus-visible .cta-arr,
+.contact__btn:active .cta-arr,
+.contact__btn.tap-press .cta-arr { transform: rotate(0deg); }
+
+.work__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 24px 24px;
+  padding: 0 0 9px;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+}
+
+.work__cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+.work:hover .work__cta::after,
+.work:focus-visible .work__cta::after,
+.work.tap-press .work__cta::after { transform: scaleX(1); }
+
+.work__cta svg {
+  display: block;
+  transition: transform 0.3s var(--ease);
+}
+
+
+
+/* ============ СЕКЦІЇ БЕЗ БІЧНОГО ПОВІТРЯ ============ */
+/* «Послуги» і «Портфоліо» виходять за сітку контейнера на всю ширину екрана.
+   Селектор подвоєний навмисно: правило накриття цитати
+   (.services-pin > .section) теж має вагу 0,2,0 і задає власні бічні
+   поля, тож перемагає той, хто нижче у файлі - цей. */
+.section.section--bleed {
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* Текст не має торкатися скла: невеликий відступ лишається, лінії - ні */
+.section--bleed .section__head,
+.section--bleed .skills__head,
+.section--bleed .skills__row,
+.section--bleed .tools { padding-inline: clamp(16px, 2vw, 32px); }
+
+/* Картки портфоліо складаються в мозаїку: без проміжків, без бордюрів по
+   зовнішньому краю, між собою розділені однією тонкою лінією, а не двома
+   сусідніми бордюрами. */
+.section--bleed .works__grid {
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.section--bleed .work {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section--bleed .work:nth-child(odd) { border-right: 1px solid var(--line); }
+
+@media (max-width: 768px) {
+  /* в одну колонку вертикальний роздільник не потрібен */
+  .section--bleed .work:nth-child(odd) { border-right: 0; }
+}
+
+/* «Гарний продукт…» без бічного повітря. Полотно фізики міряється з боксу
+   секції, тож на всю ширину розтягується і воно - букви розлітаються до
+   самих країв екрана. Напис лишає той самий малий відступ, що й інші
+   секції без повітря, інакше перша літера різалась би об overflow: hidden. */
+.statement-pin .statement {
+  max-width: none;
+  /* Секція лишається на всю ширину (полотно фізики - теж), а сам напис
+     зсунутий до центру великим лівим полем: ~14vw, на 1440 це ~200px.
+     Праве поле мінімальне, щоб найдовший рядок мав куди рости. */
+  padding-inline: clamp(24px, 12vw, 230px) clamp(16px, 2vw, 32px);
+}
+
+/* на телефоні ліве повітря з'їло б ширину під найдовший рядок - там
+   лишається той самий малий відступ, що й в інших секціях без повітря */
+@media (max-width: 700px) {
+  .statement-pin .statement { padding-inline: clamp(16px, 2vw, 32px); }
+}
+
+/* «Портфоліо» і футер впритул: нижнього поля в секції немає, межею стає
+   лінія під останнім рядом карток. Верхній бордюр футера тоді зайвий -
+   інакше дві лінії поспіль. Прив'язано до сторінки з треком, а не до
+   сусідства секцій: на вузьких екранах секції лишаються всередині <main>,
+   і футер їм не сусід. */
+#works.section--bleed { padding-bottom: 0; }
+body[data-hscroll] .footer { border-top: 0; }
+
+/* Картки портфоліо і рядки послуг більше не проявляються при прокрутці -
+   класи .reveal / .reveal-scale з них знято в розмітці. Правило, що зшивало
+   їхній ховер-transition із появою, разом із ними стало непотрібним. */
+
+
+/* ============ РУКОПИСНА НОТАТКА НА ВСЮ ШИРИНУ ============ */
+/* Смуга від краю до краю замість секції: картинка розтягується на всю
+   ширину екрана, висота йде за пропорцією. Файл написаний чорним по
+   білому, тож invert робить штрихи світлими, а screen розчиняє тепер уже
+   чорне тло в темному тлі сторінки - рамки навколо картинки немає. */
+.note-band {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-block: clamp(48px, 9vh, 120px);
+  overflow: hidden;
+  /* той самий фон, що й у футера: смуга з написом читається як його продовження */
+  background: #000;
+}
+
+.note-band__img {
+  display: block;
+  /* трохи вужче за екран і по центру: напис не впирається в краї */
+  width: min(100%, 90vw);
+  max-width: 1560px;
+  height: auto;
+  margin-inline: auto;
+  filter: invert(1) brightness(0.72);
+  mix-blend-mode: screen;
+}
+
+/* ============ ПОРТФОЛІО: ПРИКОЛЕНА ГОРИЗОНТАЛЬНА ПАНЕЛЬ ============ */
+/* Секція займає весь екран і прилипає, поки сторінка проходить відстань,
+   потрібну стрічці. Гортає її сама сторінка, а не колесо над елементом,
+   тож смуги прокрутки немає взагалі - у стрічки overflow: hidden.
+   Висоту обгортки (екран + шлях стрічки) рахує js/script.js. */
+@media (min-width: 769px) {
+  .works-pin { position: relative; }
+
+  .works-pin > #works {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-block: 112px 40px;
+  }
+
+  .works-pin .section__head { margin-bottom: clamp(20px, 3vh, 40px); }
+
+  .works-pin .works__grid {
+    display: flex;
+    flex-wrap: nowrap;
+    /* стрічку рухає скрипт через scrollLeft; для користувача вона не
+       прокручується самостійно, тому overflow прихований */
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+    border-top: 1px solid var(--line);
+  }
+
+  .works-pin .works__grid > .work {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .works-pin .works__grid > .work:not(:last-child) { border-right: 1px solid var(--line); }
+
+  /* картка тягнеться на всю висоту панелі, а зображення забирає залишок:
+     інакше на екран не влізли б і опис, і кнопка */
+  .works-pin .work__visual {
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+}
+
+/* Заголовок «Portfolio» не тулиться до краю, а стоїть на тій самій
+   вертикалі, що логотип у шапці й меню у футері. Картки лишаються
+   від краю до краю - у них своя сітка. */
+.works-pin .section__head { padding-inline: clamp(24px, 5vw, 64px); }
+
+/* Картка стала флекс-колонкою заради приколеної панелі, і кнопка почала
+   тягнутися на всю ширину - у колонці елементи розтягуються по замовчуванню.
+   Повертаємо їй ширину за вмістом. */
+.works-pin .work__cta { align-self: flex-start; }
+
+/* ============ ТЕЛЕФОН: ВИПРАВЛЕННЯ АДАПТАЦІЇ ============ */
+/* 1. Липкий герой. У вертикальній розкладці герой прилипає до верху, а всі
+   секції після нього наїжджають зверху - тож кожна мусить бути непрозорою.
+   «Портфоліо» і рукописний напис тла не мали, і герой просвічував крізь
+   них (напис до того ж змішується в режимі screen - виходила каша). */
+body[data-hscroll]:not(.hscroll-on) .works-pin,
+body[data-hscroll]:not(.hscroll-on) #works,
+body[data-hscroll]:not(.hscroll-on) .note-band {
+  position: relative;
+  z-index: 5;
+  background: var(--bg);
+}
+
+/* Смуга з рукописним написом тримає колір футера і тут: правило вище
+   ставить їй тло сторінки, тому повертаємо чорний окремо, після нього. */
+body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
+
+@media (max-width: 700px) {
+  /* 2. Привітання розбите на явні рядки під сходинку; при 28px рядок
+     «a designer and developer» не влазив у 342px і ламався на два.
+     На 390 виходить 25px, на 360 - 23px: кожен рядок в один ряд. */
+
+  /* 3. Цитата: «great collaboration» при 38px не влазить у ширину
+     телефона і переносить останнє слово на окремий рядок. */
+  /* Текст притиснутий до верху секції: нижче лишається простір, у який
+     падають букви, і вогонь під ними */
+  .statement,
+  .statement--physics { justify-content: flex-start; }
+
+  .statement-pin .statement {
+    padding-block: clamp(72px, 13vh, 120px) clamp(110px, 22vh, 240px);
+    padding-inline: 10px 8px;
+  }
+
+  /* Більший кегль: 21px читався як дрібний підпис, а це головна фраза.
+     Стеля 27px - за найдовшим українським рядком: вище він переносився
+     і лишав слово-сироту на власному рядку. */
+  /* Великий кегль важливіший за цілісність рядків: 17-знакові рядки на
+     390px впиралися в край уже на 34px. Тепер вони переносяться по словах,
+     а напис читається як плакат. Права сторона й так рвана. */
+  .statement__text {
+    font-size: clamp(30px, 12vw, 46px);
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  html[lang="en"] .statement__text { font-size: clamp(28px, 11vw, 42px); }
+}
+
+/* 4. Контакт на телефоні. Кнопку в шапці до 1024px сховано, а в
+   повноекранному меню її не було - на телефоні написати не було звідки.
+   Посилання живе в самому меню; на десктопі, де є кнопка в шапці,
+   воно приховане. Вигляд - як у кнопки в шапці. */
+/* Заголовки секцій на телефоні. Базове clamp(24px, 3.5vw, 48px) на 390px
+   впирається в нижню межу 24px - заголовок виходив ледь більшим за текст
+   привітання (21px) і губився. Тут нижня межа піднята. */
+@media (max-width: 700px) {
+  .section__label { font-size: clamp(30px, 8vw, 40px); }
+}
+
+/* Те саме для сторінок кейсів: там заголовки секцій навмисно дрібніші
+   й набрані основним шрифтом (clamp(19px, 2vw, 25px)), але на телефоні
+   вони впирались у 19px - менше за текст абзаців поруч. Вага селектора
+   така сама, як у базового правила, інакше воно б перемагало. */
+@media (max-width: 700px) {
+  body.case-page .section__label { font-size: clamp(24px, 6.6vw, 28px); }
+}
+
+/* ============ ПОСЛУГИ НА ТЕЛЕФОНІ: ЯК У РЕФЕРЕНСІ ============ */
+/* На saportfoliodesign блок EXPERIENCE & TOOLS на телефоні не складається
+   в стовпчик: вузька ліва колонка з міткою і текст праворуч, обидва 14px,
+   текст переноситься всередині своєї колонки, лінія під рядком, від краю
+   до краю. Тут те саме: ліворуч назва категорії, праворуч стек. */
+@media (max-width: 700px) {
+  .skills__row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    align-items: start;
+    padding: 16px 16px;
+  }
+
+  .skills__name {
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+    /* страховка: навіть якщо зʼявиться ще довше слово, воно переноситься,
+       а не лізе на сусідню колонку */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .skills__desc { line-height: 1.5; }
+
+  .tools {
+    --tool-h: 22px;
+    padding: 18px 16px 0;
+    gap: 10px;
+  }
+
+  /* на 375px шість знаків самі стають у 3+2+1 - рвано. Сітка в дві колонки
+     дає рівний блок 2x3, і найширший підпис у неї вкладається */
+  .tools__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+  }
+  .tools__label,
+  .tools__name { font-size: 12px; letter-spacing: 0.06em; }
+}
+
+/* ============ ПРО МЕНЕ: РЯДКИ СХОДИНКОЮ ============ */
+/* Кожен наступний рядок відступає праворуч, як у заголовку героя.
+   Ланцюжок із ~, а не :nth-child: друкування ([data-typeintro]) обгортає
+   пробіли між рядками у власні span і збиває нумерацію дітей, а загальний
+   сусідній комбінатор рахує лише самі .line. */
+.about__hello .line { display: block; }
+.about__hello .line ~ .line { margin-left: 0.55em; }
+.about__hello .line ~ .line ~ .line { margin-left: 1.1em; }
+.about__hello .line ~ .line ~ .line ~ .line { margin-left: 1.65em; }
+.about__hello .line ~ .line ~ .line ~ .line ~ .line { margin-left: 2.2em; }
+
+/* на телефоні сходинка з'їла б ширину під найдовший рядок */
+@media (max-width: 700px) {
+  .about__hello .line ~ .line,
+  .about__hello .line ~ .line ~ .line,
+  .about__hello .line ~ .line ~ .line ~ .line,
+  .about__hello .line ~ .line ~ .line ~ .line ~ .line { margin-left: 0; }
+}
+/* ============ ЦИТАТА: РОЗКЛАДКА ЯК У CONNECT НА OLHALAZARIEVA.COM ============ */
+/* Пін і фізика букв ті самі - міняється лише розкладка тексту в закріпленій
+   секції: дві великі лінії по центру екрана, а між ними маленьке розряджене
+   «start with» (як у референсі - 15px, трекінг 1.5em). */
+.statement-pin .statement {
+  /* асиметрично: зліва помітний відступ від краю секції, справа мінімум -
+     рядкам є куди рости, а правий край лишається рваним */
+  padding-inline: clamp(24px, 12vw, 230px) clamp(16px, 2vw, 32px);
+}
+
+.statement,
+.statement--physics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* блок вирівняний по лівому краю з відступом від краю секції: рядки
+     стоять у стовпчик, права сторона рвана - як у референсі */
+  text-align: left;
+}
+
+.statement__text {
+  text-align: left;
+  /* Рядки стали коротші (найдовший - 19 знаків), тож кегль можна підняти:
+     напис читається великим, як у референсі, і все одно не переноситься */
+  font-size: clamp(22px, min(6.4vw, 10vh), 92px);
+}
+
+.statement__mid {
+  display: block;
+  margin: clamp(10px, 2.2vh, 24px) 0;
+  font-family: var(--font-display);
+  font-size: clamp(11px, 1.05vw, 15px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1.5em;
+  /* трекінг додається після останньої літери - відступ на початку вирівнює центр */
+  text-indent: 1.5em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+@media (max-width: 700px) {
+  /* той самий розмір, що й у блоці телефонних правок вище */
+  /* Текст притиснутий до верху секції: нижче лишається простір, у який
+     падають букви, і вогонь під ними */
+  .statement,
+  .statement--physics { justify-content: flex-start; }
+
+  .statement-pin .statement {
+    padding-block: clamp(72px, 13vh, 120px) clamp(110px, 22vh, 240px);
+    padding-inline: 10px 8px;
+  }
+
+  /* Більший кегль: 21px читався як дрібний підпис, а це головна фраза.
+     Стеля 27px - за найдовшим українським рядком: вище він переносився
+     і лишав слово-сироту на власному рядку. */
+  /* Великий кегль важливіший за цілісність рядків: 17-знакові рядки на
+     390px впиралися в край уже на 34px. Тепер вони переносяться по словах,
+     а напис читається як плакат. Права сторона й так рвана. */
+  .statement__text {
+    font-size: clamp(30px, 12vw, 46px);
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  html[lang="en"] .statement__text { font-size: clamp(28px, 11vw, 42px); }
+  .statement__mid { letter-spacing: 0.6em; text-indent: 0.6em; margin: 8px 0; }
+}
+
+/* ============ МЕНЮ У ФУТЕРІ: ОДИН СТОВПЧИК ============ */
+/* Розділів лишилося три, тож два стовпчики більше не потрібні: у сітці
+   вони ламалися на «два в ряд плюс один», а тепер посилання стоять
+   рівною лінійкою одне під одним. */
+@media (max-width: 768px) {
+  .footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ============ ГОДИННИК У БУРГЕР-МЕНЮ ============ */
+/* На місці колишньої кнопки "Get in touch". У рядку шапки на десктопі
+   він зайвий - там годинник живе у футері, - тож показується лише в
+   повноекранному меню. Вигляд той самий, що й у футері. */
+.nav__time { display: none; }
+
+@media (max-width: 1024px) {
+  .nav__time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: clamp(12px, 3vh, 28px) 0 0;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .nav__time strong {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+}
+
+/* ============ КНОПКА В ТЕЛЕГРАМ У ГЕРОЇ ============ */
+/* Тільки на телефоні. На ширших екранах писати є звідки - у шапці стоїть
+   та сама кнопка "Contact me", - а ховається вона рівно на 768px, тож
+   нижче цієї межі її підхоплює кнопка в герої. Стоїть у нижньому ряду:
+   там ряд стає стовпчиком, тож кнопка сідає над підказкою прокрутки.
+   Вигляд - як у кнопки в шапці: та сама пігулка. Поява із затримкою 1s -
+   слідом за тегами героя, перед підказкою. */
+.hero__cta {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 0 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 1s forwards;
+}
+
+.hero__cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+
+.hero__cta:hover::after,
+.hero__cta:focus-visible::after,
+.hero__cta:active::after,
+.hero__cta.tap-press::after { transform: scaleX(1); }
+
+@media (max-width: 768px) {
+  .hero__cta { display: inline-flex; }
+}
+
+@media (max-width: 700px) {
+  .hero__cta { padding: 0 0 9px; }
+}
+
+/* ============ ТЕЛЕФОН: БІЛЬШИЙ ТЕКСТ ============ */
+/* Дрібні підписи (12-13px) на екрані телефона читалися важко. Межа тут 768px -
+   та сама, на якій сайт переходить на мобільну розкладку; при 700px смуга
+   701-768 (великий телефон боком, малий планшет) лишалася б зі старим
+   дрібним текстом. */
+@media (max-width: 768px) {
+  /* Герой: теги, статус, підказка прокрутки, кнопка */
+  .hero__tags span,
+  .hero__status,
+  .hero__scroll { font-size: 13.5px; }
+  .hero__cta { font-size: 13px; }
+
+  /* Послуги: назва категорії і стек */
+  .skills__name { font-size: 15px; }
+  .skills__desc { font-size: 15px; }
+
+  /* Обкладинка кейсу: бокс 4:3 різав із боків чверть кадру 16:9.
+     На телефоні даємо боксу пропорцію самого скріншота - ширина ціла. */
+  .work__visual { aspect-ratio: 16 / 9; }
+
+  /* Портфоліо: назва кейсу, тег, опис, кнопка */
+  .work__title { font-size: 19px; }
+  .work__tag { font-size: 13px; }
+  .work__desc { font-size: 15px; }
+  .work__cta { font-size: 14px; }
+  .work__badge { font-size: 12px; }
+
+  /* Цитата: розряджений підпис між рядками */
+  .statement__mid { font-size: 12px; }
+
+  /* Футер і меню */
+  .footer__cta-label { font-size: 14px; }
+  .footer__col h4 { font-size: 13px; }
+  .footer__col a { font-size: 16px; }
+  .footer__time { font-size: 14px; }
+  .footer__time strong { font-size: 26px; }
+
+  /* Сторінки кейсів: власний дрібний текст, якого немає на лендінгу */
+  .case-back { font-size: 13.5px; }
+  body.case-page .contact__alt { font-size: 15px; }
+}
+
+/* «About me» на телефоні: сходинки тут все одно немає (відступи рядків
+   обнулені вище), тож рядки зливаються в один абзац і переносяться самі.
+   Так розмір більше не впирається в найдовший рядок «a designer and
+   developer», який при 24px уже впритул тримався за ширину екрана, і
+   напис може бути помітно більшим. Вище 700px сходинка лишається:
+   там вона й так набрана крупно (44px на 740). */
+@media (max-width: 700px) {
+  .about__hello { font-size: clamp(30px, 9.6vw, 46px); }
+  .about__hello .line { display: inline; }
+}
+
+/* ============ КУРСОР ДРУКУВАННЯ НЕ ЗАЙМАЄ МІСЦЯ ============ */
+/* Курсор - інлайновий вузол, який на кожній новій літері переставлявся далі
+   по рядку. Своїми 3px ширини й 3px поля він щоразу зсував решту рядка, а в
+   суцільному абзаці (телефон) міг перекинути слово на новий рядок - і напис
+   смикався. Абсолютне позиціювання без top/left лишає курсор рівно там, де
+   він і був би в потоці, але місця він більше не займає. */
+.about__hello { position: relative; }
+
+.tw-caret { position: absolute; }
+
+/* ============ ІМ'Я В «ABOUT ME» КАРТИНКОЮ ============ */
+/* Перший рядок привітання - файл, решта лишається текстом. Розмір задано у
+   em, тож напис масштабується разом із рядком на будь-якій ширині: 0.85em -
+   це висота чорнила «I'M ANDRII,» у Tektur (0.71em великих літер плюс 0.14em
+   хвостика коми), а від'ємне вирівнювання садить картинку рівно на базову
+   лінію сусідніх рядків. */
+.about__name-img {
+  display: inline-block;
+  /* Рукописний напис (img/about-name.png). Висота вдвічі більша за рядок:
+     це підпис, а не частина речення, тож він має читатись окремо */
+  height: 2.2em;
+  width: auto;
+  vertical-align: -0.3em;
+  /* Той самий приглушений тон, що й напис у героєві: у файлі чорнило чисто
+     біле і без цього підпис світився б яскравіше за все довкола.
+     Прозорість, а не filter: на цьому тлі результат той самий (186 проти
+     184 зі 255), зате не створюється шар фільтра. На телефоні поворот плюс
+     clip-path плюс filter разом давали композитний шар, який замальовувався
+     чорним, і за написом стояв чорний прямокутник. */
+  opacity: 0.72;
+  /* Легкий нахил: рукописний рядок не має стояти рівно по лінійці */
+  transform: rotate(-2.4deg);
+  transform-origin: left center;
+}
+
+/* Підпис зсунутий праворуч від колонки тексту - як розчерк збоку */
+.about__hello .line.about__name { margin-left: 0.8em; }
+
+/* Підпис дописується зліва направо, як від руки - той самий прийом, що в
+   написі героя. Стартує не при завантаженні, а коли скрипт друкування
+   ставить .tw-run, тобто одночасно з набором сусіднього тексту. */
+/* Відступи невід'ємні: від'ємні виносили область обрізання за межі
+   картинки, а на повернутому елементі телефон замальовував цей надлишок
+   чорним. Нічого не втрачаємо - чорнило і так усередині свого боксу. */
+.about__name-img { clip-path: inset(0 100% 0 0); }
+
+.about__hello.tw-run .about__name-img {
+  animation: nameWrite 1.25s var(--ease) 0.15s both;
+}
+
+@keyframes nameWrite {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__name-img { clip-path: none; animation: none !important; }
+}
+
+/* На телефоні рядки привітання стають inline - напис тримаємо окремим рядком
+   і трохи більшим, щоб не клеївся до великого тексту */
+@media (max-width: 700px) {
+  .about__hello .line.about__name { display: block; margin-bottom: 0.2em; margin-left: 0.4em; }
+  .about__name-img { height: 3.2em; vertical-align: baseline; }
+}
+
+/* на десктопі рядки блокові, тож картинка стоїть у своєму рядку сама */
+.about__name { line-height: 1.08; }
+
+/* ============ ПЕРЕМИКАЧ МОВИ ============ */
+/* Пігулка з поточною мовою і список під нею. Сам список мов складає скрипт
+   з масиву SITE_LANGS у js/script.js, тож нова мова додається одним рядком
+   там, а не правкою дванадцяти сторінок. */
+.lang {
+  position: relative;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Та сама пігулка, що й кнопка «Написати» в шапці: та сама геометрія, рамка
+   й радіус, лише трохи компактніша й з галочкою. */
+.lang__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px 8px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: #000;
+  color: var(--text);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease),
+              color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.lang__btn:hover,
+.lang__btn:focus-visible,
+.lang.is-open .lang__btn {
+  background: var(--text);
+  border-color: var(--text);
+  color: #0a0a0a;
+  box-shadow: 0 0 30px var(--glow);
+}
+
+.lang__caret {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  /* товща за 2.6 у самому файлі значка: у CSS властивість перебиває
+     атрибут, тож правити дванадцять сторінок не треба */
+  stroke-width: 3.6;
+  transition: transform 0.35s var(--ease);
+}
+
+.lang.is-open .lang__caret { transform: rotate(180deg); }
+
+/* Список висить під кнопкою і вирівняний по її правому краю: далі праворуч
+   тільки край екрана, тож розкриватись ліворуч - єдиний варіант, за якого
+   довші назви мов нікуди не вилазять. */
+.lang__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 100%;
+  list-style: none;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+  padding: 12px 18px 14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+  /* Вище за смугу прокручування (90): вона живе в тій самій шапці й
+     проходить рівно по її нижньому краю, тобто просто через відкритий
+     список, і перекреслювала його тонкою лінією. */
+  z-index: 95;
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease),
+              visibility 0s 0.28s;
+}
+
+.lang.is-open .lang__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease),
+              visibility 0s 0s;
+}
+
+/* Пункти - самий текст, без заливки. Поточну мову позначає коротка риска
+   ліворуч і повна яскравість напису - той самий прийом, що й у змісті на
+   сторінках кейсів (.toc__item), тож список читається як частина сайту.
+   Місце під риску зарезервоване відступом, а сама вона лежить абсолютно:
+   при наведенні росте тільки риска, текст не смикається. */
+.lang__item {
+  position: relative;
+  display: block;
+  padding: 8px 2px 8px 28px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  transition: color 0.28s var(--ease);
+}
+
+.lang__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s var(--ease);
+}
+
+.lang__item:hover,
+.lang__item:focus-visible { color: var(--text); }
+
+.lang__item:hover::before,
+.lang__item:focus-visible::before { width: 12px; }
+
+.lang__item.is-on {
+  color: var(--text);
+  cursor: default;
+}
+
+.lang__item.is-on::before { width: 20px; }
+
+@media (max-width: 700px) {
+  .lang { font-size: 11px; }
+  .lang__btn { gap: 5px; padding: 7px 9px 7px 11px; }
+  .lang__caret { width: 10px; height: 10px; }
+  .lang__menu { padding: 10px 15px 12px; border-radius: 14px; }
+  .lang__item { padding: 7px 2px 7px 24px; }
+  .lang__item.is-on::before { width: 16px; }
+}
+/* ============ БЛОКИ КЕЙСУ В СТИЛІ NOTION ============ */
+/* Сторінки кейсів повторюють розкладку вихідної Notion-сторінки: підзаголовок
+   під назвою, таблиця властивостей, розділи звичайним текстом, цитата,
+   ряд фото в колонках, маркований список і посилання на живий проєкт. */
+
+/* Назва, під якою одразу йде підзаголовок */
+.case-hero__title--lead { margin-bottom: 0; }
+
+/* Підзаголовок іде після обкладинки - той самий порядок, що в Notion */
+.case-cover + .case-lead { margin-top: clamp(22px, 3.2vh, 30px); }
+
+.case-lead {
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-width: 62ch;
+}
+
+/* Таблиця властивостей: назва зліва, значення справа */
+.case-facts {
+  margin-top: clamp(26px, 4vh, 40px);
+  border-top: 1px solid var(--line);
+}
+
+.case-facts__row {
+  display: grid;
+  grid-template-columns: minmax(110px, 190px) 1fr;
+  gap: 4px 28px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.case-facts__key { color: var(--text-dim); }
+.case-facts__val { color: var(--text); }
+
+.case-facts__val a { border-bottom: 1px solid var(--line-strong); }
+.case-facts__val a:hover,
+.case-facts__val a:focus-visible { border-bottom-color: var(--text); }
+
+@media (max-width: 600px) {
+  .case-facts__row { grid-template-columns: 1fr; }
+}
+
+/* Обкладинка-плашка з логотипом: не обрізаємо, показуємо цілком */
+.case-cover--brand { background: #fff; }
+.case-cover--brand img { object-fit: contain; }
+
+/* Суцільний текст розділу */
+.case-text p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--text-dim);
+  max-width: 68ch;
+}
+
+.case-text p + p { margin-top: clamp(14px, 2vh, 20px); }
+
+/* Жирний зачин усередині абзацу - як у Notion */
+.case-text .lead-in {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Цитата: вертикальна риска зліва */
+.case-quote {
+  margin: clamp(24px, 3.4vh, 34px) 0;
+  padding-left: clamp(18px, 2.4vw, 28px);
+  border-left: 2px solid var(--line-strong);
+  font-size: clamp(15.5px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 66ch;
+}
+
+/* Ряд фото у три колонки */
+.case-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.6vw, 20px);
+  margin-top: clamp(18px, 2.6vh, 26px);
+}
+
+.case-photos figure { margin: 0; }
+
+.case-photos img {
+  display: block;
+  width: 100%;
+  /* height: auto обовʼязково: атрибути width/height на <img> дають
+     презентаційну висоту, і вона перебила б aspect-ratio */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.case-photos figcaption {
+  margin-top: 9px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+
+@media (max-width: 700px) {
+  .case-photos { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* Маркований список - розділ «Технічно» */
+.case-list { list-style: none; }
+
+.case-list li {
+  position: relative;
+  padding: 6px 0 6px 22px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+.case-list li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 1em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+/* Посилання на живий проєкт у кінці кейсу */
+.case-outlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(24px, 3.4vh, 34px);
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.1vw, 26px);
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 5px;
+  transition: border-color 0.3s var(--ease);
+}
+
+.case-outlink:hover,
+.case-outlink:focus-visible { border-bottom-color: var(--text); }
+
+.case-outlink:hover .cta-arr,
+.case-outlink:focus-visible .cta-arr,
+.case-outlink:active .cta-arr,
+.case-outlink.tap-press .cta-arr { transform: rotate(0deg); }
+/* ============ ДЕВАЙС-МОКАПИ ДЛЯ СКРІНШОТІВ У КЕЙСАХ ============ */
+/* Реальний скріншот усередині рамки ноутбука або телефона. Малюється чистим
+   CSS у тій самій мові, що й заглушки .mock-browser / .mock-phone: темна
+   плашка #121212, тонка рамка, прямі кути, важка тінь. Ставиться всередину
+   .case-shot__frame, який лишається темною «сценою» за пристроєм.
+
+   Розмітка:
+     <div class="case-shot__frame case-shot__frame--device">
+       <span class="device device--laptop"><span class="device__screen"><img ...></span></span>
+     </div>
+   Для телефона - device--phone. */
+
+/* Сцена: пристрій центруємо, картинка більше не розтягується на весь фрейм */
+body.case-page .case-shot__frame--device { padding: clamp(18px, 3.2vw, 44px); }
+body.case-page .case-shot__frame--device img {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.device {
+  position: relative;
+  display: block;
+  background: #121212;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.device__screen {
+  display: block;
+  overflow: hidden;
+  background: #000;
+  /* власний шар: інакше під rotateY картинка може «вилізти» за екран праворуч */
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.device__screen img { display: block; max-width: 100%; }
+
+/* --- Ноутбук: панель браузера зверху, екран, «губа» корпусу знизу --- */
+.device--laptop {
+  /* 84%, а не 100%: панель + екран + «губа» разом вищі за сцену 16/9,
+     і на всю ширину ноутбук вилазив би за рамку та обрізався overflow'ом.
+     Бічні відступи - рамка екрана: без них сайт упирався в край пристрою */
+  width: min(84%, 880px);
+  padding: 0 clamp(6px, 0.8vw, 10px) clamp(8px, 1.1vw, 14px);
+}
+
+.device--laptop::before {
+  margin: 0 calc(clamp(6px, 0.8vw, 10px) * -1);
+}
+
+.device--laptop::before {
+  content: "";
+  display: block;
+  height: clamp(20px, 2.2vw, 30px);
+  background: #0c0c0c;
+  border-bottom: 1px solid var(--line);
+  /* три квадратики-«кнопки» як у .mock-browser__bar */
+  background-image:
+    linear-gradient(#333, #333),
+    linear-gradient(#333, #333),
+    linear-gradient(#333, #333);
+  background-size: 8px 8px, 8px 8px, 8px 8px;
+  background-position: 12px 50%, 26px 50%, 40px 50%;
+  background-repeat: no-repeat;
+}
+
+.device--laptop .device__screen { aspect-ratio: 16 / 9; }
+
+/* Основа ноутбука - ширша за екран, тримає його знизу */
+.device--laptop::after {
+  content: "";
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  bottom: -1px;
+  height: clamp(8px, 1.1vw, 14px);
+  background: linear-gradient(#1a1a1a, #0e0e0e);
+  border: 1px solid var(--line-strong);
+  border-top: 0;
+}
+
+/* --- Телефон: вузька плашка з вирізом і вертикальним екраном --- */
+.device--phone {
+  width: min(32%, 250px);
+  /* верхня рамка товща: у ній живе виріз під камеру, екран починається нижче */
+  padding: 22px 10px 12px;
+}
+
+.device--phone .device__screen {
+  aspect-ratio: 9 / 19;
+  position: relative;
+}
+
+/* Виріз під камеру */
+.device--phone::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 30%;
+  height: 6px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: #2a2a2a;
+}
+
+/* Два пристрої поруч: ноутбук ліворуч, телефон правіше й нижче - як на
+   типовому мокапі. На вузьких екранах телефон ховаємо, лишається ноутбук. */
+.device-pair {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 22px);
+  width: 100%;
+}
+
+.device-pair .device--laptop { width: min(62%, 880px); }
+.device-pair .device--phone  { width: min(25%, 270px); }
+
+@media (max-width: 700px) {
+  body.case-page .case-shot__frame--device { padding: 14px; }
+  .device-pair .device--phone { display: none; }
+  .device-pair .device--laptop { width: 100%; }
+  .device--phone { width: min(60%, 250px); }
+}
+/* ============ ДЕВАЙС-МОКАПИ: ДОДАТКОВІ ВАРІАЦІЇ ============ */
+/* Планшет, тріо «ноутбук + планшет + телефон», нахилений телефон поруч
+   із ноутбуком, одиночний телефон по центру, і мокап на обкладинці кейсу.
+   Усе в тій самій мові, що й базові .device--laptop / .device--phone. */
+
+/* Сцена з телефоном чи планшетом вища за 16:9: інакше вертикальний пристрій
+   мусить бути дрібним, щоб вміститись по висоті */
+body.case-page .case-shot__frame--device:has(.device--phone),
+body.case-page .case-shot__frame--device:has(.device--tablet),
+body.case-page .case-cover--device:has(.device--phone) { aspect-ratio: 16 / 10.5; }
+
+/* Лише телефон або лише планшет, без ноутбука: сцена 4:3, пристрій на всю висоту */
+body.case-page .case-shot__frame--device:has(.device--phone):not(:has(.device--laptop)),
+body.case-page .case-shot__frame--device:has(.device--tablet):not(:has(.device--laptop)) { aspect-ratio: 4 / 3; }
+
+/* --- Планшет: рамка товща за телефон, екран 3:4 --- */
+.device--tablet {
+  width: min(44%, 460px);
+  padding: 14px 12px;
+}
+
+.device--tablet .device__screen { aspect-ratio: 3 / 4; }
+
+/* Камера планшета: маленька крапка над екраном */
+.device--tablet::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #2a2a2a;
+}
+
+/* --- Тріо: ноутбук по центру, планшет ліворуч, телефон праворуч --- */
+.device-trio {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+
+.device-trio { gap: clamp(10px, 1.4vw, 20px); }
+
+.device-trio .device--laptop { width: min(50%, 820px); }
+.device-trio .device--tablet { width: min(28%, 320px); }
+.device-trio .device--phone  { width: min(17%, 190px); }
+
+/* --- Нахилений телефон поруч із ноутбуком: легка 3D-перспектива --- */
+/* Колишній «нахилений» варіант: 3D-поворот рендерився по-різному в браузерах
+   і картинка вилазила за рамку. Тепер це рівний телефон, зсунутий трохи нижче
+   від ноутбука - різниця з .device-pair лише у вирівнюванні. */
+.device-pair--tilt { align-items: center; }
+.device-pair--tilt .device--phone { margin-top: 6%; }
+
+/* --- Одиночний телефон по центру сцени --- */
+.case-shot__frame--device > .device--phone { width: min(30%, 280px); }
+
+/* --- Два планшети або планшет + телефон поруч --- */
+.device-duo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 28px);
+  width: 100%;
+}
+
+.device-duo .device--tablet { width: min(40%, 420px); }
+.device-duo .device--phone  { width: min(24%, 260px); }
+
+/* --- Мокап на обкладинці кейсу --- */
+/* Обкладинка лишається темною сценою 16:9 з рамкою, а всередині - пристрій
+   чи композиція замість плоскої картинки на весь фрейм. */
+body.case-page .case-cover--device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 3.4vw, 48px);
+  background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+}
+
+body.case-page .case-cover--device img {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.case-cover--device .device-trio .device--laptop { width: min(50%, 900px); }
+
+@media (max-width: 700px) {
+  .device-trio .device--tablet,
+  .device-trio .device--phone { display: none; }
+  .device-trio .device--laptop { width: 100%; }
+  .device-duo { gap: 12px; }
+  .device-duo .device--tablet { width: 58%; }
+  .device-duo .device--phone  { width: 30%; }
+  body.case-page .case-cover--device { padding: 14px; }
+  .case-shot__frame--device > .device--phone { width: min(60%, 250px); }
+}
+/* ============ ВОГОНЬ ІЗ СИМВОЛІВ ПІД СЛОГАНОМ ============ */
+/* Полотно на всю ширину екрана внизу секції. Літери зі слогана падають
+   зверху і лягають у полумʼя: воно під ними за z-index, тож ніщо не
+   перекриває саму фізику. Догори полумʼя тане маскою, щоб не було різкої
+   горизонтальної межі. */
+.statement__fire {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100vw;
+  transform: translateX(-50%);
+  /* 2, а не 0: полотно з літерами має z-index 1, тож букви падають ЗА
+     полумʼя і воно їх накриває */
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to top, #000 40%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 40%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
+}
+/* ============ НИЖНЯ ТРЕТИНА СТОРІНКИ - У КОЛІР ФУТЕРА ============ */
+/* Від «Послуг» і до кінця сторінка йде суцільним чорним, тим самим, що
+   в футера. Селектори повторюють префікси правил вище (там у секцій-
+   накладок стоїть непрозоре тло var(--bg)), інакше ті переважили б. */
+body[data-hscroll]:not(.hscroll-on) .works-pin,
+body[data-hscroll]:not(.hscroll-on) #works,
+body[data-hscroll]:not(.hscroll-on) .note-band,
+body[data-hscroll] .statement-pin--on + .services-pin > .section,
+body #services,
+body .works-pin,
+body #works,
+body .note-band {
+  background: #000;
+}
+/* ============ «ПРО МЕНЕ» НА ВЕСЬ ЕКРАН ТЕЛЕФОНА ============ */
+/* Секція була заввишки ~615px при екрані 844: слоган із падаючими буквами
+   потрапляв у той самий кадр і наїжджав на привітання. Тепер вона займає
+   екран цілком, тож наступна секція починається лише за його межею.
+   svh замість vh: на телефоні vh рахується без урахування панелей браузера
+   і секція виходила б вищою за реальний видимий екран. */
+@media (max-width: 700px) {
+  body[data-hscroll]:not(.hscroll-on) #about,
+  #about {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}
+/* ============ ГЕРОЙ НА ТЕЛЕФОНІ: ПІДКАЗКА ПРОКРУТКИ ============ */
+/* Підказка стояла впритул до нижнього краю: зверху в героя 120px, знизу нуль.
+   У браузерах, де нижня панель ПЛАВАЄ поверх сторінки, а не забирає висоту
+   (Mi Browser і подібні), вона накривала стрілку, і та виглядала обрізаною.
+   Тепер під підказкою є запас, який росте разом з екраном, плюс системний
+   виріз. Висоту героя це не міняє: місце береться зі слабини зверху. */
+@media (hover: none) and (pointer: coarse) {
+  .hero {
+    padding-bottom: calc(clamp(24px, 4.5vh, 48px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Короткий екран (SE, старі Android, будь-який телефон боком). Там вміст
+   героя не вміщався в екран ще до всяких панелей: 120px згори плюс 584px
+   вмісту давали 704px при екрані 667, тож підказка була НИЖЧЕ краю просто
+   за геометрією. Тут герой підбирається: менше повітря під шапкою, тісніші
+   теги і нижчий рукописний напис - рівно стільки, щоб усе влізло. */
+@media (hover: none) and (pointer: coarse) and (max-height: 740px) {
+  .hero { padding-top: 72px; }
+  /* 183px тут тримають відстань між кнопкою і підказкою на звичайному
+     телефоні, і це правильно. Але на короткому екрані з них 71px - чиста
+     порожнеча, через яку підказка виїжджала за край. Забираємо саме тут:
+     напис і теги лишаються в повний зріст. */
+  .hero__bottom { min-height: 0; }
+}
+
+/* Зовсім малий екран (старі 4.7" і будь-який телефон боком): навіть без
+   мертвого простору вміст не влазить. Останнє, чим можна поступитись, -
+   розмір рукописного напису: він масштабується, а не зрізається. */
+@media (hover: none) and (pointer: coarse) and (max-height: 620px) {
+  .hero__title-img { max-height: 20vh; }
+}
+
+/* ============ ЗАГОЛОВКИ СЕКЦІЙ НА ТЕЛЕФОНІ ============ */
+/* «Портфоліо» і «Послуги» на телефоні читались як звичайний підзаголовок:
+   8vw на 390px давало 31px - майже як текст під ними. Тут вони помітно
+   більші, а повітря під заголовком зрізане, щоб напис стояв відразу над
+   своїм списком, а не окремим екраном. Сторінок кейсів це не чіпає: там
+   виграють власні правила body.case-page (вага 0,2,1). */
+@media (max-width: 700px) {
+  /* На телефоні список довгий, центрувати нічого, і секція впиралась
+     у власні краї. Тут вона дихає: повітря помітно більше, ніж дає
+     загальне правило .section, і тільки в Послугах. */
+  .services-pin > #services {
+    padding-block: clamp(104px, 16vh, 170px) clamp(150px, 24vh, 260px);
+  }
+
+  .section__label { font-size: clamp(38px, 11.5vw, 54px); }
+
+  .section__head,
+  .skills__head { margin-bottom: 16px; }
+
+  .works-pin .section__head { margin-bottom: 16px; }
+}
+
+/* ============ ВІДГУК НА ДОТИК ============ */
+/* На сенсорному екрані немає наведення, тож натиснута кнопка чи картка на
+   пів секунди підсвічується, і аж тоді відбувається перехід (див. модуль
+   у js/script.js). Яскравість, а не масштаб: у героя кнопка вже зайнята
+   власною анімацією появи, і transform там перебити нічим. */
+.tap-press {
+  filter: brightness(1.55);
+  transition: filter 0.12s ease-out;
+}
+
+.tap-press--out {
+  filter: brightness(1);
+  transition: filter 0.34s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tap-press,
+  .tap-press--out { filter: none; transition: none; }
+}
+
+/* ============ ПОРТФОЛІО НАЇЖДЖАЄ НА ПОСЛУГИ (ПК) ============ */
+/* Той самий прийом, що між цитатою і Послугами, лише на один щабель нижче.
+   Обгортка вдвічі вища за екран: перші 100vh секція просто стоїть на місці
+   прилипла, а Портфоліо з відʼємним полем стартує на екран раніше і
+   піднімається знизу поверх неї. Рівно коли воно закриває екран, липкість
+   Послуг закінчується - передача без стрибка.
+
+   Загальна висота сторінки не змінюється: +100vh обгортці і -100vh
+   Портфоліо взаємно гасяться.
+
+   Умови ті самі, що вмикають панельний режим (body.snap-on): на телефоні,
+   планшеті й на низьких вікнах обгортка лишається звичайним div. */
+@media (min-width: 1025px) and (min-height: 700px) {
+  body.snap-on > .services-pin {
+    position: relative;
+    height: 200vh;
+  }
+
+  body.snap-on > .services-pin > #services {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* Знизу повітря більше, ніж згори, і воно росте разом з висотою вікна.
+       Верх обмежений шапкою (80px), тож там підлога 88px. Низ стартує з
+       44px на вікні 700px - це все, що вміщається, - і додає по пів пікселя
+       на кожен піксель висоти понад 700, поки не впреться в 190px. */
+    padding-block: clamp(88px, 10vh, 130px) clamp(44px, calc(44px + (100vh - 700px) * 0.5), 190px);
+  }
+
+  body.snap-on > .services-pin + .works-pin {
+    position: relative;
+    z-index: 6;
+    margin-top: -100vh;
+  }
+}
+
+/* Низькі вікна: та сама поправка на відступи, що і в решти панелей */
+@media (min-width: 1025px) and (min-height: 700px) and (max-height: 900px) {
+  body.snap-on > .services-pin > #services .tools { padding-top: 14px; gap: 10px; }
+}
+
+/* ============ НАКРИТТЯ «ПОСЛУГИ → ПОРТФОЛІО» НА ТЕЛЕФОНІ ============ */
+/* На ПК це чиста геометрія: секція рівно на екран, обгортка вдвічі вища.
+   На телефоні «Послуги» вищі за екран (шість рядків не влазять), тож усі
+   розміри рахує скрипт у пікселях - і висоту обгортки, і зсув липкості, і
+   від'ємне поле Портфоліо. Пікселі, а не vh, навмисно: на телефоні 100vh
+   рахується по РОЗГОРНУТОМУ адресному рядку і не збігається з реальним
+   екраном, а скрипт міряє саме реальний. */
+.services-pin--on > #services {
+  position: sticky;
+  /* липне низом: спершу список догортується весь, а вже тоді завмирає */
+  top: var(--services-top, 0px);
+}
+
+.services-pin--on + .works-pin {
+  position: relative;
+  z-index: 6;
+}
+
+/* ============ ТЕЛЕФОН: ПРИБИРАЄМО ДОРОГЕ КОМПОЗИТУВАННЯ ============ */
+/* Дві речі, які на мобільному коштують більше за всі анімації разом.
+
+   1. backdrop-filter у шапці. Смуга фіксована й видима весь час, тож браузер
+      мусить розмивати те, що під нею, КОЖЕН кадр прокрутки. На темному тлі
+      різниці між розмиттям і майже непрозорим кольором око не бачить.
+
+   2. mix-blend-mode на рукописному написі. Режим накладання змушує
+      композитувати картинку 1657x949 з тим, що під нею, теж щокадру. Після
+      invert(1) фон картинки і так чорний, як і сторінка, тож без накладання
+      вона виглядає майже так само. */
+@media (hover: none) and (pointer: coarse) {
+  .header {
+    transition: background 0.4s, border-color 0.4s;
+  }
+
+  .header.scrolled {
+    background: rgba(8, 8, 8, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .note-band__img { mix-blend-mode: normal; }
+
+  .lang__menu {
+    background: #0c0c0c;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ============ ТЕЛЕФОН: ГОРТАЄТЬСЯ BODY, А НЕ КОРІНЬ ============ */
+/* Головна причина дьоргання на телефоні була не в анімаціях, а в тому, що
+   гортався КОРІНЬ сторінки. Тільки тоді мобільний браузер ховає й показує
+   адресний рядок - а разом із ним міняється висота екрана, і вся геометрія,
+   зав'язана на неї, стрибає просто під пальцем.
+
+   На olhalazarieva.com це вирішено так: html і body з overflow:hidden, а весь
+   вміст гортається всередині окремого контейнера. Тут те саме на рівень
+   простіше - гортається сам body. Ефект ідентичний (корінь нерухомий, рядок
+   не ховається), але не треба ні зайвого div у розмітці, ні переписування
+   селекторів виду "body > .section".
+
+   Фіксовані елементи (шапка, шторка переходу, зерно) від цього не страждають:
+   у body немає ні transform, ні filter, ні will-change, тож вони й далі
+   тримаються за екран. Липкі секції липнуть до body - візуально те саме. */
+@media (hover: none) and (pointer: coarse) {
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* інерція на iOS для контейнера, що гортається */
+    -webkit-overflow-scrolling: touch;
+  }
+}

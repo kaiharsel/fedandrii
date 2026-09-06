@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Кейс: дизайн мобільного B2C-застосунку | FED.ANDRII</title>
+  <meta name="description" content="Кейс FED.ANDRII: дизайн мобільного B2C-застосунку — користувацькі сценарії, екрани та логіка взаємодії.">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <!-- Замініть https://andriifedyshyn.com на реальний домен після публікації -->
+  <link rel="canonical" href="https://andriifedyshyn.com/ua/case-app.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Кейс: мобільний B2C-застосунок">
+  <meta property="og:description" content="Дизайн мобільного B2C-застосунку: користувацькі сценарії, екрани та логіка взаємодії.">
+  <meta property="og:url" content="https://andriifedyshyn.com/ua/case-app.html">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:site_name" content="FED.ANDRII | Дизайн і розробка">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=84">
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://andriifedyshyn.com/case-app.html">
+  <link rel="alternate" hreflang="uk" href="https://andriifedyshyn.com/ua/case-app.html">
+  <link rel="alternate" hreflang="x-default" href="https://andriifedyshyn.com/case-app.html">
+  <!-- Вибір мови: збережений вибір користувача має пріоритет; якщо вибору ще
+       не було - дивимось мову браузера й часовий пояс. Пошукових роботів не
+       перекидаємо, щоб обидві версії нормально індексувались. -->
+  <script>(function(){try{
+var K="fa-lang",p=location.pathname,inUA=/(^|\/)ua\//.test(p),f=p.split("/").pop()||"index.html";
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk\b|-ua\b/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":"en"}
+if(w==="uk"&&!inUA){location.replace("ua/"+f)}else if(w==="en"&&inUA){location.replace("../"+f)}
+}catch(e){}})();</script>
+</head>
+<body class="case-page">
+
+  <!-- Заставка завантаження -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></a>
+
+      <nav class="nav" id="nav" aria-label="Головна навігація">
+        <a href="index.html#about" class="nav__link" data-text="Про мене"><span>Про мене</span></a>
+        <a href="index.html#services" class="nav__link" data-text="Послуги"><span>Послуги</span></a>
+        <a href="index.html#works" class="nav__link" data-text="Портфоліо"><span>Портфоліо</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати в Telegram</span></a>
+
+        <p class="nav__time">
+          <span>Мій місцевий час</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
+            <span class="lang__cur">UA</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="../case-app.html" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="case-app.html" class="lang__item is-on" hreflang="uk" data-lang="uk" aria-current="page">Українська</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати</span></a>
+        <button class="burger" id="burger" aria-label="Відкрити меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+
+  <!-- Плаваючий зміст сторінки, як у Notion -->
+  <nav class="toc" aria-label="Навігація сторінкою">
+    <a href="#about-case" class="toc__item"><span class="toc__label">Про проєкт</span><span class="toc__line"></span></a>
+    <a href="#screens" class="toc__item"><span class="toc__label">Екрани проєкту</span><span class="toc__line"></span></a>
+    <a href="#features" class="toc__item"><span class="toc__label">Що всередині</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">Результат</span><span class="toc__line"></span></a>
+    <a href="#contact" class="toc__item"><span class="toc__label">Обговорити</span><span class="toc__line"></span></a>
+  </nav>
+
+  <main>
+    <!-- Головний блок кейсу -->
+    <section class="case-hero container">
+      <a href="index.html#works" class="case-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Назад до портфоліо
+      </a>
+
+      <h1 class="case-hero__title">Мобільний застосунок B2C</h1>
+
+      <div class="case-meta reveal">
+        <div class="case-meta__item">
+          <h4>Тип проєкту</h4>
+          <p>Мобільний застосунок для iOS та Android</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>Моя роль</h4>
+          <p>UX-дослідження та UI-дизайн</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>Інструменти</h4>
+          <p>Figma, FigJam</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>Тривалість</h4>
+          <p>2-3 тижні</p>
+        </div>
+      </div>
+
+      <!-- Обкладинка кейсу.
+           Щоб показати реальний скриншот: покладіть файл у img/ і додайте
+           <img src="../img/app-cover.jpg" alt="Обкладинка проєкту">
+           одразу після цього коментаря (розмітку .mock тоді можна видалити). -->
+      <div class="case-cover reveal" data-parallax>
+        <div class="mock mock-phone">
+              <div class="mock-phone__body">
+                <div class="mock-card mock-card--big"></div>
+                <div class="mock-card"></div>
+                <div class="mock-card"></div>
+              </div>
+            </div>
+      </div>
+    </section>
+
+    <!-- Про проєкт -->
+    <section class="section container" id="about-case">
+      <div class="section__head reveal">
+        <h2 class="section__label">Про проєкт</h2>
+      </div>
+
+      <div class="case-cols reveal">
+        <div>
+          <h3>Завдання</h3>
+          <p>Ідея застосунку вже була, але не було розуміння, як людина насправді ним користуватиметься: які кроки робитиме, де застрягатиме і що бачитиме на кожному екрані</p>
+        </div>
+        <div>
+          <h3>Рішення</h3>
+          <p>Почав із користувацьких сценаріїв у FigJam, розклав шляхи на кроки і лише тоді взявся за екрани. Кожен екран закриває одне завдання, а логіку переходів описано для розробників</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Екрани проєкту -->
+    <section class="section container" id="screens">
+      <div class="section__head reveal">
+        <h2 class="section__label">Екрани проєкту</h2>
+      </div>
+
+      <!-- Галерея. Щоб показати реальні скриншоти: покладіть файли у img/
+           і вставте їх усередину .case-shot__frame:
+           <img src="../img/app-1.jpg" alt="Опис екрана">
+           розмітку .mock усередині тоді можна видалити. -->
+      <div class="case-gallery">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-phone">
+                <div class="mock-phone__body">
+                  <div class="mock-card mock-card--big"></div>
+                  <div class="mock-card"></div>
+                  <div class="mock-card"></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Головний екран</span>
+            <span class="case-shot__tag">Стрічка та швидкі дії</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-phone">
+                <div class="mock-phone__body">
+                  <div class="mock-card mock-card--big"></div>
+                  <div class="mock-card"></div>
+                  <div class="mock-card"></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Екран товару</span>
+            <span class="case-shot__tag">Деталі та головна дія</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-browser">
+                <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+                <div class="mock-browser__body">
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-cta" style="width:34%"></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Користувацький сценарій</span>
+            <span class="case-shot__tag">Від входу до цілі</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-phone">
+                <div class="mock-phone__body">
+                  <div class="mock-card mock-card--big"></div>
+                  <div class="mock-card"></div>
+                  <div class="mock-card"></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Профіль</span>
+            <span class="case-shot__tag">Налаштування та історія</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Що всередині -->
+    <section class="section container" id="features">
+      <div class="section__head reveal">
+        <h2 class="section__label">Що всередині</h2>
+      </div>
+
+      <ul class="case-features reveal">
+        <li><span class="num">01</span>Користувацькі сценарії та карта екранів</li>
+        <li><span class="num">02</span>Інтерактивний прототип у Figma</li>
+        <li><span class="num">03</span>Опрацьовані стани: порожній екран, завантаження, помилка</li>
+        <li><span class="num">04</span>Компоненти на одній спільній сітці</li>
+        <li><span class="num">05</span>Макети, підготовлені для розробників</li>
+        <li><span class="num">06</span>Перевірка контрасту та зон натискання</li>
+      </ul>
+    </section>
+
+    <!-- Результат -->
+    <section class="section container" id="result">
+      <div class="section__head reveal">
+        <h2 class="section__label">Результат</h2>
+      </div>
+
+      <div class="about__stats reveal">
+        <div class="stat">
+          <div class="stat__num">20+</div>
+          <div class="stat__label">Опрацьованих екранів</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">4</div>
+          <div class="stat__label">Ключових користувацьких шляхів</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">100%</div>
+          <div class="stat__label">Екранів в інтерактивному прототипі</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Заклик до дії -->
+    <section class="contact container" id="contact">
+      <h2 class="contact__title split">
+        Хочете <span class="outline">щось подібне?</span>
+      </h2>
+
+      <div class="reveal">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="contact__btn">
+          <span>Обговорити проєкт</span>
+          <svg class="cta-arr" width="22" height="20" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+        <p class="contact__alt">
+          Або поверніться до <a href="index.html#works">портфоліо</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Підвал -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal">
+        <span class="footer__cta-label">Маєте ідею?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          Напишіть мені
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Меню</h4>
+          <ul>
+            <li><a href="index.html#about">Про мене</a></li>
+            <li><a href="index.html#services">Послуги</a></li>
+            <li><a href="index.html#works">Портфоліо</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          Мій місцевий час
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="../js/script.js?v=84"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# У репозиторії тримаємо LF, у робочій копії Windows git сам поставить CRLF.
+# Без цього кожна правка з іншої машини давала б різницю в усьому файлі.
+* text=auto
+
+# Картинки й відео чіпати не можна
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.svg text
+*.mp4 binary
+*.webm binary

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Case: website with online payments in Framer | FED.ANDRII</title>
+  <meta name="description" content="FED.ANDRII case: a multipage Framer website with online payment integration. Design, build and payment setup.">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <!-- Replace https://andriifedyshyn.com with your real domain after publishing -->
+  <link rel="canonical" href="https://andriifedyshyn.com/case-payments.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Case: Website with payments">
+  <meta property="og:description" content="A multipage Framer website with online payment integration: design, build and payment provider setup.">
+  <meta property="og:url" content="https://andriifedyshyn.com/case-payments.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="FED.ANDRII | Design &amp; Development">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=84">
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://andriifedyshyn.com/case-payments.html">
+  <link rel="alternate" hreflang="uk" href="https://andriifedyshyn.com/ua/case-payments.html">
+  <link rel="alternate" hreflang="x-default" href="https://andriifedyshyn.com/case-payments.html">
+  <!-- Вибір мови: збережений вибір користувача має пріоритет; якщо вибору ще
+       не було - дивимось мову браузера й часовий пояс. Пошукових роботів не
+       перекидаємо, щоб обидві версії нормально індексувались. -->
+  <script>(function(){try{
+var K="fa-lang",p=location.pathname,inUA=/(^|\/)ua\//.test(p),f=p.split("/").pop()||"index.html";
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk\b|-ua\b/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":"en"}
+if(w==="uk"&&!inUA){location.replace("ua/"+f)}else if(w==="en"&&inUA){location.replace("../"+f)}
+}catch(e){}})();</script>
+</head>
+<body class="case-page">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></a>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html#about" class="nav__link" data-text="About"><span>About</span></a>
+        <a href="index.html#services" class="nav__link" data-text="Services"><span>Services</span></a>
+        <a href="index.html#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Message on Telegram</span></a>
+
+        <p class="nav__time">
+          <span>My local time</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
+            <span class="lang__cur">EN</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="case-payments.html" class="lang__item is-on" hreflang="en" data-lang="en" aria-current="page">English</a></li>
+            <li><a href="ua/case-payments.html" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Contact me</span></a>
+        <button class="burger" id="burger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+
+  <!-- Page navigation, like Notion's floating table of contents -->
+  <nav class="toc" aria-label="Page navigation">
+    <a href="#about-case" class="toc__item"><span class="toc__label">About the project</span><span class="toc__line"></span></a>
+    <a href="#screens" class="toc__item"><span class="toc__label">Project screens</span><span class="toc__line"></span></a>
+    <a href="#features" class="toc__item"><span class="toc__label">What is inside</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">Result</span><span class="toc__line"></span></a>
+    <a href="#contact" class="toc__item"><span class="toc__label">Discuss</span><span class="toc__line"></span></a>
+  </nav>
+
+  <main>
+    <!-- Case hero -->
+    <section class="case-hero container">
+      <a href="index.html#works" class="case-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to portfolio
+      </a>
+
+      <h1 class="case-hero__title">Website with payments</h1>
+
+      <div class="case-meta reveal">
+        <div class="case-meta__item">
+          <h4>Project type</h4>
+          <p>Multipage website + online payments</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>My role</h4>
+          <p>Turnkey design and build</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>Tools</h4>
+          <p>Figma, Framer</p>
+        </div>
+        <div class="case-meta__item">
+          <h4>Timeline</h4>
+          <p>5-10 days</p>
+        </div>
+      </div>
+
+      <!-- Case cover.
+           To show a real screenshot: drop the file into img/ and add
+           <img src="img/payments-cover.jpg" alt="Project cover">
+           right after this comment (the .mock markup can then be deleted). -->
+      <div class="case-cover reveal" data-parallax>
+        <div class="mock mock-browser">
+              <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+              <div class="mock-browser__body">
+                <div class="mock-nav"><i></i><i></i><i></i><i></i></div>
+                <div class="mock-line mock-line--hero" style="width:62%"></div>
+                <div class="mock-line" style="width:40%"></div>
+                <div class="mock-cta"></div>
+                <div class="mock-grid"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+      </div>
+    </section>
+
+    <!-- About project -->
+    <section class="section container" id="about-case">
+      <div class="section__head reveal">
+        <h2 class="section__label">About the project</h2>
+      </div>
+
+      <div class="case-cols reveal">
+        <div>
+          <h3>Task</h3>
+          <p>The client needed a site where a visitor can not only read about the service but pay for it on the spot, with no back-and-forth and no invoices issued by hand</p>
+        </div>
+        <div>
+          <h3>Solution</h3>
+          <p>Built the site in Framer around one continuous path: service page, plan choice, payment in a few steps. The payment provider is wired in directly and confirmation is sent automatically</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screens -->
+    <section class="section container" id="screens">
+      <div class="section__head reveal">
+        <h2 class="section__label">Project screens</h2>
+      </div>
+
+      <!-- Gallery. To show real screenshots: drop the files into img/
+           and put them inside .case-shot__frame:
+           <img src="img/payments-1.jpg" alt="Screen description">
+           the .mock markup inside can then be deleted. -->
+      <div class="case-gallery">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-browser">
+                <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+                <div class="mock-browser__body">
+                  <div class="mock-nav"><i></i><i></i><i></i></div>
+                  <div class="mock-line mock-line--hero"></div>
+                  <div class="mock-line" style="width:55%"></div>
+                  <div class="mock-grid"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Home page</span>
+            <span class="case-shot__tag">The service and its value</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-browser">
+                <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+                <div class="mock-browser__body">
+                  <div class="mock-split">
+                    <div class="mock-split__img"></div>
+                    <div>
+                      <div class="mock-line" style="width:80%"></div>
+                      <div class="mock-line mock-line--sm"></div>
+                      <div class="mock-cta" style="width:70%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Plan page</span>
+            <span class="case-shot__tag">What is included and the price</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-browser">
+                <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+                <div class="mock-browser__body">
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-row"><i class="sq"></i><div class="mock-line"></div><div class="mock-line mock-line--sm"></div></div>
+                  <div class="mock-cta" style="width:34%"></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Payment form</span>
+            <span class="case-shot__tag">Step by step, no spare fields</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
+          <div class="case-shot__frame" data-parallax>
+              <div class="mock mock-browser">
+                <div class="mock-browser__bar"><i></i><i></i><i></i></div>
+                <div class="mock-browser__body">
+                  <div class="mock-nav"><i></i><i></i><i></i></div>
+                  <div class="mock-line mock-line--hero"></div>
+                  <div class="mock-line" style="width:55%"></div>
+                  <div class="mock-grid"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+          </div>
+          <div class="case-shot__cap">
+            <span class="case-shot__title">Confirmation</span>
+            <span class="case-shot__tag">Order status after payment</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section container" id="features">
+      <div class="section__head reveal">
+        <h2 class="section__label">What is inside</h2>
+      </div>
+
+      <ul class="case-features reveal">
+        <li><span class="num">01</span>Multipage structure built in Framer</li>
+        <li><span class="num">02</span>Payment provider integration</li>
+        <li><span class="num">03</span>Plan pages with side-by-side comparison</li>
+        <li><span class="num">04</span>Automatic payment confirmation</li>
+        <li><span class="num">05</span>Adapted to phone and tablet</li>
+        <li><span class="num">06</span>Event and conversion analytics</li>
+      </ul>
+    </section>
+
+    <!-- Result -->
+    <section class="section container" id="result">
+      <div class="section__head reveal">
+        <h2 class="section__label">Result</h2>
+      </div>
+
+      <div class="about__stats reveal">
+        <div class="stat">
+          <div class="stat__num">3</div>
+          <div class="stat__label">Steps from page to payment</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">100%</div>
+          <div class="stat__label">Responsive on every screen</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">24/7</div>
+          <div class="stat__label">Payments without your involvement</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact container" id="contact">
+      <h2 class="contact__title split">
+        Want <span class="outline">something similar?</span>
+      </h2>
+
+      <div class="reveal">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="contact__btn">
+          <span>Discuss the project</span>
+          <svg class="cta-arr" width="22" height="20" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+        <p class="contact__alt">
+          Or go back to <a href="index.html#works">the portfolio</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal">
+        <span class="footer__cta-label">Have an idea?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          Get in touch
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#works">Portfolio</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          My local time:
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/script.js?v=84"></script>
+</body>
+</html>

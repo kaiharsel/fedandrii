@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>FED.ANDRII / Дизайн і розробка: сайти, UI/UX, Telegram-боти, автоматизація</title>
+  <meta name="description" content="FED.ANDRII (Андрій Федишин): дизайн і розробка повного циклу. UI/UX-дизайн, сайти та e-commerce, фронтенд, бекенд, Telegram-боти, автоматизація процесів і зміни в дизайні чи коді. Пишіть у Telegram.">
+  <meta name="keywords" content="UI/UX-дизайнер, веброзробка, розробка сайтів, фронтенд-розробник, бекенд, розробка Telegram-ботів, автоматизація бізнесу, вебдизайн, лендинг, e-commerce, зміни на сайті, Framer, дизайн-система, FED.ANDRII, Андрій Федишин">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://fedandrii.me/ua/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FED.ANDRII / Дизайн і розробка">
+  <meta property="og:description" content="UI/UX-дизайн, сайти та e-commerce, фронтенд, бекенд, Telegram-боти, автоматизація й зміни будь-якої складності.">
+  <meta property="og:url" content="https://fedandrii.me/ua/">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:site_name" content="FED.ANDRII / Дизайн і розробка">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FED.ANDRII / Дизайн і розробка">
+  <meta name="twitter:description" content="UI/UX-дизайн, сайти, фронтенд, бекенд, Telegram-боти та автоматизація.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;family=Caveat:wght@600;700&amp;family=Spline+Sans+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=95">
+
+  <!-- Структуровані дані для Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Andrii Fedyshyn",
+    "alternateName": "FED.ANDRII",
+    "jobTitle": "Дизайнер і розробник",
+    "description": "Дизайн і розробка повного циклу: UI/UX-дизайн, сайти, e-commerce, фронтенд, бекенд, Telegram-боти, автоматизація та зміни.",
+    "url": "https://fedandrii.me/",
+    "sameAs": ["https://t.me/fed_andrii"],
+    "knowsAbout": ["UI-дизайн", "UX-дизайн", "Вебдизайн", "Розробка сайтів", "Фронтенд-розробка", "Бекенд-розробка", "Telegram-боти", "Автоматизація процесів", "Дизайн для e-commerce", "Дизайн-системи", "UI kit", "Прототипування"]
+  }
+  </script>
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://fedandrii.me/">
+  <link rel="alternate" hreflang="uk" href="https://fedandrii.me/ua/">
+  <link rel="alternate" hreflang="pl" href="https://fedandrii.me/pl/">
+  <link rel="alternate" hreflang="de" href="https://fedandrii.me/de/">
+  <link rel="alternate" hreflang="x-default" href="https://fedandrii.me/">
+  <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
+       (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
+       поважати. Інакше посилання на польську версію, надіслане клієнтові,
+       кидало б його на ту мову, яку він колись обрав тут раніше.
+       Пошукових роботів не перекидаємо взагалі. -->
+  <script>(function(){try{
+var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"index.html";
+var D={uk:"ua",pl:"pl",de:"de"},cur="en",k;
+for(k in D){if(new RegExp("(^|/)"+D[k]+"/").test(p))cur=k;}
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(cur!=="en")return;
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
+  (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
+  (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
+if(!D[w])return;
+location.replace(D[w]+"/"+f);
+}catch(e){}})();</script>
+</head>
+<body data-hscroll="about">
+
+  <!-- Прелоадер -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" width="700" height="249" fetchpriority="high" decoding="sync"></a>
+
+      <nav class="nav" id="nav" aria-label="Головна навігація">
+        <a href="#about" class="nav__link" data-text="Про мене"><span>Про мене</span></a>
+        <a href="#services" class="nav__link" data-text="Послуги"><span>Послуги</span></a>
+        <a href="#works" class="nav__link" data-text="Портфоліо"><span>Портфоліо</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати в Telegram</span></a>
+
+        <p class="nav__time">
+          <span>Мій місцевий час</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
+            <span class="lang__cur">UA</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="../index.html" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="index.html" class="lang__item is-on" hreflang="uk" data-lang="uk" aria-current="page">Українська</a></li>
+            <li><a href="../pl/index.html" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
+            <li><a href="../de/index.html" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати</span></a>
+        <button class="burger" id="burger" aria-label="Відкрити меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Перший екран -->
+    <section class="hero container">
+      <!-- Тло першого екрана. Щоб поставити свій ролик: покладіть файл у теку
+           video/ і впишіть шлях у data-video, напр. data-video="../video/hero.mp4".
+           Поки поле порожнє, показується намальована кодом заставка. -->
+      <div class="hero__bg" data-video="" aria-hidden="true">
+        <span class="hero__scrim"></span>
+      </div>
+
+      <div class="hero__top">
+        <div class="hero__tags">
+          <span>/ UI/UX-дизайн</span>
+          <span>/ Фронтенд і бекенд</span>
+          <span class="accent">/ Сайти та Telegram-боти</span>
+          <span>/ Автоматизація процесів</span>
+        </div>
+        <div class="hero__status">
+          <span class="pulse"></span>
+          Відкритий до нових проєктів
+        </div>
+      </div>
+
+      <h1 class="hero__title">
+        <img src="../img/hero.png" alt="Дизайн і код" class="hero__title-img" width="1600" height="860" fetchpriority="high">
+      </h1>
+
+      <div class="hero__bottom">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="hero__cta">
+          <span>Telegram</span>
+          <svg class="cta-arr" width="18" height="16" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+
+        <div class="hero__scroll">
+          <span class="hero__scroll-txt hero__scroll-txt--v">Гортайте вниз</span>
+          <span class="hero__scroll-txt hero__scroll-txt--h">Гортайте праворуч</span>
+          <svg class="hero__scroll-arr hero__scroll-arr--v" width="16" height="26" viewBox="0 0 24 38" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v28M4 24l8 8 8-8"/></svg>
+          <svg class="hero__scroll-arr hero__scroll-arr--h" width="26" height="16" viewBox="0 0 38 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h28M24 4l8 8-8 8"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Про мене -->
+    <section class="section container section--art" id="about">
+      <!-- Хвилі позаду секції. Малюються кодом, жодних файлів не треба. -->
+      <div class="section__bg" aria-hidden="true">
+        <figure class="art" data-art="terrain"></figure>
+        <span class="section__scrim"></span>
+      </div>
+
+      <p class="about__hello" data-typeintro>
+        <span class="line about__name"><img src="../img/about-name.png" alt="Я Андрій," class="about__name-img" width="1200" height="393"></span>
+        <span class="line accent">дизайнер і розробник,</span>
+        <span class="line">який веде продукт</span>
+        <span class="line">від ідеї та макета</span>
+        <span class="line">до запуску</span>
+      </p>
+
+    </section>
+
+    <!-- Слоган -->
+    <!-- Розкладка як у секції connect на olhalazarieva.com: дві великі лінії
+         з маленьким розрядженим «start with» між ними, по центру екрана. -->
+    <div class="statement-pin">
+    <section class="statement container">
+      <p class="statement__text" data-statement>
+        <span class="statement__line"><span>Дизайн</span></span>
+        <span class="statement__line"><span class="dim">це не оздоба,</span></span>
+        <span class="statement__line"><span class="dim">а спосіб вплинути</span></span>
+        <span class="statement__line"><span>на рішення людини</span></span>
+        <span class="statement__line"><span>за пʼять секунд</span></span>
+      </p>
+    </section>
+    </div>
+
+    <!-- Послуги -->
+    <!-- Послуги. Обгортка існує лише заради накриття: на ПК вона тримає
+         секцію приколеною, поки Портфоліо піднімається знизу поверх неї.
+         На телефоні це звичайний div без жодних стилів. -->
+    <div class="services-pin">
+    <section class="section section--long section--bleed container" id="services">
+      <div class="skills__head">
+        <div class="skills__aside">
+          <p class="skills__lead">Беру на себе весь процес створення продукту, від структури й дизайну до розробки та запуску</p>
+        </div>
+        <h2 class="section__label typewrite">Послуги</h2>
+      </div>
+
+      <ol class="skills">
+        <li class="skills__row">
+          <h3 class="skills__name">UI/UX-дизайн</h3>
+          <div class="skills__body">
+            <p class="skills__desc">Створюю зрозумілі інтерфейси з продуманою логікою від структури до фінального прототипу</p>
+          </div>
+        </li>
+
+        <li class="skills__row">
+          <h3 class="skills__name">Сайти під ключ</h3>
+          <div class="skills__body">
+            <p class="skills__desc">Проєктую та розробляю сайти від першого макета до готового запуску</p>
+          </div>
+        </li>
+
+        <li class="skills__row">
+          <h3 class="skills__name">Фронтенд і бекенд</h3>
+          <div class="skills__body">
+            <p class="skills__desc">Розробляю повноцінні цифрові продукти від інтерфейсу до серверної логіки та інтеграцій</p>
+          </div>
+        </li>
+
+        <li class="skills__row">
+          <h3 class="skills__name">Telegram-боти</h3>
+          <div class="skills__body">
+            <p class="skills__desc">Автоматизую заявки, замовлення та підтримку через Telegram</p>
+          </div>
+        </li>
+
+        <li class="skills__row">
+          <h3 class="skills__name">Доопрацювання й підтримка</h3>
+          <div class="skills__body">
+            <p class="skills__desc">Покращую готові сайти та продукти без необхідності починати все з нуля</p>
+          </div>
+        </li>
+      </ol>
+
+      <!-- Інструменти: те, чим це роблю. Логотипи одним кольором,
+           останній знак - не сервіс, а просто код. -->
+      <div class="tools">
+        <p class="tools__label">Інструменти</p>
+        <ul class="tools__list">
+          <li class="tools__item"><svg class="tools__icon" viewBox="0 0 16 24" aria-hidden="true"><path d="M8 0H4a4 4 0 0 0 0 8h4V0z"/><path d="M8 0h4a4 4 0 0 1 0 8H8V0z"/><path d="M8 8H4a4 4 0 0 0 0 8h4V8z"/><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/><path d="M8 20a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg><span class="tools__name">Figma</span></li>
+          <li class="tools__item"><svg class="tools__icon" viewBox="0 0 16 24" aria-hidden="true"><path d="M0 0h16v8H8zM0 8h8l8 8H0zM0 16h8v8z"/></svg><span class="tools__name">Framer</span></li>
+          <li class="tools__item"><svg class="tools__icon tools__icon--wide" viewBox="0 4.515 24 14.97" aria-hidden="true"><path d="m24 4.515-7.658 14.97H9.149l3.205-6.204h-.144C9.566 16.713 5.621 18.973 0 19.485v-6.118s3.596-.213 5.71-2.435H0V4.515h6.417v5.278l.144-.001 2.622-5.277h4.854v5.244h.144l2.72-5.244H24Z"/></svg><span class="tools__name">Webflow</span></li>
+          <li class="tools__item"><svg class="tools__icon tools__icon--round" viewBox="1.4 0 21.2 24" aria-hidden="true"><path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/></svg><span class="tools__name">Shopify</span></li>
+          <li class="tools__item"><svg class="tools__icon tools__icon--round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/></svg><span class="tools__name">WordPress</span></li>
+          <li class="tools__item"><svg class="tools__icon tools__icon--code" viewBox="1.4 2.5 21.2 19" aria-hidden="true"><path d="M8.5 6.5 2.5 12l6 5.5"/><path d="M15.5 6.5l6 5.5-6 5.5"/><path d="M13.6 3.6 10.4 20.4"/></svg><span class="tools__name">Код</span></li>
+        </ul>
+      </div>
+    </section>
+    </div>
+
+    <!-- Портфоліо: панель на весь екран, закріплена на час горизонтального
+         прокручування. Висоту обгортки рахує скрипт: екран плюс шлях,
+         який має пройти стрічка. -->
+    <div class="works-pin">
+    <!-- Портфоліо -->
+    <section class="section section--long section--bleed container" id="works">
+      <div class="section__head">
+        <h2 class="section__label typewrite">Портфоліо</h2>      </div>
+
+      <div class="works__grid">
+        <a href="case-melume.html" class="work">
+          <div class="work__visual" data-parallax>
+            <img src="../img/melume-home.jpg" alt="Головна сторінка українського магазину Melumé Skinscience" loading="lazy">
+          </div>
+          <div class="work__info">
+            <span class="work__title">Melumé Skinscience / Вихід на ринок</span>
+            <span class="work__tag">Shopify / E-commerce</span>
+          </div>
+          <p class="work__desc">Німецький космецевтичний бренд виходить на український ринок: окремий магазин на Shopify, 26 колекцій із фільтрами за трьома ознаками, бібліотека інгредієнтів. Уже онлайн: melume-skinscience.com.ua</p>
+          <span class="work__cta">
+
+            Дивитись кейс
+            <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a href="case-confectionery.html" class="work">
+          <div class="work__visual" data-parallax>
+            <img src="../img/velvet-home.jpg" alt="Головна сторінка сайту кондитерської VelvetCake" loading="lazy">
+          </div>
+          <div class="work__info">
+            <span class="work__title">VelvetCake / Сайт і CRM</span>
+            <span class="work__tag">E-commerce / UI</span>
+          </div>
+          <p class="work__desc">Застосунок на React і Firebase для львівської кондитерської: каталог десертів, форми заявок і закрита CRM, куди сходяться замовлення з сайту, Instagram і Telegram. Уже онлайн: velvetcake.site</p>
+          <span class="work__cta">
+            Дивитись кейс
+            <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </section>
+    </div>
+
+    <!-- Рукописна нотатка на всю ширину. Файл чорним по білому, тому
+         в стилях його інвертують і розчиняють у темному тлі. -->
+
+    <section class="note-band">
+      <img src="../img/hero-note.webp" class="note-band__img" alt="Творці слухають очима, а говорять руками" width="1657" height="949">
+    </section>
+  </main>
+
+  <!-- Підвал -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal" id="contact">
+        <span class="footer__cta-label">Маєте ідею?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          Напишіть мені
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Меню</h4>
+          <ul>
+            <li><a href="#about">Про мене</a></li>
+            <li><a href="#services">Послуги</a></li>
+            <li><a href="#works">Портфоліо</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          Мій місцевий час
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/matter-js@0.19.0/build/matter.min.js"></script>
+  <script src="../js/script.js?v=95"></script>
+</body>
+</html>
