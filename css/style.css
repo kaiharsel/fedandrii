@@ -1024,12 +1024,16 @@ html.snap-armed body { touch-action: none; }
 .mock-swatches i:nth-child(3) { background: #3a3a3a; }
 .mock-swatches i:nth-child(4) { background: #000; }
 
+/* Тег стоїть під заголовком завжди. Раніше вони ділили один рядок, і тег
+   зривався вниз лише тоді, коли заголовок не влазив, - через це в двох
+   карток поруч він опинявся на різній висоті. Колонка прибирає цю
+   залежність від довжини назви. */
 .work__info {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 24px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 24px 16px;
 }
 
 .work__title {
@@ -1844,9 +1848,8 @@ html.snap-armed body { touch-action: none; }
   .works__grid { grid-template-columns: 1fr; }
 
   .work__info {
-    flex-wrap: wrap;
-    row-gap: 2px;
-    padding: 18px 20px 6px;
+    gap: 8px;
+    padding: 18px 20px 14px;
   }
 
   .work__tag { white-space: normal; }
