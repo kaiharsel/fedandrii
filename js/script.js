@@ -1161,17 +1161,30 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
       ids.map(function (id) { return МАРКИ[id]; }).join('') + '</div>';
   }
 
-  // Порядок строго за рядками у розмітці. Шостий візуал тут колись лишився
-  // від прибраної послуги і зсував усі наступні: Telegram показував таблицю,
-  // а підтримка - телефон.
-  var SHOTS = [
-    картка(['figma']),                                      // UI/UX-дизайн
-    картка(['framer', 'webflow', 'shopify', 'wordpress', 'code']), // Сайти під ключ
-    картка(['code']),                                       // Фронтенд і бекенд
-    картка(['telegram', 'code']),                           // Telegram-боти
+  // Набори інструментів за рядками, строго в порядку розмітки. З одного й
+  // того самого списку будується і картка під курсором, і підсвічування у
+  // смужці під списком - інакше вони рано чи пізно розʼїхались би.
+  var НАБОРИ = [
+    ['figma'],                                                      // UI/UX-дизайн
+    ['framer', 'webflow', 'shopify', 'wordpress', 'code'],          // Сайти під ключ
+    ['code'],                                                       // Фронтенд і бекенд
+    ['telegram', 'code'],                                           // Telegram-боти
     // підхоплюю будь-що з того, чим працюю, тож тут увесь набір
-    картка(['figma', 'framer', 'webflow', 'shopify', 'wordpress', 'code'])
+    ['figma', 'framer', 'webflow', 'shopify', 'wordpress', 'code']  // Доопрацювання
   ];
+
+  var SHOTS = НАБОРИ.map(function (ids) { return картка(ids); });
+
+  // Смужка під списком підсвічує ті самі інструменти. Telegram у ній немає,
+  // тож на його рядку засвітиться лише знак коду - і це чесно.
+  var плитки = document.querySelectorAll(".tools__item[data-tool]");
+
+  function підсвітити(ids) {
+    Array.prototype.forEach.call(плитки, function (плитка) {
+      var свій = !!ids && ids.indexOf(плитка.getAttribute("data-tool")) !== -1;
+      плитка.classList.toggle("is-lit", свій);
+    });
+  }
 
   var card = document.createElement("div");
   card.className = "cursor-card";
@@ -1200,6 +1213,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
       var i = Array.prototype.indexOf.call(rows, row);
       var photo = row.getAttribute("data-shot");
       card.innerHTML = photo ? '<img src="' + photo + '" alt="">' : (SHOTS[i] || SHOTS[0]);
+      підсвітити(НАБОРИ[i]);
       current = row;
       half.w = 0;                    // remeasure: content changes the size
     }
@@ -1210,6 +1224,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
   function hide() {
     current = null;
     card.classList.remove("is-on");
+    підсвітити(null);
   }
 
   // What is under the cursor right now? Used after the page moves beneath it.
