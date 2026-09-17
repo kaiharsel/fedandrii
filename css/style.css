@@ -4469,6 +4469,14 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
   transition: border-color 0.3s var(--ease);
 }
 
+/* Розмір стрілки вязаний до кегля, а не заданий у розмітці: текст тут
+   тягнеться clamp-ом від 17 до 26px, і стала стрілка на 17px при
+   великому тексті губилась - надто, що вона ще й повернута на 45°. */
+.case-outlink .cta-arr {
+  width: auto;
+  height: 0.85em;
+}
+
 .case-outlink:hover,
 .case-outlink:focus-visible { border-bottom-color: var(--text); }
 
