@@ -2750,12 +2750,13 @@ body.case-page .split .word > i {
 
 
 /* Preview that follows the cursor over the services list */
+/* Коробка біля курсора. Розмір не заданий: вона обтискає знаки, тож для
+   одного виходить квадратик, для чотирьох - квадрат побільше. */
 .cursor-card {
   position: fixed;
   top: 0;
   left: 0;
-  width: clamp(210px, 19vw, 290px);
-  aspect-ratio: 4 / 3;
+  width: auto;
   z-index: 95;
   pointer-events: none;
   opacity: 0;
@@ -2763,7 +2764,7 @@ body.case-page .split .word > i {
   border: 1px solid var(--line-strong);
   border-radius: 0;
   background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2774,6 +2775,49 @@ body.case-page .split .word > i {
 .cursor-card.is-on {
   opacity: 1;
   transform: translate(var(--x, 0px), var(--y, 0px)) translate(-50%, -50%) scale(1);
+}
+
+/* ============ ЗНАК ІНСТРУМЕНТА БІЛЯ КУРСОРА ============ */
+/* Наводиш на послугу - поруч із курсором зʼявляється значок інструмента,
+   яким вона робиться. Ті самі контури, що в смужці під списком. */
+.tool-shot {
+  --mark-h: clamp(26px, 2.3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), auto);
+  gap: clamp(12px, 1.3vw, 18px);
+  place-items: center;
+  padding: clamp(14px, 1.5vw, 20px);
+  color: var(--text);
+}
+
+.tool-mark {
+  display: block;
+  height: var(--mark-h);
+  width: auto;
+  fill: currentColor;
+}
+
+/* Оптична поправка, та сама, що в смужці: широкий Webflow при однаковій
+   висоті здається більшим, круглі знаки - навпаки. */
+.tool-mark--wide { height: calc(var(--mark-h) * 0.74); }
+.tool-mark--round { height: calc(var(--mark-h) * 0.94); }
+
+/* Telegram займав лише 63% висоти свого поля, решта - порожнеча всередині
+   контуру, і поруч з іншими він виглядав дрібним. viewBox обрізано по
+   справжніх межах знака, а 0.88 тут тому, що він ширший за висоту: при
+   однаковій висоті широка форма читається більшою. */
+.tool-mark--tg { height: calc(var(--mark-h) * 0.88); }
+
+.tool-mark--code {
+  height: calc(var(--mark-h) * 0.92);
+  fill: none;
+  stroke: currentColor;
+  /* товщина в пікселях, а не в одиницях viewBox: інакше на великому
+     розмірі лінія роздувалась би разом зі знаком */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .cursor-card img {
