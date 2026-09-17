@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=114">
+  <link rel="stylesheet" href="css/style.css?v=115">
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
@@ -45,7 +45,7 @@
        кидало б його на ту мову, яку він колись обрав тут раніше.
        Пошукових роботів не перекидаємо взагалі. -->
   <script>(function(){try{
-var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"index.html";
+var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"";if(f==="index.html")f="";
 var D={uk:"ua",pl:"pl",de:"de"},cur="en",k;
 for(k in D){if(new RegExp("(^|/)"+D[k]+"/").test(p))cur=k;}
 document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
@@ -73,12 +73,12 @@ location.replace(D[w]+"/"+f);
   <!-- Header -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="index.html" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+      <a href="./" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
 
       <nav class="nav" id="nav" aria-label="Main navigation">
-        <a href="index.html#about" class="nav__link" data-text="About"><span>About</span></a>
-        <a href="index.html#services" class="nav__link" data-text="Services"><span>Services</span></a>
-        <a href="index.html#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
+        <a href="./#about" class="nav__link" data-text="About"><span>About</span></a>
+        <a href="./#services" class="nav__link" data-text="Services"><span>Services</span></a>
+        <a href="./#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
         <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Message on Telegram</span></a>
 
@@ -136,7 +136,7 @@ location.replace(D[w]+"/"+f);
     <!-- Case header. The block order matches the original Notion page:
          title, cover, subtitle, property table. -->
     <section class="case-hero container">
-      <a href="index.html#works" class="case-back">
+      <a href="./#works" class="case-back">
         <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
         Back to portfolio
       </a>
@@ -379,9 +379,9 @@ location.replace(D[w]+"/"+f);
         <div class="footer__col">
           <h4>Menu</h4>
           <ul>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="index.html#works">Portfolio</a></li>
+            <li><a href="./#about">About</a></li>
+            <li><a href="./#services">Services</a></li>
+            <li><a href="./#works">Portfolio</a></li>
           </ul>
         </div>
         <div class="footer__time">
@@ -393,6 +393,6 @@ location.replace(D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/script.js?v=114"></script>
+  <script src="js/script.js?v=115"></script>
 </body>
 </html>

@@ -1007,7 +1007,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
   var links = [];
   var targets = [];
   Array.prototype.forEach.call(nav.querySelectorAll(".nav__link"), function (l) {
-    // на сторінках кейсів пункти ведуть на index.html#..., там підсвічувати нічого
+    // на сторінках кейсів пункти ведуть на "./#...", там підсвічувати нічого
     var href = l.getAttribute("href") || "";
     if (href.charAt(0) !== "#" || href.length < 2) return;
     var t = document.querySelector(href);
@@ -2363,16 +2363,18 @@ var SITE_LANGS = [
 
   var here = document.documentElement.lang || "en";
 
-  // Ім'я файла і мовна тека, у якій ми зараз. "/ua/" дає порожній хвіст
-  // після split, тому файл підставляємо сам.
+  // Ім'я файла і мовна тека, у якій ми зараз. Головна сторінка лишається
+  // без імені файла: "/ua/" і "/ua/index.html" - та сама адреса, і в рядку
+  // браузера має лишатись коротка.
   var parts = location.pathname.split("/");
-  var file = parts.pop() || "index.html";
+  var file = parts.pop() || "";
+  if (file === "index.html") file = "";
   var last = parts[parts.length - 1] || "";
   var inDir = "";
   SITE_LANGS.forEach(function (l) { if (l.dir && l.dir === last) inDir = l.dir; });
 
   function hrefFor(l) {
-    if (l.dir === inDir) return file;                       // та сама тека
+    if (l.dir === inDir) return file || "./";               // та сама тека
     return (inDir ? "../" : "") + (l.dir ? l.dir + "/" : "") + file;
   }
 

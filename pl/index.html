@@ -34,7 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;family=Caveat:wght@600;700&amp;family=Spline+Sans+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=114">
+  <link rel="stylesheet" href="../css/style.css?v=115">
 
   <!-- Structured data for Google -->
   <script type="application/ld+json">
@@ -64,7 +64,7 @@
        кидало б його на ту мову, яку він колись обрав тут раніше.
        Пошукових роботів не перекидаємо взагалі. -->
   <script>(function(){try{
-var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"index.html";
+var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"";if(f==="index.html")f="";
 var D={uk:"ua",pl:"pl",de:"de"},cur="en",k;
 for(k in D){if(new RegExp("(^|/)"+D[k]+"/").test(p))cur=k;}
 document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
@@ -117,10 +117,10 @@ location.replace(D[w]+"/"+f);
             <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
           </button>
           <ul class="lang__menu">
-            <li><a href="../index.html" class="lang__item" hreflang="en" data-lang="en">English</a></li>
-            <li><a href="../ua/index.html" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
-            <li><a href="index.html" class="lang__item is-on" hreflang="pl" data-lang="pl" aria-current="page">Polski</a></li>
-            <li><a href="../de/index.html" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+            <li><a href="../" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="../ua/" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+            <li><a href="./" class="lang__item is-on" hreflang="pl" data-lang="pl" aria-current="page">Polski</a></li>
+            <li><a href="../de/" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
           </ul>
         </div>
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Kontakt</span></a>
@@ -375,6 +375,6 @@ location.replace(D[w]+"/"+f);
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/matter-js@0.19.0/build/matter.min.js"></script>
-  <script src="../js/script.js?v=114"></script>
+  <script src="../js/script.js?v=115"></script>
 </body>
 </html>
