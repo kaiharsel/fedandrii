@@ -1166,9 +1166,9 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
   // а підтримка - телефон.
   var SHOTS = [
     картка(['figma']),                                      // UI/UX-дизайн
-    картка(['framer', 'webflow', 'shopify', 'wordpress']),  // Сайти під ключ
+    картка(['framer', 'webflow', 'shopify', 'wordpress', 'code']), // Сайти під ключ
     картка(['code']),                                       // Фронтенд і бекенд
-    картка(['telegram']),                                   // Telegram-боти
+    картка(['telegram', 'code']),                           // Telegram-боти
     // підхоплюю будь-що з того, чим працюю, тож тут увесь набір
     картка(['figma', 'framer', 'webflow', 'shopify', 'wordpress', 'code'])
   ];
