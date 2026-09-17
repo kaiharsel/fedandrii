@@ -4456,6 +4456,7 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 
 /* Посилання на живий проєкт у кінці кейсу */
 .case-outlink {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -4464,21 +4465,35 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
   font-size: clamp(17px, 2.1vw, 26px);
   font-weight: 700;
   color: var(--text);
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 5px;
-  transition: border-color 0.3s var(--ease);
+  padding-bottom: 8px;
 }
 
-/* Розмір стрілки вязаний до кегля, а не заданий у розмітці: текст тут
-   тягнеться clamp-ом від 17 до 26px, і стала стрілка на 17px при
-   великому тексті губилась - надто, що вона ще й повернута на 45°. */
+/* Лінія виїжджає зліва направо, як на решті кнопок сайту. Раніше тут
+   стояв статичний border-bottom, який лише міняв колір, - через це
+   кнопка поводилась інакше за «Назад до портфоліо» просто поруч. */
+.case-outlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+.case-outlink:hover::after,
+.case-outlink:focus-visible::after,
+.case-outlink.tap-press::after { transform: scaleX(1); }
+
+/* Розмір стрілки звязаний з кеглем: текст тягнеться clamp-ом від 17
+   до 26px, і стала стрілка при великому тексті губилась. */
 .case-outlink .cta-arr {
   width: auto;
   height: 0.85em;
 }
-
-.case-outlink:hover,
-.case-outlink:focus-visible { border-bottom-color: var(--text); }
 
 .case-outlink:hover .cta-arr,
 .case-outlink:focus-visible .cta-arr,
