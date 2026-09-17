@@ -1957,7 +1957,11 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
       // Клас вмикає анімацію підпису-картинки: вона «дописується» рівно
       // тоді, коли починає набиратись текст поруч
       el.classList.add("tw-run");
-      el.before(caret);
+      // Курсор ставимо перед ПЕРШОЮ літерою, а не перед усім блоком.
+      // Раніше він з'являвся біля лівого краю абзацу і на першій же літері
+      // перестрибував через увесь рядок: перший рядок тут картинка, а
+      // наступні йдуть сходинкою з відступами.
+      spans[0].before(caret);
       // interval as the safety net where rAF is paused; both call the same
       // clock, so double delivery is harmless
       timer = setInterval(tick, 200);
@@ -2447,12 +2451,45 @@ var SITE_LANGS = [
     }, TAP_MS);
   }
 
+  // Гортання починається тим самим pointerdown, що й дотик, тож підсвічувати
+  // одразу не можна: палець просто торкався картки, щоб прокрутити сторінку,
+  // а вона вже блимала. Чекаємо трохи і дивимось, чи палець рушив.
+  var ЗАТРИМКА = 120;   // стільки терпимо, перш ніж вважати це дотиком
+  var ЗСУВ = 8;         // на стільки зрушив - це вже гортання
+  var чекає = 0, кандидат = null, старт = null;
+
+  function скасувати() {
+    if (чекає) clearTimeout(чекає);
+    чекає = 0;
+    кандидат = null;
+    старт = null;
+  }
+
   document.addEventListener("pointerdown", function (e) {
     touch = e.pointerType === "touch" || e.pointerType === "pen";
     if (!touch) return;
     var el = e.target.closest ? e.target.closest(SEL) : null;
-    if (el) press(el);
+    if (!el) return;
+    скасувати();
+    кандидат = el;
+    старт = { x: e.clientX, y: e.clientY };
+    чекає = setTimeout(function () {
+      чекає = 0;
+      var ціль = кандидат;
+      кандидат = null;
+      старт = null;
+      if (ціль) press(ціль);
+    }, ЗАТРИМКА);
   }, { passive: true, capture: true });
+
+  document.addEventListener("pointermove", function (e) {
+    if (!кандидат || !старт) return;
+    if (Math.abs(e.clientX - старт.x) > ЗСУВ || Math.abs(e.clientY - старт.y) > ЗСУВ) скасувати();
+  }, { passive: true, capture: true });
+
+  // Сторінка поїхала - значить це було гортання, хоч би як мало палець зрушив
+  document.addEventListener("scroll", function () { if (кандидат) скасувати(); }, { passive: true, capture: true });
+  document.addEventListener("pointercancel", скасувати, { passive: true, capture: true });
 
   document.addEventListener("click", function (e) {
     if (!touch || !coarse()) return;

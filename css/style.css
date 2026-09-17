@@ -3864,7 +3864,9 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 
   .tools {
     --tool-h: 22px;
-    padding: 18px 16px 0;
+    /* 36px згори: на телефоні смужка стояла майже впритул до останнього
+       рядка послуг і читалась як його продовження, а не окремий блок */
+    padding: 36px 16px 0;
     gap: 10px;
   }
 
