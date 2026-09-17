@@ -50,6 +50,9 @@ http.createServer((req, res) => {
     return send(res, 400, "Bad request");
   }
   if (urlPath.endsWith("/")) urlPath += "index.html";
+  // Чисті адреси, як на хостингу: /ua/case-melume віддає case-melume.html.
+  // Без цього локальний перегляд розходився б з тим, що бачить відвідувач.
+  if (!path.extname(urlPath)) urlPath += ".html";
 
   // Шлях завжди лишається всередині папки сайту.
   const file = path.normalize(path.join(ROOT, urlPath));
