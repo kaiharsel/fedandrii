@@ -131,46 +131,5 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Кейс: цей сайт -->
-  <url>
-    <loc>https://www.fedandrii.me/case-portfolio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-portfolio"/>
-    <lastmod>2026-09-17</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/ua/case-portfolio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-portfolio"/>
-    <lastmod>2026-09-17</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/pl/case-portfolio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-portfolio"/>
-    <lastmod>2026-09-17</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/de/case-portfolio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-portfolio"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-portfolio"/>
-    <lastmod>2026-09-17</lastmod>
-    <priority>0.8</priority>
-  </url>
 
 </urlset>
