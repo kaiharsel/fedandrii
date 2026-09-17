@@ -795,9 +795,17 @@ html.snap-armed body { touch-action: none; }
   display: block;
 }
 
-.work:hover {
-  border-color: var(--line-strong);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(255, 255, 255, 0.05);
+/* Наведення на картку кейсу - тільки для миші. На телефоні :hover вмикає
+   дотик, і стан залипає, доки не торкнешся деінде: палець ставав на картку,
+   щоб гортати, вона піднімалась і такою лишалась, хоч на кейс ніхто не
+   переходив. Пальцю відгук дає .tap-press, і тільки на справжній дотик. */
+@media (hover: hover) and (pointer: fine) {
+  .work:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(255, 255, 255, 0.05);
+  }
+
+  .work:hover .work__visual img { transform: scale(1.04); }
 }
 
 .work__visual {
@@ -823,7 +831,6 @@ html.snap-armed body { touch-action: none; }
   transition: transform 0.6s var(--ease);
 }
 
-.work:hover .work__visual img { transform: scale(1.04); }
 
 .work__badge {
   position: absolute;
@@ -848,8 +855,10 @@ html.snap-armed body { touch-action: none; }
   will-change: transform;
 }
 
-.work:hover .mock {
-  transform: translateY(calc(var(--py, 0px) - 8px)) scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .work:hover .mock {
+    transform: translateY(calc(var(--py, 0px) - 8px)) scale(1.03);
+  }
 }
 
 /* Browser mockup */
@@ -3565,7 +3574,6 @@ body.snap-on > .footer {
   transition: transform 0.4s var(--ease);
 }
 
-.work:hover .cta-arr,
 .work:focus-visible .cta-arr,
 .work.tap-press .cta-arr,
 .hero__cta:hover .cta-arr,
@@ -3576,6 +3584,10 @@ body.snap-on > .footer {
 .contact__btn:focus-visible .cta-arr,
 .contact__btn:active .cta-arr,
 .contact__btn.tap-press .cta-arr { transform: rotate(0deg); }
+
+@media (hover: hover) and (pointer: fine) {
+  .work:hover .cta-arr { transform: rotate(0deg); }
+}
 
 .work__cta {
   position: relative;
@@ -3607,9 +3619,12 @@ body.snap-on > .footer {
   transition: transform 0.4s var(--ease);
 }
 
-.work:hover .work__cta::after,
 .work:focus-visible .work__cta::after,
 .work.tap-press .work__cta::after { transform: scaleX(1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .work:hover .work__cta::after { transform: scaleX(1); }
+}
 
 .work__cta svg {
   display: block;

@@ -2453,51 +2453,20 @@ var SITE_LANGS = [
     }, TAP_MS);
   }
 
-  // Гортання починається тим самим pointerdown, що й дотик, тож підсвічувати
-  // одразу не можна: палець просто торкався картки, щоб прокрутити сторінку,
-  // а вона вже блимала. Чекаємо трохи і дивимось, чи палець рушив.
-  var ЗАТРИМКА = 120;   // стільки терпимо, перш ніж вважати це дотиком
-  var ЗСУВ = 8;         // на стільки зрушив - це вже гортання
-  var чекає = 0, кандидат = null, старт = null;
-
-  function скасувати() {
-    if (чекає) clearTimeout(чекає);
-    чекає = 0;
-    кандидат = null;
-    старт = null;
-  }
-
+  // Відгук на дотик вмикає лише справжній дотик, тобто click. Раніше він
+  // вмикався за 120 мс після pointerdown, і досить було на мить затримати
+  // палець на картці перед гортанням, щоб вона блимнула, - хоч на кейс ніхто
+  // не переходив. Затримка нічого не рятувала: палець перед свайпом стоїть
+  // довше. Не клікнув - не блимає; а справжній дотик дає click завжди.
   document.addEventListener("pointerdown", function (e) {
     touch = e.pointerType === "touch" || e.pointerType === "pen";
-    if (!touch) return;
-    var el = e.target.closest ? e.target.closest(SEL) : null;
-    if (!el) return;
-    скасувати();
-    кандидат = el;
-    старт = { x: e.clientX, y: e.clientY };
-    чекає = setTimeout(function () {
-      чекає = 0;
-      var ціль = кандидат;
-      кандидат = null;
-      старт = null;
-      if (ціль) press(ціль);
-    }, ЗАТРИМКА);
   }, { passive: true, capture: true });
-
-  document.addEventListener("pointermove", function (e) {
-    if (!кандидат || !старт) return;
-    if (Math.abs(e.clientX - старт.x) > ЗСУВ || Math.abs(e.clientY - старт.y) > ЗСУВ) скасувати();
-  }, { passive: true, capture: true });
-
-  // Сторінка поїхала - значить це було гортання, хоч би як мало палець зрушив
-  document.addEventListener("scroll", function () { if (кандидат) скасувати(); }, { passive: true, capture: true });
-  document.addEventListener("pointercancel", скасувати, { passive: true, capture: true });
 
   document.addEventListener("click", function (e) {
     if (!touch || !coarse()) return;
     var el = e.target.closest ? e.target.closest(SEL) : null;
     if (!el) return;
-    press(el);                                   // якщо pointerdown не спрацював
+    press(el);
 
     if (el.tapGo) { el.tapGo = false; return; }  // це наш власний повторний клік
     if (el.tagName !== "A") return;              // кнопки спрацьовують одразу
