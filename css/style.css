@@ -1560,6 +1560,17 @@ html.snap-armed body { touch-action: none; }
   color: var(--text-dim);
 }
 
+/* Значок Telegram перед написом, рівно у висоту великої літери Tektur.
+   Задана висота, ширина сама: поле значка обрізане по контуру і воно ширше
+   за висоту, тож квадрат зробив би його нижчим за букви.
+   clamp, а не чистий em: на телефоні напис падає до 26px, і значок при
+   0.72em виходив дрібним. Нижня межа тримає його помітним. У шапці в нього
+   свій розмір, там інший масштаб. */
+.footer__cta-link .tg-ico {
+  width: auto;
+  height: clamp(22px, 0.72em, 46px);
+}
+
 .footer__cta-link {
   font-family: var(--font-display);
   font-size: clamp(26px, 4.5vw, 64px);
