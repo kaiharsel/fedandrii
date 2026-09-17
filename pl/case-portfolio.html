@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>VelvetCake: сайт, каталог і CRM для львівської кондитерської / FED.ANDRII</title>
-  <meta name="description" content="Кейс FED.ANDRII: VelvetCake, сайт і закрита CRM для львівської кондитерської. Каталог десертів, форми заявок і бронювання майстер-класів; замовлення з сайту, Instagram і Telegram в одному місці. Сайт онлайн: velvetcake.site">
+  <title>Ta strona: portfolio napisane w kodzie, w czterech językach / FED.ANDRII</title>
+  <meta name="description" content="Case FED.ANDRII: strona portfolio, którą właśnie czytasz. Czysty HTML, CSS i JavaScript bez platformy i kreatora, cztery języki każdy pod własnym adresem, animacje napisane ręcznie.">
   <meta name="author" content="Andrii Fedyshyn">
   <meta name="robots" content="index, follow">
 
-  <!-- Замініть https://www.fedandrii.me на справжній домен після публікації -->
-  <link rel="canonical" href="https://www.fedandrii.me/ua/case-confectionery">
+  <link rel="canonical" href="https://www.fedandrii.me/pl/case-portfolio">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="VelvetCake: сайт, каталог і CRM для львівської кондитерської">
-  <meta property="og:description" content="Каталог десертів, форми заявок, бронювання майстер-класів і закрита CRM: замовлення з сайту, Instagram і Telegram в одній воронці. Сайт онлайн: velvetcake.site">
-  <meta property="og:url" content="https://www.fedandrii.me/ua/case-confectionery">
-  <meta property="og:locale" content="uk_UA">
-  <meta property="og:site_name" content="FED.ANDRII / Дизайн і розробка">
-  <meta property="og:image" content="https://www.fedandrii.me/img/og/og-ua.jpg?v=6">
+  <meta property="og:title" content="Ta strona: portfolio napisane w kodzie, w czterech językach">
+  <meta property="og:description" content="Czysty HTML, CSS i JavaScript bez platformy i kreatora, cztery języki każdy pod własnym adresem, animacje napisane ręcznie">
+  <meta property="og:url" content="https://www.fedandrii.me/pl/case-portfolio">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="FED.ANDRII / Projektowanie i programowanie">
+  <meta property="og:image" content="https://www.fedandrii.me/img/og/og-pl.jpg?v=6">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="FED.ANDRII - Figma, Framer, Webflow, Shopify, WordPress, код">
+  <meta property="og:image:alt" content="FED.ANDRII - Figma, Framer, Webflow, Shopify, WordPress, kod">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://www.fedandrii.me/img/og/og-ua.jpg?v=6">
+  <meta name="twitter:image" content="https://www.fedandrii.me/img/og/og-pl.jpg?v=6">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
 
@@ -35,11 +34,11 @@
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
-  <link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-confectionery">
-  <link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery">
-  <link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery">
-  <link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery">
-  <link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery">
+  <link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-portfolio">
+  <link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-portfolio">
+  <link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-portfolio">
+  <link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-portfolio">
+  <link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-portfolio">
   <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
        (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
        поважати. Інакше посилання на польську версію, надіслане клієнтові,
@@ -67,26 +66,26 @@ location.replace("/"+D[w]+"/"+f);
 </head>
 <body class="case-page">
 
-  <!-- Прелоадер -->
+  <!-- Preloader -->
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></div>
     <div class="preloader__count" id="preloaderCount">0%</div>
   </div>
 
-  <!-- Шапка -->
+  <!-- Header -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="/ua/" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+      <a href="/pl/" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
 
-      <nav class="nav" id="nav" aria-label="Головна навігація">
-        <a href="/ua/#about" class="nav__link" data-text="Про мене"><span>Про мене</span></a>
-        <a href="/ua/#services" class="nav__link" data-text="Послуги"><span>Послуги</span></a>
-        <a href="/ua/#works" class="nav__link" data-text="Портфоліо"><span>Портфоліо</span></a>
+      <nav class="nav" id="nav" aria-label="Nawigacja główna">
+        <a href="/pl/#about" class="nav__link" data-text="O mnie"><span>O mnie</span></a>
+        <a href="/pl/#services" class="nav__link" data-text="Usługi"><span>Usługi</span></a>
+        <a href="/pl/#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
         <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
-        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати в Telegram</span></a>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Kontakt przez Telegram</span></a>
 
         <p class="nav__time">
-          <span>Мій місцевий час</span>
+          <span>Mój czas lokalny</span>
           <strong data-localtime>--:--</strong>
         </p>
       </nav>
@@ -96,19 +95,19 @@ location.replace("/"+D[w]+"/"+f);
              SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
              нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
         <div class="lang" data-lang-switch>
-          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
-            <span class="lang__cur">UA</span>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Język / Language">
+            <span class="lang__cur">PL</span>
             <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
           </button>
           <ul class="lang__menu">
-            <li><a href="/case-confectionery" class="lang__item" hreflang="en" data-lang="en">English</a></li>
-            <li><a href="/ua/case-confectionery" class="lang__item is-on" hreflang="uk" data-lang="uk" aria-current="page">Українська</a></li>
-            <li><a href="/pl/case-confectionery" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
-            <li><a href="/de/case-confectionery" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+            <li><a href="/case-portfolio" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="/ua/case-portfolio" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+            <li><a href="/pl/case-portfolio" class="lang__item is-on" hreflang="pl" data-lang="pl" aria-current="page">Polski</a></li>
+            <li><a href="/de/case-portfolio" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
           </ul>
         </div>
-        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати</span></a>
-        <button class="burger" id="burger" aria-label="Відкрити меню">
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Kontakt</span></a>
+        <button class="burger" id="burger" aria-label="Otwórz menu">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -124,74 +123,76 @@ location.replace("/"+D[w]+"/"+f);
 
 
 
-  <!-- Навігація сторінкою, як плаваючий зміст у Notion -->
-  <nav class="toc" aria-label="Навігація сторінкою">
-    <a href="#task" class="toc__item"><span class="toc__label">Задача</span><span class="toc__line"></span></a>
-    <a href="#solution" class="toc__item"><span class="toc__label">Рішення</span><span class="toc__line"></span></a>
-    <a href="#result" class="toc__item"><span class="toc__label">Результат</span><span class="toc__line"></span></a>
+  <!-- Page navigation, like Notion's floating table of contents -->
+  <nav class="toc" aria-label="Nawigacja po stronie">
+    <a href="#task" class="toc__item"><span class="toc__label">Zadanie</span><span class="toc__line"></span></a>
+    <a href="#solution" class="toc__item"><span class="toc__label">Rozwiązanie</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">Rezultat</span><span class="toc__line"></span></a>
   </nav>
   <main>
-    <!-- Шапка кейсу. Порядок блоків такий самий, як у кейсі Melumé:
-         назва, обкладинка, підзаголовок, таблиця властивостей. -->
+    <!-- Case header. Same block order as the Melumé case:
+         title, cover, subtitle, property table. -->
     <section class="case-hero container">
-      <a href="/ua/#works" class="case-back">
+      <a href="/pl/#works" class="case-back">
         <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
-        Назад до портфоліо
+        Powrót do portfolio
       </a>
 
-      <h1 class="case-hero__title case-hero__title--lead">VelvetCake Lviv</h1>
+      <h1 class="case-hero__title case-hero__title--lead">FED.ANDRII</h1>
 
       <div class="case-cover reveal" data-parallax>
-        <img src="../img/velvet-cover.webp" alt="VelvetCake" width="1200" height="620">
+        <img src="../img/portfolio-cover.webp" alt="FED.ANDRII" width="1200" height="620">
       </div>
 
-      <p class="case-lead reveal">Сайт, каталог і CRM для львівської кондитерської: замовлення з сайту, Instagram і Telegram в одному місці</p>
+      <p class="case-lead reveal">Strona, którą właśnie czytasz: projekt, kod i cztery języki, bez platformy i kreatora</p>
 
       <div class="case-facts reveal">
         <div class="case-facts__row">
-          <span class="case-facts__key">Основа</span>
-          <span class="case-facts__val">Код</span>
+          <span class="case-facts__key">Podstawa</span>
+          <span class="case-facts__val">Kod</span>
         </div>
         <div class="case-facts__row">
-          <span class="case-facts__key">Що зроблено</span>
-          <span class="case-facts__val">Дизайн, сайт, каталог, CRM</span>
+          <span class="case-facts__key">Zakres</span>
+          <span class="case-facts__val">Projekt, strona, animacje, cztery języki</span>
         </div>
         <div class="case-facts__row">
-          <span class="case-facts__key">Сайт</span>
-          <span class="case-facts__val"><a href="https://velvetcake.site" target="_blank" rel="noopener">velvetcake.site</a></span>
+          <span class="case-facts__key">Strona</span>
+          <span class="case-facts__val"><a href="https://www.fedandrii.me/" target="_blank" rel="noopener">fedandrii.me</a></span>
         </div>
+      </div>
       </div>
     </section>
 
-    <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+<!-- Місце під запис прокрутки. Поки файла немає, блок схований:
            на живому сайті коротший кейс кращий за биту картинку. -->
       <figure class="case-gif container" hidden>
         <div class="case-gif__frame">
-          <img class="case-gif__media" src="../img/gif/velvet-home.gif" alt="VelvetCake: Головна" decoding="async">
+          <img class="case-gif__media" src="../img/gif/site-hero.gif" alt="FED.ANDRII: Strona główna" decoding="async">
         </div>
-        <figcaption class="case-gif__cap">Головна</figcaption>
+        <figcaption class="case-gif__cap">Strona główna</figcaption>
       </figure>
 
       <section class="section container" id="task">
         <div class="section__head reveal">
-          <h2 class="section__label">Задача</h2>
+          <h2 class="section__label">Zadanie</h2>
         </div>
 
         <div class="case-text reveal">
-          <p>Замовлення в кондитерській приходять звідусіль: хтось пише в Instagram, хтось у Telegram, хтось хоче оформити прямо на сайті. Поки все це живе в листуваннях, щось губиться, а картина дня складається з памʼяті</p>
-          <p>Потрібен був сайт, який передає атмосферу бренду й приймає замовлення, і водночас робоче місце для кондитерки, куди стікаються всі заявки й де можна самій міняти меню, ціни та майстер-класи без розробника</p>
+          <p>Portfolio projektanta i programisty musi być dowodem na to, co w nim napisano. Strona złożona w kreatorze dowodzi tylko jednego: że umiem korzystać z kreatora</p>
+          <p>Drugi warunek to klienci z Europy. To znaczy więcej niż jeden język, i nie przełącznik nad jednym tekstem, tylko osobna strona dla każdego</p>
         </div>
 
       </section>
 
       <section class="section container" id="solution">
         <div class="section__head reveal">
-          <h2 class="section__label">Рішення</h2>
+          <h2 class="section__label">Rozwiązanie</h2>
         </div>
 
         <div class="case-text reveal">
-          <p>Сайт: каталог десертів, окрема сторінка на кожен десерт, майстер-класи і FAQ. Заявку можна залишити з будь-якої сторінки</p>
-          <p>Для команди є закрита CRM: усі заявки в одному місці, а меню, ціни й теми майстер-класів кондитерка міняє сама</p>
+          <p>Żadnej platformy i żadnego CMS-a: czysty HTML, CSS i JavaScript, bez budowania. Poprawka w pliku od razu staje się stroną</p>
+          <p>Cztery języki - ukraiński, angielski, polski i niemiecki - każdy pod własnym adresem. Język gościa wykrywa się sam, ale wysłany link zawsze jest silniejszy od domysłu: link do polskiej wersji otworzy polską</p>
+          <p>Animacje są napisane ręcznie, a nie wzięte gotowe: litery nagłówka spadają z fizyką i wracają na miejsce, stopka płonie ogniem rysowanym znakami, a na szerokim ekranie portfolio przewija się w bok razem ze stroną</p>
         </div>
 
       </section>
@@ -200,19 +201,19 @@ location.replace("/"+D[w]+"/"+f);
            на живому сайті коротший кейс кращий за биту картинку. -->
       <figure class="case-gif container" hidden>
         <div class="case-gif__frame">
-          <img class="case-gif__media" src="../img/gif/velvet-catalog.gif" alt="VelvetCake: Каталог і заявка" decoding="async">
+          <img class="case-gif__media" src="../img/gif/site-works.gif" alt="FED.ANDRII: Portfolio" decoding="async">
         </div>
-        <figcaption class="case-gif__cap">Каталог і заявка</figcaption>
+        <figcaption class="case-gif__cap">Portfolio</figcaption>
       </figure>
 
       <section class="section container" id="result">
         <div class="section__head reveal">
-          <h2 class="section__label">Результат</h2>
+          <h2 class="section__label">Rezultat</h2>
         </div>
 
         <div class="case-text reveal">
-          <p>Вітрина приймає заявки цілодобово, а замовлення з сайту, Instagram і Telegram сходяться в одному місці</p>
-          <p>Розробник більше не потрібен, щоб додати торт, змінити ціну чи оголосити новий майстер-клас</p>
+          <p>Strona sama jest pracą z portfolio: pokazuje dokładnie to, o czym mówi</p>
+          <p>Link można wysłać klientowi z Polski czy Niemiec - czyta od razu w swoim języku, a nie po angielsku z konieczności</p>
         </div>
 
       </section>
@@ -221,21 +222,21 @@ location.replace("/"+D[w]+"/"+f);
            на живому сайті коротший кейс кращий за биту картинку. -->
       <figure class="case-gif container" hidden>
         <div class="case-gif__frame">
-          <img class="case-gif__media" src="../img/gif/velvet-crm.gif" alt="VelvetCake: CRM: заявки" decoding="async">
+          <img class="case-gif__media" src="../img/gif/site-lang.gif" alt="FED.ANDRII: Przełączanie języków" decoding="async">
         </div>
-        <figcaption class="case-gif__cap">CRM: заявки</figcaption>
+        <figcaption class="case-gif__cap">Przełączanie języków</figcaption>
       </figure>
 
     </main>
 
-  <!-- Підвал -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__cta reveal">
-        <span class="footer__cta-label">Маєте ідею?</span>
+        <span class="footer__cta-label">Jest pomysł?</span>
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
           <svg class="tg-ico" viewBox="3 4.44 18.02 15.12" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
-          Напишіть мені
+          Kontakt
           <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -257,15 +258,15 @@ location.replace("/"+D[w]+"/"+f);
     <div class="container">
       <div class="footer__mid">
         <div class="footer__col">
-          <h4>Меню</h4>
+          <h4>Menu</h4>
           <ul>
-            <li><a href="/ua/#about">Про мене</a></li>
-            <li><a href="/ua/#services">Послуги</a></li>
-            <li><a href="/ua/#works">Портфоліо</a></li>
+            <li><a href="/pl/#about">O mnie</a></li>
+            <li><a href="/pl/#services">Usługi</a></li>
+            <li><a href="/pl/#works">Portfolio</a></li>
           </ul>
         </div>
         <div class="footer__time">
-          Мій місцевий час
+          Mój czas lokalny:
           <strong id="localTime" data-localtime>--:--</strong>
         </div>
       </div>
