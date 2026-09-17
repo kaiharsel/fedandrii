@@ -2363,19 +2363,19 @@ var SITE_LANGS = [
 
   var here = document.documentElement.lang || "en";
 
-  // Ім'я файла і мовна тека, у якій ми зараз. Головна сторінка лишається
-  // без імені файла: "/ua/" і "/ua/index.html" - та сама адреса, і в рядку
-  // браузера має лишатись коротка.
-  var parts = location.pathname.split("/");
+  // Мовна тека і назва сторінки. Порожні куски відкидаємо, тому "/ua/" і
+  // "/ua" читаються однаково - хостинг віддає сторінку на обидві адреси,
+  // і меню має працювати на кожній.
+  var parts = location.pathname.split("/").filter(Boolean);
+  var inDir = "";
+  if (parts.length && SITE_LANGS.some(function (l) { return l.dir === parts[0]; })) inDir = parts.shift();
   var file = parts.pop() || "";
   if (file === "index.html") file = "";
-  var last = parts[parts.length - 1] || "";
-  var inDir = "";
-  SITE_LANGS.forEach(function (l) { if (l.dir && l.dir === last) inDir = l.dir; });
 
+  // Адреса від кореня, а не відносна: відносна на "/ua" (без скісної)
+  // розгорталась би вгору, у корінь, і кидала б на англійську.
   function hrefFor(l) {
-    if (l.dir === inDir) return file || "./";               // та сама тека
-    return (inDir ? "../" : "") + (l.dir ? l.dir + "/" : "") + file;
+    return "/" + (l.dir ? l.dir + "/" : "") + file;
   }
 
   var cur = null;

@@ -50,14 +50,21 @@ http.createServer((req, res) => {
     return send(res, 400, "Bad request");
   }
   if (urlPath.endsWith("/")) urlPath += "index.html";
-  // Чисті адреси, як на хостингу: /ua/case-melume віддає case-melume.html.
-  // Без цього локальний перегляд розходився б з тим, що бачить відвідувач.
-  if (!path.extname(urlPath)) urlPath += ".html";
 
   // Шлях завжди лишається всередині папки сайту.
-  const file = path.normalize(path.join(ROOT, urlPath));
-  if (!file.startsWith(ROOT + path.sep) && file !== ROOT) {
+  const base = path.normalize(path.join(ROOT, urlPath));
+  if (!base.startsWith(ROOT + path.sep) && base !== ROOT) {
     return send(res, 403, "Forbidden");
+  }
+
+  // Чисті адреси, як на хостингу: /ua/case-melume віддає case-melume.html,
+  // а /ua (без скісної) - ua/index.html. Без цього локальний перегляд
+  // розходився б з тим, що бачить відвідувач на сайті.
+  let file = base;
+  if (!path.extname(base)) {
+    for (const спроба of [base + ".html", path.join(base, "index.html")]) {
+      try { if (fs.statSync(спроба).isFile()) { file = спроба; break; } } catch (e) {}
+    }
   }
 
   fs.stat(file, (err, st) => {

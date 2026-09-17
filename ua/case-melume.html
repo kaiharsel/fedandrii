@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=116">
+  <link rel="stylesheet" href="../css/style.css?v=118">
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
@@ -45,9 +45,11 @@
        кидало б його на ту мову, яку він колись обрав тут раніше.
        Пошукових роботів не перекидаємо взагалі. -->
   <script>(function(){try{
-var K="fa-lang",p=location.pathname,f=p.split("/").pop()||"";if(f==="index.html")f="";
-var D={uk:"ua",pl:"pl",de:"de"},cur="en",k;
-for(k in D){if(new RegExp("(^|/)"+D[k]+"/").test(p))cur=k;}
+var K="fa-lang",s=location.pathname.split("/").filter(Boolean);
+var D={uk:"ua",pl:"pl",de:"de"},dirs=["ua","pl","de"],cur="en",k;
+var d=(s.length&&dirs.indexOf(s[0])!==-1)?s.shift():"";
+for(k in D){if(D[k]===d)cur=k;}
+var f=s.pop()||"";if(f==="index.html")f="";
 document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
 if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
 if(cur!=="en")return;
@@ -59,7 +61,7 @@ w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
   (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
   (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
 if(!D[w])return;
-location.replace(D[w]+"/"+f);
+location.replace("/"+D[w]+"/"+f);
 }catch(e){}})();</script>
 </head>
 <body class="case-page">
@@ -73,12 +75,12 @@ location.replace(D[w]+"/"+f);
   <!-- Шапка -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="./" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+      <a href="/ua/" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
 
       <nav class="nav" id="nav" aria-label="Головна навігація">
-        <a href="./#about" class="nav__link" data-text="Про мене"><span>Про мене</span></a>
-        <a href="./#services" class="nav__link" data-text="Послуги"><span>Послуги</span></a>
-        <a href="./#works" class="nav__link" data-text="Портфоліо"><span>Портфоліо</span></a>
+        <a href="/ua/#about" class="nav__link" data-text="Про мене"><span>Про мене</span></a>
+        <a href="/ua/#services" class="nav__link" data-text="Послуги"><span>Послуги</span></a>
+        <a href="/ua/#works" class="nav__link" data-text="Портфоліо"><span>Портфоліо</span></a>
         <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати в Telegram</span></a>
 
@@ -98,10 +100,10 @@ location.replace(D[w]+"/"+f);
             <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
           </button>
           <ul class="lang__menu">
-            <li><a href="../case-melume" class="lang__item" hreflang="en" data-lang="en">English</a></li>
-            <li><a href="case-melume" class="lang__item is-on" hreflang="uk" data-lang="uk" aria-current="page">Українська</a></li>
-            <li><a href="../pl/case-melume" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
-            <li><a href="../de/case-melume" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+            <li><a href="/case-melume" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="/ua/case-melume" class="lang__item is-on" hreflang="uk" data-lang="uk" aria-current="page">Українська</a></li>
+            <li><a href="/pl/case-melume" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
+            <li><a href="/de/case-melume" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
           </ul>
         </div>
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Написати</span></a>
@@ -136,7 +138,7 @@ location.replace(D[w]+"/"+f);
     <!-- Шапка кейсу. Порядок блоків такий самий, як на вихідній сторінці
          в Notion: назва, обкладинка, підзаголовок, таблиця властивостей. -->
     <section class="case-hero container">
-      <a href="./#works" class="case-back">
+      <a href="/ua/#works" class="case-back">
         <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
         Назад до портфоліо
       </a>
@@ -379,9 +381,9 @@ location.replace(D[w]+"/"+f);
         <div class="footer__col">
           <h4>Меню</h4>
           <ul>
-            <li><a href="./#about">Про мене</a></li>
-            <li><a href="./#services">Послуги</a></li>
-            <li><a href="./#works">Портфоліо</a></li>
+            <li><a href="/ua/#about">Про мене</a></li>
+            <li><a href="/ua/#services">Послуги</a></li>
+            <li><a href="/ua/#works">Портфоліо</a></li>
           </ul>
         </div>
         <div class="footer__time">
@@ -393,6 +395,6 @@ location.replace(D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="../js/script.js?v=116"></script>
+  <script src="../js/script.js?v=118"></script>
 </body>
 </html>
