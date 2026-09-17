@@ -4808,6 +4808,42 @@ body .note-band {
   .hero__title-img { max-height: 20vh; }
 }
 
+/* ============ ЗАПИС ПРОКРУТКИ В КЕЙСІ ============ */
+/* Гіфка з живою сторінкою показує роботу краще за будь-який статичний
+   знімок, тож знімки з кейсів прибрані, а на їх місці ці блоки. Рамка та
+   сама, що була в галереї, тільки без заданих пропорцій: запис може бути
+   якої завгодно висоти. */
+.case-gif {
+  margin: clamp(52px, 9vh, 104px) auto;
+}
+
+.case-gif__frame {
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, #1c1c1c 0%, #0d0d0d 60%, #000 100%);
+}
+
+.case-gif__media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-gif__cap {
+  padding-top: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (max-width: 700px) {
+  .case-gif { margin: clamp(36px, 6vh, 64px) auto; }
+  .case-gif__cap { font-size: 12px; }
+}
+
 /* ============ ЗАГОЛОВКИ СЕКЦІЙ НА ТЕЛЕФОНІ ============ */
 /* «Портфоліо» і «Послуги» на телефоні читались як звичайний підзаголовок:
    8vw на 390px давало 31px - майже як текст під ними. Тут вони помітно

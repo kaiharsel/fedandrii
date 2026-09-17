@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=119">
+  <link rel="stylesheet" href="../css/style.css?v=120">
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
@@ -125,15 +125,9 @@ location.replace("/"+D[w]+"/"+f);
 
   <!-- Page navigation, like Notion's floating table of contents -->
   <nav class="toc" aria-label="Seitennavigation">
-    <a href="#brand" class="toc__item"><span class="toc__label">Über die Marke</span><span class="toc__line"></span></a>
     <a href="#task" class="toc__item"><span class="toc__label">Die Aufgabe</span><span class="toc__line"></span></a>
     <a href="#solution" class="toc__item"><span class="toc__label">Die Lösung</span><span class="toc__line"></span></a>
-    <a href="#catalog" class="toc__item"><span class="toc__label">Katalog</span><span class="toc__line"></span></a>
-    <a href="#order" class="toc__item"><span class="toc__label">Bestellung</span><span class="toc__line"></span></a>
-    <a href="#crm" class="toc__item"><span class="toc__label">CRM</span><span class="toc__line"></span></a>
-    <a href="#tech" class="toc__item"><span class="toc__label">Technisch</span><span class="toc__line"></span></a>
     <a href="#result" class="toc__item"><span class="toc__label">Das Ergebnis</span><span class="toc__line"></span></a>
-    <a href="#screens" class="toc__item"><span class="toc__label">Screens</span><span class="toc__line"></span></a>
   </nav>
   <main>
     <!-- Case header. Same block order as the Melumé case:
@@ -172,205 +166,80 @@ location.replace("/"+D[w]+"/"+f);
       </div>
     </section>
 
-    <!-- About the brand -->
-    <section class="section container" id="brand">
-      <div class="section__head reveal">
-        <h2 class="section__label">Über die Marke</h2>
-      </div>
+    <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/velvet-home.gif" alt="VelvetCake: Startseite" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Startseite</figcaption>
+      </figure>
 
-      <div class="case-text reveal">
-        <p>VelvetCake ist eine Konditorei aus Lwiw: Torten nach Maß, Bento-Torten, Cupcakes, Candybars, Desserts und Workshops zum Dekorieren von Bento. Visuell setzt die Marke auf eine Dark-Luxury-Stimmung: dunkle Palette, zurückhaltende Typografie, das Dessert selbst trägt das Bild</p>
-        <p>Desserts kauft man hier mit den Augen, deshalb funktioniert die Auslage genau so gut, wie sie aussieht. Hinter der Auslage steht aber die zweite Hälfte des Geschäfts, die der Kunde nie sieht: Bestellungen, die täglich über drei verschiedene Kanäle kommen</p>
-      </div>
-    </section>
-
-    <!-- The task -->
-    <section class="section container" id="task">
-      <div class="section__head reveal">
-        <h2 class="section__label">Die Aufgabe</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Bestellungen in einer Konditorei kommen von überall: der eine schreibt auf Instagram, der andere auf Telegram, der dritte will direkt auf der Website bestellen. Solange das alles in Chatverläufen lebt, geht etwas verloren, und das Bild des Tages steckt in jemandes Kopf</p>
-        <p>Gebraucht wurde eine Website, die die Stimmung der Marke trägt und Bestellungen annimmt, und zugleich ein Arbeitsplatz für die Konditorin, an dem jede Anfrage landet und an dem sie Menü, Preise und Workshops selbst ändert, ohne Entwickler</p>
-      </div>
-    </section>
-
-    <!-- The solution -->
-    <section class="section container" id="solution">
-      <div class="section__head reveal">
-        <h2 class="section__label">Die Lösung</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Keine Landingpage mit einem "Schreiben Sie uns"-Button, sondern eine Anwendung mit zwei Eingängen: eine öffentliche Website für Kundinnen und Kunden und ein internes CRM für das Team unter /admin</p>
-        <p>Die Website ist ein Dessertkatalog, eine eigene Seite für jedes Dessert, Workshops und ein FAQ. Eine Anfrage aus jedem Formular wird sofort zur Karte im CRM. Bestellungen von Instagram und Telegram kommen von Hand in denselben Ablauf, sodass jede Kundin in einer Liste sichtbar ist</p>
-        <p>Menü, Preise, Fotos und Workshop-Themen werden im CRM bearbeitet: im Panel ändern und die Website aktualisiert sich</p>
-      </div>
-    </section>
-
-    <!-- Catalog -->
-    <section class="section container" id="catalog">
-      <div class="section__head reveal">
-        <h2 class="section__label">Katalog</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Fünf Kategorien: Torten, Bento, Cupcakes, Candybars, Desserts. Dazu Suche nach Namen und ein Kategoriefilter</p>
-        <p><span class="lead-in">Kategorien</span>Der Einstieg für alle, die noch nicht wissen, was sie wollen, und einfach die Auslage durchsehen</p>
-        <p><span class="lead-in">Suche</span>Für alle, die wegen eines bestimmten Desserts kommen oder eines für einen Anlass suchen</p>
-        <p><span class="lead-in">Dessertseite</span>Fotos, Gewicht, Portionen, Allergene, ein Preis "ab". Jedes Dessert bekommt eine eigene Seite statt einer Zeile in einer Liste</p>
-        <p><span class="lead-in">FAQ</span>Vorlaufzeiten, Lieferung in Lwiw in Markenverpackung oder Abholung, mehrstöckige Torten von 8-12 kg, ein Design nach Vorlage oder aus dem Portfolio</p>
-      </div>
-
-      <blockquote class="case-quote reveal">
-        Fragen zu Zutaten, Allergenen und Vorlaufzeiten sind in einer Konditorei die häufigsten. Wenn die Seite sie beantwortet statt eines Chatverlaufs, kommen deutlich mehr Bestellungen zum Abschluss
-      </blockquote>
-    </section>
-
-    <!-- Ordering -->
-    <section class="section container" id="order">
-      <div class="section__head reveal">
-        <h2 class="section__label">Bestellung</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Auf der Dessertseite gibt es einen Button: "Anfrage senden". Es öffnet sich ein kurzes Formular: Name und Telefon, ohne Registrierung, ohne Warenkorb. Nach dem Absenden sieht die Kundin, dass sie innerhalb einer Stunde zu den Öffnungszeiten kontaktiert wird</p>
-        <p><span class="lead-in">Workshops</span>Eine eigene Seite mit Dekorationsthemen, Preis, Platzzahl und Ablauf des Termins. Die Buchung läuft über dasselbe kurze Formular plus Platzzahl</p>
-        <p><span class="lead-in">Instagram und Telegram</span>Bleiben voll funktionierende Kanäle: die Kontakte stehen im Header, auf der Menüseite und im Footer. Diese Bestellungen trägt die Konditorin von Hand ins CRM ein, damit der Ablauf vollständig ist</p>
-        <p>Jede Anfrage von der Website wird mit einer Markierung gespeichert, woher sie kam: von der Dessertseite oder von der Workshop-Seite. Das CRM zeigt das sofort</p>
-      </div>
-    </section>
-
-    <!-- CRM -->
-    <section class="section container" id="crm">
-      <div class="section__head reveal">
-        <h2 class="section__label">CRM</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Das Panel liegt auf derselben Domain unter /admin, Login mit E-Mail und Passwort. Vier Bereiche</p>
-        <p><span class="lead-in">Anfragen</span>Hier landet jedes Formular von der Website. Oben stehen Statuszähler: neu, in Arbeit, erledigt, storniert; darunter eine Suche nach Name, Telefon oder Produkt. Jede Anfrage ist eine Karte mit Typ (Bestellung oder Workshop), Datum, Kontakt, Dessert und Notiz der Kundin, und der Status wird direkt auf der Karte geändert. Die Konditorin begleitet eine Bestellung vom ersten Anruf bis zur Übergabe und sieht jederzeit, was gerade läuft</p>
-        <p><span class="lead-in">Menü</span>Produkte, Preise, Beschreibungen, Fotos und Sichtbarkeit im Katalog. Ein Produkt lässt sich mit einem Schalter von der Website ausblenden, ohne es zu löschen</p>
-        <p><span class="lead-in">Workshops</span>Dekorationsthemen: Namen, Dauer, Platzzahl, Preise und Sichtbarkeit</p>
-        <p><span class="lead-in">Für den Entwickler</span>Servicefunktionen: Menü oder Workshops auf den Ausgangsstand aus dem Code zurücksetzen, Demo-Anfragen für eine Vorführung laden</p>
-        <p>Alles, was im CRM geändert wird, liegt in Firestore und erscheint auf der Website ohne Rebuild und ohne Entwickler</p>
-      </div>
-    </section>
-
-    <!-- Technically -->
-    <section class="section container" id="tech">
-      <div class="section__head reveal">
-        <h2 class="section__label">Technisch</h2>
-      </div>
-
-      <ul class="case-list reveal">
-        <li>Eine React-Anwendung, gebaut mit Vite; Seiten laden als eigene Chunks, sodass das CRM eine normale Besucherin nichts kostet</li>
-        <li>Firebase: Auth für den CRM-Login, Firestore für Anfragen, Menü und Workshops, Storage für Produktfotos</li>
-        <li>Aktualisierung in Echtzeit: eine neue Anfrage erscheint im CRM ohne Neuladen</li>
-        <li>Katalog mit Kategorien und Suche, eine eigene Route je Dessert</li>
-        <li>Das Basismenü und die Workshops stecken im Code, die Änderungen aus dem CRM legen sich darüber: es gibt immer einen Stand, zu dem man zurück kann</li>
-        <li>Sanftes Scrollen mit Lenis, Animationen mit GSAP und Motion, Ansicht für das Telefon, Meta-Tags und Canonical auf jeder Seite</li>
-      </ul>
-    </section>
-
-    <!-- Result -->
-    <section class="section container" id="result">
-      <div class="section__head reveal">
-        <h2 class="section__label">Das Ergebnis</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>Die Konditorei bekam ein System und nicht nur eine Website: die Auslage nimmt rund um die Uhr Anfragen an, und jede Bestellung, von der Website, Instagram und Telegram, sammelt sich in einem CRM mit Status</p>
-        <p>Menü, Preise, Fotos und Workshops verwaltet das Team selbst. Für eine neue Torte oder einen geänderten Preis wird kein Entwickler mehr gebraucht</p>
-      </div>
-
-      <a href="https://velvetcake.site" target="_blank" rel="noopener" class="case-outlink reveal">
-        velvetcake.site
-        <svg class="cta-arr" width="22" height="20" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
-      </a>
-    </section>
-
-    <!-- Screens of the live site -->
-    <section class="section container" id="screens">
-      <div class="section__head reveal">
-        <h2 class="section__label">Screens</h2>
-      </div>
-
-      <div class="case-gallery">
-        <a href="https://velvetcake.site" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-home.jpg" alt="Startseite von VelvetCake mit erstem Screen und Auslage" loading="lazy" width="1440" height="900">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Startseite</span>
-            <span class="case-shot__tag">Erster Screen und Auslage</span>
-          </div>
-        </a>
-
-        <a href="https://velvetcake.site/menu" target="_blank" rel="noopener" class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-menu-tablet.jpg" alt="Dessertkatalog von VelvetCake auf dem Tablet" loading="lazy" width="900" height="1200">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Dessertkatalog</span>
-            <span class="case-shot__tag">Fünf Kategorien und Suche</span>
-          </div>
-        </a>
-
-        <a href="https://velvetcake.site/menu/klasychnyi-tort" target="_blank" rel="noopener" class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-product.jpg" alt="Dessertseite von VelvetCake mit Gewicht, Portionen, Allergenen und Preis" loading="lazy" width="1440" height="900">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Dessertseite</span>
-            <span class="case-shot__tag">Gewicht, Portionen, Allergene, Preis und das Anfrageformular</span>
-          </div>
-        </a>
-
-        <a href="https://velvetcake.site/masterclasses" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-masterclass.jpg" alt="Workshop-Seite von VelvetCake" loading="lazy" width="1440" height="900">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Workshops</span>
-            <span class="case-shot__tag">Themen, Preis, Plätze und Buchung</span>
-          </div>
-        </a>
-
-        <!-- CRM: screens from the Figma design. Files: img/velvet-crm-*.jpg -->
-        <div class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-crm-leads.jpg" alt="VelvetCake CRM, Bereich Anfragen auf dem Laptop" loading="lazy" width="1440" height="1022">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">CRM / Anfragen</span>
-            <span class="case-shot__tag">Statuszähler, Suche, Anfragekarten mit Statuswechsel</span>
-          </div>
+      <section class="section container" id="task">
+        <div class="section__head reveal">
+          <h2 class="section__label">Die Aufgabe</h2>
         </div>
 
-        <div class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-crm-menu.jpg" alt="VelvetCake CRM, Bereich Menü: Produkte, Preise, Fotos, Sichtbarkeit" loading="lazy" width="1440" height="1515">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">CRM / Menü</span>
-            <span class="case-shot__tag">Produkte, Preise, Fotos und Sichtbarkeit im Katalog</span>
-          </div>
+        <div class="case-text reveal">
+          <p>Bestellungen in einer Konditorei kommen von überall: der eine schreibt auf Instagram, der andere auf Telegram, der dritte will direkt auf der Website bestellen. Solange das alles in Chatverläufen lebt, geht etwas verloren, und das Bild des Tages steckt in jemandes Kopf</p>
+          <p>Gebraucht wurde eine Website, die die Stimmung der Marke trägt und Bestellungen annimmt, und zugleich ein Arbeitsplatz für die Konditorin, an dem jede Anfrage landet und an dem sie Menü, Preise und Workshops selbst ändert, ohne Entwickler</p>
         </div>
 
-        <div class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="../img/velvet-crm-masterclasses.jpg" alt="VelvetCake CRM, Bereich Workshops: Themen, Dauer, Plätze, Preise" loading="lazy" width="1440" height="949">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">CRM / Workshops</span>
-            <span class="case-shot__tag">Dekorationsthemen, Dauer, Plätze, Preise</span>
-          </div>
+      </section>
+
+      <section class="section container" id="solution">
+        <div class="section__head reveal">
+          <h2 class="section__label">Die Lösung</h2>
         </div>
-      </div>
-    </section>
-  </main>
+
+        <div class="case-text reveal">
+          <p>Keine Landingpage mit einem "Schreiben Sie uns"-Button, sondern eine Anwendung mit zwei Eingängen: eine öffentliche Website für Kundinnen und Kunden und ein internes CRM für das Team unter /admin</p>
+          <p>Die Website ist ein Dessertkatalog, eine eigene Seite für jedes Dessert, Workshops und ein FAQ. Eine Anfrage aus jedem Formular wird sofort zur Karte im CRM. Bestellungen von Instagram und Telegram kommen von Hand in denselben Ablauf, sodass jede Kundin in einer Liste sichtbar ist</p>
+          <p>Menü, Preise, Fotos und Workshop-Themen werden im CRM bearbeitet: im Panel ändern und die Website aktualisiert sich</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Eine React-Anwendung, gebaut mit Vite; Seiten laden als eigene Chunks, sodass das CRM eine normale Besucherin nichts kostet</li>
+          <li>Firebase: Auth für den CRM-Login, Firestore für Anfragen, Menü und Workshops, Storage für Produktfotos</li>
+          <li>Aktualisierung in Echtzeit: eine neue Anfrage erscheint im CRM ohne Neuladen</li>
+          <li>Katalog mit Kategorien und Suche, eine eigene Route je Dessert</li>
+          <li>Das Basismenü und die Workshops stecken im Code, die Änderungen aus dem CRM legen sich darüber: es gibt immer einen Stand, zu dem man zurück kann</li>
+          <li>Sanftes Scrollen mit Lenis, Animationen mit GSAP und Motion, Ansicht für das Telefon, Meta-Tags und Canonical auf jeder Seite</li>
+          </ul>
+
+      </section>
+
+      <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/velvet-catalog.gif" alt="VelvetCake: Katalog und Anfrage" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Katalog und Anfrage</figcaption>
+      </figure>
+
+      <section class="section container" id="result">
+        <div class="section__head reveal">
+          <h2 class="section__label">Das Ergebnis</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Die Konditorei bekam ein System und nicht nur eine Website: die Auslage nimmt rund um die Uhr Anfragen an, und jede Bestellung, von der Website, Instagram und Telegram, sammelt sich in einem CRM mit Status</p>
+          <p>Menü, Preise, Fotos und Workshops verwaltet das Team selbst. Für eine neue Torte oder einen geänderten Preis wird kein Entwickler mehr gebraucht</p>
+        </div>
+
+      </section>
+
+      <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/velvet-crm.gif" alt="VelvetCake: CRM: Anfragen" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">CRM: Anfragen</figcaption>
+      </figure>
+
+    </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -417,6 +286,6 @@ location.replace("/"+D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="../js/script.js?v=119"></script>
+  <script src="../js/script.js?v=120"></script>
 </body>
 </html>

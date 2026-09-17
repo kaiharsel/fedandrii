@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=119">
+  <link rel="stylesheet" href="css/style.css?v=120">
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
@@ -125,14 +125,9 @@ location.replace("/"+D[w]+"/"+f);
 
   <!-- Page navigation, like Notion's floating table of contents -->
   <nav class="toc" aria-label="Page navigation">
-    <a href="#brand" class="toc__item"><span class="toc__label">About the brand</span><span class="toc__line"></span></a>
     <a href="#task" class="toc__item"><span class="toc__label">The task</span><span class="toc__line"></span></a>
     <a href="#solution" class="toc__item"><span class="toc__label">The solution</span><span class="toc__line"></span></a>
-    <a href="#catalog" class="toc__item"><span class="toc__label">Catalog</span><span class="toc__line"></span></a>
-    <a href="#content" class="toc__item"><span class="toc__label">Content</span><span class="toc__line"></span></a>
-    <a href="#tech" class="toc__item"><span class="toc__label">Technically</span><span class="toc__line"></span></a>
     <a href="#result" class="toc__item"><span class="toc__label">The result</span><span class="toc__line"></span></a>
-    <a href="#screens" class="toc__item"><span class="toc__label">Screens</span><span class="toc__line"></span></a>
   </nav>
   <main>
     <!-- Case header. The block order matches the original Notion page:
@@ -167,188 +162,81 @@ location.replace("/"+D[w]+"/"+f);
       </div>
     </section>
 
-    <!-- About the brand -->
-    <section class="section container" id="brand">
-      <div class="section__head reveal">
-        <h2 class="section__label">About the brand</h2>
-      </div>
+    <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/melume-home.gif" alt="Melumé Skinscience: Home page" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Home page</figcaption>
+      </figure>
 
-      <div class="case-text reveal">
-        <p>Melumé Skinscience is a German skincare brand out of Düsseldorf. The line is built around its own GMOD complex, which pairs peptides with plant-derived actives</p>
-        <p>The brand plays in cosmeceuticals, and there the buyer doesn't come for a beautiful jar. They come for a specific active and a specific result, and they decide with their head, not their eye</p>
-      </div>
-    </section>
+      <section class="section container" id="task">
+        <div class="section__head reveal">
+          <h2 class="section__label">The task</h2>
+        </div>
 
-    <!-- The task -->
-    <section class="section container" id="task">
-      <div class="section__head reveal">
-        <h2 class="section__label">The task</h2>
-      </div>
+        <div class="case-text reveal">
+          <p>By the time we started, Melumé already ran a European store: English, German and Italian, prices in euro, shipping to thirty countries</p>
+          <p>Ukraine was formally on that list. You could order from Germany as it was, in English and in euro. But formal availability is not the same thing as sales</p>
+          <p>I was brought in to take the brand into the Ukrainian market for real</p>
+        </div>
 
-      <div class="case-text reveal">
-        <p>By the time we started, Melumé already ran a European store: English, German and Italian, prices in euro, shipping to thirty countries</p>
-        <p>Ukraine was formally on that list. You could order from Germany as it was, in English and in euro. But formal availability is not the same thing as sales</p>
-        <p>I was brought in to take the brand into the Ukrainian market for real</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- The solution -->
-    <section class="section container" id="solution">
-      <div class="section__head reveal">
-        <h2 class="section__label">The solution</h2>
-      </div>
+      <section class="section container" id="solution">
+        <div class="section__head reveal">
+          <h2 class="section__label">The solution</h2>
+        </div>
 
-      <div class="case-text reveal">
-        <p>Not a language switcher on top of the European site, but a separate store</p>
-        <p>Its own domain, its own theme, hryvnia prices, Nova Poshta, local payment methods, Ukrainian content. The European store stayed untouched and kept working for its thirty countries</p>
-        <p>The theme is built on a Focal base and customized for the brand, with development in a separate branch. That way the theme base keeps updating and the customizations don't get lost</p>
-      </div>
-    </section>
+        <div class="case-text reveal">
+          <p>Not a language switcher on top of the European site, but a separate store</p>
+          <p>Its own domain, its own theme, hryvnia prices, Nova Poshta, local payment methods, Ukrainian content. The European store stayed untouched and kept working for its thirty countries</p>
+          <p>The theme is built on a Focal base and customized for the brand, with development in a separate branch. That way the theme base keeps updating and the customizations don't get lost</p>
+        </div>
 
-    <!-- Catalog -->
-    <section class="section container" id="catalog">
-      <div class="section__head reveal">
-        <h2 class="section__label">Catalog</h2>
-      </div>
+        <ul class="case-list reveal">
+          <li>A separate Shopify store for the market, with its own domain</li>
+          <li>Custom theme on a Focal base, development in a git branch</li>
+          <li>Catalog with a three-axis collection taxonomy</li>
+          <li>17 pages, among them the ingredient library</li>
+          <li>Judge.me for collecting and showing reviews</li>
+          <li>80 scripts on the home page against 125 on the European site, the Ukrainian version is noticeably lighter</li>
+          </ul>
 
-      <div class="case-text reveal">
-        <p>The main work in this project is not the design, but how the catalog is put together</p>
-        <p>28 products are gathered into 26 collections, and those collections run along three axes at once</p>
-        <p><span class="lead-in">By concern</span>Pigmentation, wrinkles, dryness, dull skin, clogged pores and breakouts</p>
-        <p><span class="lead-in">By active ingredient</span>Retinol, vitamin C, hyaluronic acid, niacinamide, peptides, AHA and BHA acids</p>
-        <p><span class="lead-in">By format</span>Serums, creams, travel sizes, sets, free samples</p>
-      </div>
+      </section>
 
-      <blockquote class="case-quote reveal">
-        People come to the site in different ways. One buyer is looking for what to do about the spots on her face and doesn't know the product names. Another has already read everything and wants retinol, specifically. A third is going on holiday and is looking for a small jar. Each of them has to find their thing fast
-      </blockquote>
+      <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/melume-catalog.gif" alt="Melumé Skinscience: Catalogue and filters" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Catalogue and filters</figcaption>
+      </figure>
 
-      <div class="case-text reveal">
-        <p>Free samples and travel sizes are pulled out separately. This is a first-purchase instrument: a person tries a 10 or 20 ml format before committing to a full volume that costs several thousand hryvnia</p>
-        <p><span class="lead-in">Formats and miniatures</span></p>
-      </div>
+      <section class="section container" id="result">
+        <div class="section__head reveal">
+          <h2 class="section__label">The result</h2>
+        </div>
 
-      <div class="case-photos reveal">
-        <figure>
-          <img src="img/melume-fmt-1.jpg" alt="Super C-Cream" loading="lazy" width="900" height="900">
-        </figure>
-        <figure>
-          <img src="img/melume-fmt-2.jpg" alt="Calm Balm" loading="lazy" width="900" height="900">
-        </figure>
-        <figure>
-          <img src="img/melume-fmt-3.jpg" alt="Power Peptide Micro Emulsion" loading="lazy" width="900" height="900">
-        </figure>
-      </div>
-    </section>
+        <div class="case-text reveal">
+          <p>The Ukrainian buyer got a store in their own language, with hryvnia prices and Nova Poshta delivery instead of an English-language showcase with euro prices and European logistics</p>
+          <p>The European store was not touched along the way: it still works for its thirty countries, and no Ukraine-specific decision required reconfiguring it</p>
+        </div>
 
-    <!-- Content -->
-    <section class="section container" id="content">
-      <div class="section__head reveal">
-        <h2 class="section__label">Content</h2>
-      </div>
+      </section>
 
-      <div class="case-text reveal">
-        <p>For a brand that sells on its formulation, content is not an add-on to the store but part of the product</p>
-        <p><span class="lead-in">Ingredient library</span>A separate section breaking down the actives the line relies on. In this segment it is the strongest trust argument there is, and most cosmetics stores don't make it</p>
-        <p><span class="lead-in">Press</span>Mentions of the brand in the media, social proof for those seeing it for the first time</p>
-        <p><span class="lead-in">FAQ, shipping and returns, legal pages</span>They clear objections before those turn into a reason not to buy</p>
-        <p>Reviews are collected through Judge.me</p>
-      </div>
-    </section>
+      <!-- Місце під запис прокрутки. Поки файла немає, блок схований:
+           на живому сайті коротший кейс кращий за биту картинку. -->
+      <figure class="case-gif container" hidden>
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="../img/gif/melume-product.gif" alt="Melumé Skinscience: Product page" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Product page</figcaption>
+      </figure>
 
-    <!-- Technically -->
-    <section class="section container" id="tech">
-      <div class="section__head reveal">
-        <h2 class="section__label">Technically</h2>
-      </div>
-
-      <ul class="case-list reveal">
-        <li>A separate Shopify store for the market, with its own domain</li>
-        <li>Custom theme on a Focal base, development in a git branch</li>
-        <li>Catalog with a three-axis collection taxonomy</li>
-        <li>17 pages, among them the ingredient library</li>
-        <li>Judge.me for collecting and showing reviews</li>
-        <li>80 scripts on the home page against 125 on the European site, the Ukrainian version is noticeably lighter</li>
-      </ul>
-    </section>
-
-    <!-- Result -->
-    <section class="section container" id="result">
-      <div class="section__head reveal">
-        <h2 class="section__label">The result</h2>
-      </div>
-
-      <div class="case-text reveal">
-        <p>The Ukrainian buyer got a store in their own language, with hryvnia prices and Nova Poshta delivery instead of an English-language showcase with euro prices and European logistics</p>
-        <p>The European store was not touched along the way: it still works for its thirty countries, and no Ukraine-specific decision required reconfiguring it</p>
-      </div>
-
-      <a href="https://melume-skinscience.com.ua/" target="_blank" rel="noopener" class="case-outlink reveal">
-        melume-skinscience.com.ua
-        <svg class="cta-arr" width="22" height="20" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
-      </a>
-    </section>
-
-    <!-- Screens of the live site. This block is not in the Notion page - it is
-         added here so the case shows the work itself, not only the write-up. -->
-    <section class="section container" id="screens">
-      <div class="section__head reveal">
-        <h2 class="section__label">Screens</h2>
-      </div>
-
-      <div class="case-gallery">
-        <a href="https://melume-skinscience.com.ua/" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="img/melume-home.jpg" alt="Melumé Skinscience home page" loading="lazy" width="1920" height="1080">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Home page</span>
-            <span class="case-shot__tag">First screen &amp; showcase, in Ukrainian</span>
-          </div>
-        </a>
-
-        <a href="https://melume-skinscience.com.ua/collections/shop-all" target="_blank" rel="noopener" class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="img/melume-catalog.jpg" alt="Melumé Skinscience catalog" loading="lazy" width="1920" height="1080">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Catalog</span>
-            <span class="case-shot__tag">28 products, hryvnia pricing</span>
-          </div>
-        </a>
-
-        <a href="https://melume-skinscience.com.ua/collections/pigmentation" target="_blank" rel="noopener" class="case-shot reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="img/melume-concern.jpg" alt="Melume Skinscience collection built around a skin concern" loading="lazy" width="1920" height="1080">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Collection by concern</span>
-            <span class="case-shot__tag">Entry point for those who don't know product names</span>
-          </div>
-        </a>
-
-        <a href="https://melume-skinscience.com.ua/pages/ingredient-library-a" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="img/melume-ingredients-tablet.jpg" alt="Melumé Skinscience ingredient library on a tablet" loading="lazy" width="900" height="1200">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Ingredient library</span>
-            <span class="case-shot__tag">The trust material most stores skip</span>
-          </div>
-        </a>
-
-        <a href="https://melume-skinscience.com.ua/collections/travel-sizes" target="_blank" rel="noopener" class="case-shot case-shot--wide reveal-scale">
-          <div class="case-shot__frame" data-parallax>
-            <img src="img/melume-travel.jpg" alt="Melume Skinscience travel sizes and samples collection" loading="lazy" width="1920" height="1080">
-          </div>
-          <div class="case-shot__cap">
-            <span class="case-shot__title">Travel sizes &amp; samples</span>
-            <span class="case-shot__tag">The first-purchase instrument</span>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
+    </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -395,6 +283,6 @@ location.replace("/"+D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/script.js?v=119"></script>
+  <script src="js/script.js?v=120"></script>
 </body>
 </html>

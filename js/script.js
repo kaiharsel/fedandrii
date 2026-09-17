@@ -2489,3 +2489,20 @@ var SITE_LANGS = [
     }, TAP_MS);
   }, true);
 })();
+
+// Місця під запис прокрутки в кейсах. Файл може бути ще не знятий, тож
+// блок стоїть схований у розмітці і зʼявляється тільки тоді, коли картинка
+// справді завантажилась. На живому сайті коротший кейс кращий за биту
+// картинку, а щойну гіфку покладено в папку - блок покажеться сам.
+(function () {
+  var слоти = document.querySelectorAll(".case-gif");
+  if (!слоти.length) return;
+  Array.prototype.forEach.call(слоти, function (слот) {
+    var img = слот.querySelector(".case-gif__media");
+    if (!img) return;
+    function показати() { слот.hidden = false; }
+    // Картинка могла встигнути завантажитись ще до цього скрипта
+    if (img.complete) { if (img.naturalWidth) показати(); return; }
+    img.addEventListener("load", показати);
+  });
+})();
