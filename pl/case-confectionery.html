@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>VelvetCake: strona, katalog i CRM dla lwowskiej cukierni / FED.ANDRII</title>
-  <meta name="description" content="Case FED.ANDRII: VelvetCake, aplikacja na React i Firebase dla lwowskiej cukierni. Katalog deserów, formularze zgłoszeń, rezerwacja warsztatów i własny CRM, w którym zamówienia ze strony, Instagrama i Telegrama trafiają do jednego procesu. Działa pod adresem velvetcake.site">
+  <meta name="description" content="Case FED.ANDRII: VelvetCake, strona i zamknięty CRM dla lwowskiej cukierni. Katalog deserów, formularze zgłoszeń i rezerwacja warsztatów; zamówienia ze strony, Instagrama i Telegrama w jednym miejscu. Działa pod adresem velvetcake.site">
   <meta name="author" content="Andrii Fedyshyn">
   <meta name="robots" content="index, follow">
 
@@ -13,7 +13,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="VelvetCake: strona, katalog i CRM dla lwowskiej cukierni">
-  <meta property="og:description" content="Katalog deserów, formularze zgłoszeń, rezerwacja warsztatów i własny CRM: zamówienia ze strony, Instagrama i Telegrama w jednym procesie. React, Vite, Firebase. Działa pod adresem velvetcake.site">
+  <meta property="og:description" content="Katalog deserów, formularze zgłoszeń, rezerwacja warsztatów i własny CRM: zamówienia ze strony, Instagrama i Telegrama w jednym procesie. Działa pod adresem velvetcake.site">
   <meta property="og:url" content="https://www.fedandrii.me/pl/case-confectionery">
   <meta property="og:locale" content="pl_PL">
   <meta property="og:site_name" content="FED.ANDRII / Projektowanie i programowanie">
@@ -138,7 +138,7 @@ location.replace("/"+D[w]+"/"+f);
         Powrót do portfolio
       </a>
 
-      <h1 class="case-hero__title case-hero__title--lead">VelvetCake</h1>
+      <h1 class="case-hero__title case-hero__title--lead">VelvetCake Lviv</h1>
 
       <div class="case-cover reveal" data-parallax>
         <img src="../img/velvet-cover.webp" alt="VelvetCake" width="1200" height="620">
@@ -193,19 +193,9 @@ location.replace("/"+D[w]+"/"+f);
         </div>
 
         <div class="case-text reveal">
-          <p>Nie landing page z przyciskiem "napisz do nas", lecz aplikacja z dwoma wejściami: publiczna strona dla klientów i zamknięty CRM dla zespołu pod /admin</p>
-          <p>Strona to katalog deserów, osobna strona dla każdego deseru, warsztaty i FAQ. Zgłoszenie z dowolnego formularza od razu staje się kartą w CRM. Zamówienia z Instagrama i Telegrama trafiają do tego samego procesu ręcznie, więc każdy klient jest widoczny na jednej liście</p>
-          <p>Menu, ceny, zdjęcia i tematy warsztatów edytuje się w CRM: zmiana w panelu i strona się aktualizuje</p>
+          <p>Strona: katalog deserów, osobna strona każdego deseru, warsztaty i FAQ. Zgłoszenie można zostawić z dowolnej strony</p>
+          <p>Dla zespołu jest zamknięty CRM: wszystkie zgłoszenia w jednym miejscu, a menu, ceny i tematy warsztatów zmienia się bez programisty</p>
         </div>
-
-        <ul class="case-list reveal">
-          <li>Aplikacja React zbudowana przez Vite; strony ładują się osobnymi chunkami, więc CRM nic nie kosztuje zwykłego odwiedzającego</li>
-          <li>Firebase: Auth do logowania w CRM, Firestore na zgłoszenia, menu i warsztaty, Storage na zdjęcia produktów</li>
-          <li>Aktualizacje w czasie rzeczywistym: nowe zgłoszenie pojawia się w CRM bez przeładowania</li>
-          <li>Katalog z kategoriami i wyszukiwaniem, osobna ścieżka dla każdego deseru</li>
-          <li>Bazowe menu i warsztaty są zaszyte w kodzie, a zmiany z CRM nakładają się na wierzch: zawsze jest do czego wrócić</li>
-          <li>Płynne przewijanie Lenis, animacje GSAP i Motion, wersja na telefon, meta tagi i canonical na każdej stronie</li>
-          </ul>
 
       </section>
 
@@ -224,8 +214,8 @@ location.replace("/"+D[w]+"/"+f);
         </div>
 
         <div class="case-text reveal">
-          <p>Cukiernia dostała system, a nie samą stronę: witryna przyjmuje zgłoszenia całą dobę, a każde zamówienie, ze strony, Instagrama i Telegrama, zbiera się w jednym CRM ze statusami</p>
-          <p>Menu, cenami, zdjęciami i warsztatami zarządza sam zespół. Programista nie jest już potrzebny, żeby dodać tort albo zmienić cenę</p>
+          <p>Witryna przyjmuje zgłoszenia całą dobę, a zamówienia ze strony, Instagrama i Telegrama trafiają w jedno miejsce</p>
+          <p>Zespół nie potrzebuje już programisty, żeby dodać tort, zmienić cenę czy ogłosić nowe warsztaty</p>
         </div>
 
       </section>
