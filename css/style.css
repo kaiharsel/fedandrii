@@ -4809,6 +4809,16 @@ body .note-band {
 
   .section__label { font-size: clamp(38px, 11.5vw, 54px); }
 
+  /* Стрілка під написом, а не збоку: на телефоні рядок і так вузький,
+     а вертикальна стрілка збоку від тексту читалась як продовження рядка.
+     Під ним вона однозначно каже, куди гортати. */
+  .hero__scroll {
+    flex-direction: column;
+    /* стрілка по центру напису, а не під його першою літерою */
+    align-items: center;
+    gap: 8px;
+  }
+
   .section__head,
   .skills__head { margin-bottom: 16px; }
 
