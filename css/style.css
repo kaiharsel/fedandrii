@@ -109,7 +109,9 @@ img { max-width: 100%; display: block; }
   align-items: flex-end;
   justify-content: space-between;
   padding: 40px clamp(24px, 4vw, 60px);
-  transition: opacity 0.85s var(--ease), visibility 0.85s;
+  /* Було 0.85s. Завіса тане поверх уже готового героя, тож довге згасання
+     нічого не показує - лише відсуває момент, коли на сайт можна дивитись. */
+  transition: opacity 0.5s var(--ease), visibility 0.5s;
 }
 
 .preloader.done {
@@ -128,11 +130,17 @@ html.warm .preloader { display: none; }
    прибирає завісу. На повторних заходах прелоадера немає, класу .warm
    досить, щоб це правило не спрацювало, і все йде як раніше. */
 html:not(.warm) .hero__cta,
+html:not(.warm) .hero__works,
 html:not(.warm) .hero__scroll { animation-play-state: paused; }
 
 html.intro-ready .hero__cta {
   animation-play-state: running;
   animation-delay: 0.15s;
+}
+
+html.intro-ready .hero__works {
+  animation-play-state: running;
+  animation-delay: 0.22s;
 }
 
 html.intro-ready .hero__scroll {
@@ -2280,8 +2288,19 @@ html.snap-armed body { touch-action: none; }
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.16em;
-    color: var(--text);
+    color: var(--text-dim);
     gap: 14px;
+  }
+
+  /* Кнопка йде за підказкою, тим самим правим краєм і тією ж мірою відступу
+     від центру. Раніше вона стояла в нижньому кутку - через пів екрана від
+     підказки, і дві дії героя не читались як одна група. Прив'язка теж до
+     центру, а не до низу: так зазор між ними не залежить від висоти вікна. */
+  body.hscroll-on main .hero__actions {
+    position: absolute;
+    top: calc(50% + 118px);
+    right: calc(max(0px, (100vw - 1440px) / 2) + clamp(24px, 5vw, 64px));
+    margin-left: 0;
   }
 
   body.hscroll-on main .hero__scroll-txt--v,
@@ -3564,6 +3583,10 @@ body.snap-on > .footer {
 .hero__cta:focus-visible .cta-arr,
 .hero__cta:active .cta-arr,
 .hero__cta.tap-press .cta-arr,
+.hero__works:hover .cta-arr,
+.hero__works:focus-visible .cta-arr,
+.hero__works:active .cta-arr,
+.hero__works.tap-press .cta-arr,
 .contact__btn:hover .cta-arr,
 .contact__btn:focus-visible .cta-arr,
 .contact__btn:active .cta-arr,
@@ -4059,7 +4082,94 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 }
 
 @media (max-width: 700px) {
-  .hero__cta { padding: 0 0 9px; }
+  .hero__cta,
+  .hero__works { padding: 0 0 9px; }
+}
+
+/* ============ КНОПКА «ПОРТФОЛІО» В ГЕРОЇ ============ */
+/* Головна дія героя: звідси людина йде прямо в роботи, не шукаючи пункт у
+   меню. На ПК кнопка стоїть у правому нижньому куті - по діагоналі від тегів,
+   навпроти підказки прокрутки. Правий край тримає margin-left:auto, а не сам
+   space-between: у горизонтальному режимі підказка йде з потоку
+   (position:absolute), і кнопка лишилась би в ряду сама - тобто зліва.
+
+   order:1 переставляє кнопку за підказку. У розмітці вона стоїть перед нею,
+   бо на телефоні саме такий порядок і потрібен, а на ПК без перестановки
+   автополе штовхало б праворуч обидві - і кут діставався б підказці.
+
+   На телефоні окремого кута кнопці не знайшлося: нижній ряд там і так
+   стовпчик. Тому вона стає поруч із телеграмом однією парою - дві дії
+   рівної ваги в один рядок, і висота героя не росте. */
+.hero__actions {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(20px, 7vw, 34px);
+  order: 1;
+  margin-left: auto;
+}
+
+.hero__works {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.1vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 1.05s forwards;
+}
+
+/* Обидві кнопки героя носять ту саму стрілку, тож і розмір у них спільний.
+   Раніше в телеграма він стояв у розмітці (18x16), а в портфоліо був завязаний
+   на кегль - виходило на чверть менше і тонше за обведенням, і на телефоні,
+   де кнопки стоять поруч, різниця лізла в очі. Тепер обидві тягнуться від
+   тексту: на 13px це ті самі 16px, що були в телеграма. */
+.hero__cta .cta-arr,
+.hero__works .cta-arr {
+  width: 1.354em;   /* 1.25em * 26/24 - пропорція viewBox */
+  height: 1.25em;
+}
+
+.hero__works::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease);
+}
+
+/* На ПК кнопка називає дію повністю, на телефоні лишається одне слово:
+   поруч із телеграмом довгий напис не вміщається в рядок. */
+.hero__works-txt--short { display: none; }
+
+@media (max-width: 768px) {
+  .hero__works-txt--full { display: none; }
+  .hero__works-txt--short { display: inline; }
+}
+
+.hero__works:hover::after,
+.hero__works:focus-visible::after,
+.hero__works:active::after,
+.hero__works.tap-press::after { transform: scaleX(1); }
+
+@media (max-width: 768px) {
+  /* Ряд став стовпчиком: автополе кинуло б пару до правого краю, а
+     перестановка - під підказку прокрутки. Тут кнопки йдуть першими. */
+  .hero__actions {
+    order: 0;
+    margin-left: 0;
+  }
 }
 
 /* ============ ТЕЛЕФОН: БІЛЬШИЙ ТЕКСТ ============ */
@@ -4356,6 +4466,23 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 }
 
 .case-facts__key { color: var(--text-dim); }
+
+/* Значок платформи перед назвою. Розмір узятий від кегля рядка, як у стрілок
+   кнопок: так він не роз'їжджається з текстом, коли той міняється. Колір -
+   currentColor, тобто значок гасне і світиться разом із рядком. */
+.plat-ico {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+  margin-right: 0.5em;
+}
+
+/* Мальований контуром значок оптично важчий за суцільний, тож трохи менший */
+.plat-ico--stroke {
+  width: 1.05em;
+  height: 1.05em;
+  vertical-align: -0.17em;
+}
 .case-facts__val { color: var(--text); }
 
 .case-facts__val a { border-bottom: 1px solid var(--line-strong); }
@@ -4433,6 +4560,13 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 }
 
 /* Маркований список - розділ «Технічно» */
+/* Блоки всередині розділу дихають однаково. Відступ досі мали тільки сусідні
+   абзаци, тож список упирався в текст над ним, а підводка під списком - у
+   сам список: два нулі поспіль. Тепер між ними стільки ж, скільки до таблиці
+   фактів, і розділ читається рівним ритмом. */
+.case-text + .case-list,
+.case-list + .case-text { margin-top: clamp(20px, 3vh, 30px); }
+
 .case-list { list-style: none; }
 
 .case-list li {
