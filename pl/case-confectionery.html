@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=137">
+  <link rel="stylesheet" href="../css/style.css?v=140">
   <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
 
   <!-- Мовні версії сторінки для Google -->
@@ -226,15 +226,61 @@ location.replace("/"+D[w]+"/"+f);
 
       </section>
 
-      <!-- Місце під запис прокрутки CRM. Файл кладеться в img/gif/velvet-crm.gif,
-           далі з figure знімається hidden, а img отримує src. Поки атрибута
-           немає, браузер нічого не запитує - зайвої 404 не буде. -->
-      <figure class="case-gif container" hidden>
-        <div class="case-gif__frame">
-          <img class="case-gif__media" alt="VelvetCake: CRM" decoding="async">
+      <!-- Екрани CRM. Доріжка це звичайний горизонтальний скрол зі scroll-snap:
+           на телефоні гортає палець, на ПК додаються стрілки. Бібліотеки тут
+           не треба, логіки рівно на scrollBy і підсвічування крапки. -->
+      <div class="crm-slider container reveal" data-crm-slider aria-label="Ekrany CRM">
+        <div class="crm-slider__viewport">
+          <ul class="crm-slider__track">
+          <li class="crm-slider__slide">
+            <figure class="crm-shot">
+              <picture>
+                <source media="(max-width: 430px)" srcset="../img/crm/crm-leads-m.webp">
+                <img src="../img/crm/crm-leads.webp" alt="CRM: lista zgłoszeń" width="2400" height="1500" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Zgłoszenia klientów</figcaption>
+            </figure>
+          </li>
+          <li class="crm-slider__slide">
+            <figure class="crm-shot">
+              <picture>
+                <source media="(max-width: 430px)" srcset="../img/crm/crm-lead-edit-m.webp">
+                <img src="../img/crm/crm-lead-edit.webp" alt="CRM: edycja zgłoszenia" width="2400" height="1500" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Edycja zgłoszenia</figcaption>
+            </figure>
+          </li>
+          <li class="crm-slider__slide">
+            <figure class="crm-shot">
+              <picture>
+                <source media="(max-width: 430px)" srcset="../img/crm/crm-menu-m.webp">
+                <img src="../img/crm/crm-menu.webp" alt="CRM: edycja menu" width="2400" height="1500" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Menu</figcaption>
+            </figure>
+          </li>
+          <li class="crm-slider__slide">
+            <figure class="crm-shot">
+              <picture>
+                <source media="(max-width: 430px)" srcset="../img/crm/crm-masterclasses-m.webp">
+                <img src="../img/crm/crm-masterclasses.webp" alt="CRM: tematy warsztatów" width="2400" height="1500" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Warsztaty</figcaption>
+            </figure>
+          </li>
+          </ul>
         </div>
-        <figcaption class="case-gif__cap">CRM: zgłoszenia</figcaption>
-      </figure>
+
+        <button class="crm-slider__arrow crm-slider__arrow--prev" type="button" aria-label="Poprzedni ekran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="crm-slider__arrow crm-slider__arrow--next" type="button" aria-label="Następny ekran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+
+        <div class="crm-slider__dots" aria-hidden="true">
+          <span class="crm-slider__dot is-on"></span>
+          <span class="crm-slider__dot"></span>
+          <span class="crm-slider__dot"></span>
+          <span class="crm-slider__dot"></span>
+        </div>
+      </div>
 
       <section class="section container" id="result">
         <div class="section__head reveal">
@@ -302,6 +348,6 @@ location.replace("/"+D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="../js/script.js?v=137"></script>
+  <script src="../js/script.js?v=140"></script>
 </body>
 </html>

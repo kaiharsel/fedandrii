@@ -2513,3 +2513,57 @@ var SITE_LANGS = [
     img.addEventListener("load", показати);
   });
 })();
+
+// ===== Карусель екранів CRM =====
+// Гортання лишаємо браузеру: доріжка має scroll-snap, тож кнопка лише
+// зсуває скрол на один кадр, а решту (інерція, палець, клавіші) робить
+// сам віюпорт. Звідси й підсвічування крапки рахується з scrollLeft.
+(function () {
+  var root = document.querySelector("[data-crm-slider]");
+  if (!root) return;
+  var view = root.querySelector(".crm-slider__viewport");
+  var slides = root.querySelectorAll(".crm-slider__slide");
+  var prev = root.querySelector(".crm-slider__arrow--prev");
+  var next = root.querySelector(".crm-slider__arrow--next");
+  var dots = root.querySelectorAll(".crm-slider__dot");
+  if (!view || slides.length < 2) return;
+
+  function step() {
+    var a = slides[0].getBoundingClientRect();
+    var b = slides[1].getBoundingClientRect();
+    return b.left - a.left;          // ширина кадру разом із проміжком
+  }
+
+  function current() {
+    var s = step();
+    return s ? Math.round(view.scrollLeft / s) : 0;
+  }
+
+  function sync() {
+    var i = current();
+    var max = slides.length - 1;
+    Array.prototype.forEach.call(dots, function (d, n) {
+      d.classList.toggle("is-on", n === i);
+    });
+    // 2px допуску: субпіксельний scrollLeft інакше лишає кнопку живою
+    // на самому краю, і клік нікуди не веде
+    if (prev) prev.disabled = view.scrollLeft <= 2;
+    if (next) next.disabled = view.scrollLeft >= view.scrollWidth - view.clientWidth - 2;
+  }
+
+  function go(dir) {
+    view.scrollBy({ left: dir * step(), behavior: "smooth" });
+  }
+
+  if (prev) prev.addEventListener("click", function () { go(-1); });
+  if (next) next.addEventListener("click", function () { go(1); });
+
+  var tick = null;
+  view.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = requestAnimationFrame(function () { tick = null; sync(); });
+  }, { passive: true });
+
+  window.addEventListener("resize", sync);
+  sync();
+})();

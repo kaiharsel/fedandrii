@@ -4172,6 +4172,175 @@ body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
   }
 }
 
+/* ============ КАРУСЕЛЬ ЕКРАНІВ CRM ============ */
+/* Доріжка це звичайний горизонтальний скрол зі scroll-snap, а не слайдер на
+   трансформах. Тому на телефоні гортає сам палець, з нативною інерцією, а
+   на ПК лишаються стрілки. Бібліотеку сюди не тягнемо: логіки рівно на
+   scrollBy і підсвічування крапки. */
+/* Карусель підтягнута до тексту CRM відємним полем: вона ілюструє саме
+   його, а стандартний відступ розділу лишав між ними 91px і знімки повисали
+   посередині. Наступний розділ навпаки відсунутий далі, щоб «Результат»
+   читався як новий крок, а не як підпис під картинками. */
+.crm-slider {
+  position: relative;
+  margin-top: clamp(-28px, -2.6vh, -14px);
+}
+
+/* На ПК карусель навмисно ширша за колонку кейсу і виступає за неї з обох
+   боків: знімки це головне, заради чого сюди йдуть. Селектор із body, бо в
+   кейсах діє body.case-page main .container з max-width 900px, і коротший
+   .crm-slider програвав би йому специфічністю. Знімки зняті з макета на
+   2400, тож навіть на такій ширині лишається понад дворазова щільність. */
+@media (min-width: 769px) {
+  body.case-page main .crm-slider { max-width: min(1280px, 100vw - 96px); }
+}
+
+/* Селектор із body: у кейсах діє body.case-page .section з padding-block,
+   і коротший .crm-slider + .section програвав йому специфічністю */
+body.case-page .crm-slider + .section { padding-top: clamp(76px, 10vh, 120px); }
+
+body.case-page .crm-slider + .section .section__head { margin-bottom: clamp(18px, 2.4vh, 30px); }
+
+.crm-slider__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.crm-slider__viewport::-webkit-scrollbar { display: none; }
+
+/* Плавну прокрутку вимикає і системне «менше руху», і власна кнопка сайту */
+@media (prefers-reduced-motion: reduce) {
+  .crm-slider__viewport { scroll-behavior: auto; }
+}
+
+.crm-slider__track {
+  display: flex;
+  gap: clamp(14px, 2vw, 22px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.crm-slider__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+
+.crm-shot { margin: 0; }
+
+.crm-shot picture { display: block; }
+
+/* Екрани CRM високі й різні за висотою: 949, 1198, 1373, 1515 при спільній
+   ширині 1440. Якби кадр тягнувся за картинкою, стрічка стрибала б при
+   кожному гортанні. Тому рамка стала, а знімок обрізається зверху: у всіх
+   чотирьох екранах угорі шапка із заголовком і вкладками, тобто саме те,
+   що впізнається з першого погляду. */
+.crm-shot img {
+  display: block;
+  width: 100%;
+  /* height:auto обовязковий: у розмітці в картинки стоять width і height
+     проти зсуву верстки при завантаженні, і задана висота перебила б
+     aspect-ratio, бо той діє лише коли один бік auto */
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0b0b0b;
+}
+
+.crm-shot figcaption {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Стрілки висять на висоті знімка, а не всього блоку: підпис під кадром
+   інакше стягував би їх нижче центру картинки. */
+.crm-slider__arrow {
+  position: absolute;
+  top: calc((100% - 46px) / 2);
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(8, 8, 8, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.crm-slider__arrow svg { width: 20px; height: 20px; }
+
+.crm-slider__arrow--prev { left: clamp(10px, 1.6vw, 20px); }
+.crm-slider__arrow--next { right: clamp(10px, 1.6vw, 20px); }
+
+.crm-slider__arrow:hover,
+.crm-slider__arrow:focus-visible {
+  background: rgba(8, 8, 8, 0.92);
+  border-color: var(--text);
+}
+
+/* Край стрічки: кнопка лишається на місці, але гасне і перестає ловити клік */
+.crm-slider__arrow[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* На сенсорному екрані стрілок немає: там гортають пальцем, і кнопки тільки
+   закривали б собою кадр */
+@media (hover: none), (pointer: coarse) {
+  .crm-slider__arrow { display: none; }
+}
+
+.crm-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.crm-slider__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  transition: background 0.3s var(--ease), width 0.3s var(--ease);
+}
+
+.crm-slider__dot.is-on {
+  width: 20px;
+  background: var(--text);
+}
+
+/* На телефоні показуємо мобільні екрани CRM, а не зменшений desktop:
+   підміну робить <source> у <picture>, тобто браузер вантажить тільки
+   потрібний файл. Рамка стає вертикальною під ці макети, знімок і далі
+   обрізається зверху, де шапка з вкладками. */
+@media (max-width: 430px) {
+  /* 11/20, а не 3/4: мобільні екрани CRM у 3-4 рази вищі за ширину, і в
+     нижчій рамці від них лишалася сама шапка. Тепер на екрані телефона
+     видно приблизно вдвічі більше, а ширина лишається повною, тож текст
+     усередині читається. */
+  .crm-shot img { aspect-ratio: 11 / 20; }
+}
+
 /* ============ ТЕЛЕФОН: БІЛЬШИЙ ТЕКСТ ============ */
 /* Дрібні підписи (12-13px) на екрані телефона читалися важко. Межа тут 768px -
    та сама, на якій сайт переходить на мобільну розкладку; при 700px смуга
