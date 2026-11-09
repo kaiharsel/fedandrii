@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>HubSuite: strona platformy AI do ERP i CRM / FED.ANDRII</title>
+  <meta name="description" content="Case FED.ANDRII: strona HubSuite, platformy AI do ERP, CRM i przetargów publicznych. Projekt, żywe dema produktu zamiast zrzutów ekranu, ponad 20 stron, własny motyw WordPress, zapis na prezentację z Cal.com i Telegramem oraz dokumentacja, którą uzupełnia AI. Strona: hubsuite.net">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://www.fedandrii.me/pl/case-hubsuite">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Case: HubSuite, strona platformy AI do ERP i CRM">
+  <meta property="og:description" content="Żywe demo produktu na każdym pierwszym ekranie, ponad 20 stron, własny motyw WordPress z edycją na stronie, zapis na prezentację i dokumentacja pisana dla AI. Strona: hubsuite.net">
+  <meta property="og:url" content="https://www.fedandrii.me/pl/case-hubsuite">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="FED.ANDRII / Projektowanie i programowanie">
+  <meta property="og:image" content="https://www.fedandrii.me/img/og/og-pl.jpg?v=6">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FED.ANDRII - Figma, Framer, Webflow, Shopify, WordPress, kod">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.fedandrii.me/img/og/og-pl.jpg?v=6">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=137">
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-hubsuite">
+  <link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite">
+  <link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite">
+  <link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite">
+  <link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite">
+  <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
+       (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
+       поважати. Інакше посилання на польську версію, надіслане клієнтові,
+       кидало б його на ту мову, яку він колись обрав тут раніше.
+       Пошукових роботів не перекидаємо взагалі. -->
+  <script>(function(){try{
+var K="fa-lang",s=location.pathname.split("/").filter(Boolean);
+var D={uk:"ua",pl:"pl",de:"de"},dirs=["ua","pl","de"],cur="en",k;
+var d=(s.length&&dirs.indexOf(s[0])!==-1)?s.shift():"";
+for(k in D){if(D[k]===d)cur=k;}
+var f=s.pop()||"";if(f==="index.html")f="";
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(cur!=="en")return;
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
+  (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
+  (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
+if(!D[w])return;
+location.replace("/"+D[w]+"/"+f);
+}catch(e){}})();</script>
+</head>
+<body class="case-page">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="/pl/" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="../img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+
+      <nav class="nav" id="nav" aria-label="Nawigacja główna">
+        <a href="/pl/#about" class="nav__link" data-text="O mnie"><span>O mnie</span></a>
+        <a href="/pl/#services" class="nav__link" data-text="Usługi"><span>Usługi</span></a>
+        <a href="/pl/#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Kontakt przez Telegram</span></a>
+
+        <p class="nav__time">
+          <span>Mój czas lokalny</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Język / Language">
+            <span class="lang__cur">PL</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="/case-hubsuite" class="lang__item" hreflang="en" data-lang="en">English</a></li>
+            <li><a href="/ua/case-hubsuite" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+            <li><a href="/pl/case-hubsuite" class="lang__item is-on" hreflang="pl" data-lang="pl" aria-current="page">Polski</a></li>
+            <li><a href="/de/case-hubsuite" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Kontakt</span></a>
+        <button class="burger" id="burger" aria-label="Otwórz menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+
+
+
+  <!-- Page navigation, like Notion's floating table of contents -->
+  <nav class="toc" aria-label="Nawigacja po stronie">
+    <a href="#task" class="toc__item"><span class="toc__label">Zadanie</span><span class="toc__line"></span></a>
+    <a href="#design" class="toc__item"><span class="toc__label">Projekt</span><span class="toc__line"></span></a>
+    <a href="#demo" class="toc__item"><span class="toc__label">Żywe dema</span><span class="toc__line"></span></a>
+    <a href="#pages" class="toc__item"><span class="toc__label">Strony</span><span class="toc__line"></span></a>
+    <a href="#leads" class="toc__item"><span class="toc__label">Zgłoszenia</span><span class="toc__line"></span></a>
+    <a href="#docs" class="toc__item"><span class="toc__label">Dokumentacja</span><span class="toc__line"></span></a>
+    <a href="#wordpress" class="toc__item"><span class="toc__label">WordPress</span><span class="toc__line"></span></a>
+    <a href="#app" class="toc__item"><span class="toc__label">Aplikacja</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">Rezultat</span><span class="toc__line"></span></a>
+  </nav>
+  <main>
+    <section class="case-hero container">
+      <a href="/pl/#works" class="case-back">
+        <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
+        Powrót do portfolio
+      </a>
+
+      <h1 class="case-hero__title case-hero__title--lead">HubSuite</h1>
+
+      <div class="case-cover reveal" data-parallax>
+        <img src="/img/hubsuite/hubsuite-cover.jpg" alt="HubSuite" width="1200" height="628">
+      </div>
+
+      <p class="case-lead reveal">Strona platformy AI do ERP i CRM: projekt, żywe dema produktu i WordPress, który klient prowadzi sam</p>
+
+      <div class="case-facts reveal">
+        <div class="case-facts__row">
+          <span class="case-facts__key">Platforma</span>
+          <span class="case-facts__val"><svg class="plat-ico plat-ico--stroke" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 3.5l-4 17"/></svg>WordPress, własny motyw</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Zakres</span>
+          <span class="case-facts__val">Projekt, animacje, ponad 20 stron, motyw WordPress, zgłoszenia, dokumentacja</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Strona</span>
+          <span class="case-facts__val"><a href="https://hubsuite.net/" target="_blank" rel="noopener">hubsuite.net</a></span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Aplikacja</span>
+          <span class="case-facts__val"><a href="https://apps.apple.com/ua/app/hubsuite/id6829011991" target="_blank" rel="noopener">App Store</a>, <a href="https://play.google.com/store/apps/details?id=ua.hubsuite.app" target="_blank" rel="noopener">Google Play</a></span>
+        </div>
+      </div>
+    </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-home.jpg" alt="HubSuite: pierwszy ekran strony głównej z modułami systemu" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Strona główna: pierwszy ekran</figcaption>
+      </figure>
+
+      <section class="section container" id="task">
+        <div class="section__head reveal">
+          <h2 class="section__label">Zadanie</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>HubSuite to platforma ERP, CRM i AI dla małych i średnich firm: ponad 25 modułów, agenci AI na poziomie ChatGPT i Gemini, monitoring i sprawdzanie przetargów Prozorro</p>
+          <p>Firma miała prosty landing i wersję strony na WordPressie od innego programisty, która jej się nie podobała: ciężkie nagłówki wersalikami, płaski niebieski z limonkowym, sucho i bez żadnej animacji</p>
+          <p>Agencja SEO zatwierdziła już strukturę strony głównej i tabelę meta tagów dla wszystkich stron. Oczekiwano strony, która od pierwszego spojrzenia wygląda mocno i profesjonalnie, z animacjami, jasnym i ciemnym motywem oraz porządną wersją mobilną</p>
+          <p>I najważniejsze: pokazać sam produkt. System jest duży, a kupują go właściciele firm, którzy w minutę muszą zrozumieć, co on robi</p>
+        </div>
+      </section>
+
+      <section class="section container" id="design">
+        <div class="section__head reveal">
+          <h2 class="section__label">Projekt</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Zacząłem w Figmie: sześć makiet strony głównej, ciemny i jasny motyw, ukraiński i angielski, komputer i telefon, ze zmiennymi projektowymi i klikalnym prototypem</p>
+          <p>Po pierwszym pokazie było jasne, że statyczne makiety nie oddają tego, czego chce klient, czyli ruchu i żywego produktu. Zamiast więc szlifować obrazki, przeszliśmy na żywą stronę i dalej poprawialiśmy ją wprost w przeglądarce, ekran po ekranie</p>
+          <p>Kolory marki zostały: ciemnoniebieski i limonkowy, limonkowy tylko jako akcent. Ciemny motyw jest główny, jasny jest pełnoprawny, z własnymi odcieniami dla każdego bloku</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Krój szablonowy na pierwszym ekranie, Geist w nagłówkach, Inter w tekście</li>
+          <li>Karty z miękkimi rogami: światło i ramka idą za kursorem, na telefonie nic nie reaguje na palec</li>
+          <li>Sieć w tle, która rośnie przy przewijaniu i zbiega się w jeden sznur w bloku Jak to działa</li>
+          <li>Intro 3D z logo na three.js: około trzech sekund i tylko przy pierwszej wizycie</li>
+          <li>Żywe logo w nagłówku, którego węzły reagują na kursor</li>
+          <li>Płynna zmiana motywu przez View Transitions</li>
+        </ul>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-solution.jpg" alt="HubSuite: orbita usług wokół logo" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Orbita integracji</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-security.jpg" alt="HubSuite: blok bezpieczeństwa z przyciskiem alarmowym i macierzą uprawnień" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Bezpieczeństwo: żywe mini interfejsy zamiast ikon</figcaption>
+      </figure>
+
+      <section class="section container" id="demo">
+        <div class="section__head reveal">
+          <h2 class="section__label">Żywe dema</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Kluczowa decyzja projektu: zamiast zrzutów ekranu i wideo na pierwszym ekranie działa sam program. To HTML i JavaScript odtworzone ze zrzutów prawdziwego systemu klienta: kursor otwiera moduły, pisze na czacie, AI sprawdza pakiet dokumentów przetargowych, liczby analityki zgadzają się między blokami</p>
+          <p>Każda podstrona ma własną scenę: monitoring przetargów, karta akceptacji, raport rozdziału leadów, kontrola zamówionych pozycji. Łącznie 31 scen, na komputerze z kursorem, na telefonie z dotknięciami palca</p>
+          <p>Punkty obok programu są z nim zsynchronizowane: świeci ten, o którym właśnie jest demo, a kliknięcie punktu przewija demo do jego momentu</p>
+          <p>Później klient przyniósł własne animacje 3D dla strony głównej, AI, przetargów, branż i modułów. Wbudowałem je w stronę: dopasowują się do jasnego motywu, mieszczą się na ekranie dowolnej wysokości i nie tracą ostrości, a na telefonie pokazują przybliżony fragment sceny</p>
+          <p>We wszystkich demach zamiast imion ludzi są stanowiska, a uczestnicy przetargów są zmyśleni. Prawdziwe dane klientów nie trafiają na stronę</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-modules.jpg" alt="HubSuite: pierwszy ekran strony modułów" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Możliwości: ponad 25 modułów na orbicie</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-ai.jpg" alt="HubSuite: pierwszy ekran strony AI" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">AI: asystenci w każdym procesie</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-aichat.jpg" alt="HubSuite: prawnik AI sprawdza umowę na czacie" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Czat AI w oknie programu</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-tenders.jpg" alt="HubSuite: pierwszy ekran strony przetargów" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Przetargi: Prozorro, PlayTender i SmartTender w jednym dziale</figcaption>
+      </figure>
+
+      <section class="section container" id="pages">
+        <div class="section__head reveal">
+          <h2 class="section__label">Strony</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Wszystkie strony z tabeli agencji SEO oraz O nas i Cennik: strona główna z 17 sekcjami, Możliwości, AI, Przetargi, Branże, Cennik, O nas, Kontakt, blog z artykułami i stroną autora, cztery dokumenty prawne, dokumentacja i 404</p>
+          <p>Żeby podstrony nie powtarzały strony głównej, każda dostała własny główny element:</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Przetargi: pakiet dokumentów w weryfikacji, ryzyka dostają status, pierścień gotowości rośnie, termin odlicza się na żywo</li>
+          <li>AI: konsola zapytań, w której AI po kolei czyta źródła w systemie i odpowiada krokami</li>
+          <li>Moduły: konfigurator własnego zestawu modułów z licznikiem</li>
+          <li>Branże: autodiagnoza Znajome? i proces narysowany jako linia ze stacjami</li>
+          <li>Cennik: porównanie na 23 wiersze, wdrożenie i wsparcie według dokumentów klienta</li>
+        </ul>
+
+        <div class="case-text reveal">
+          <p>Wybór odwiedzającego nie ginie: plan, zestaw modułów czy branża wybrane na stronie trafiają do zgłoszenia razem z kontaktem</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-industries.jpg" alt="HubSuite: pierwszy ekran strony branż" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Branże</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-pricing.jpg" alt="HubSuite: plany cenowe z przełącznikiem płatności" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Cennik</figcaption>
+      </figure>
+
+      <section class="section container" id="leads">
+        <div class="section__head reveal">
+          <h2 class="section__label">Zgłoszenia</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Przycisk Zapisz się na prezentację otwiera okno zapisu jak w Calendly: kalendarz z wolnymi terminami menedżerów z Cal.com, dane, sprawdzenie, potwierdzenie. Można też bez terminu, wtedy menedżer oddzwoni</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Spotkanie od razu rezerwuje się w Cal.com, nawet gdy typ spotkania wymaga własnych pól</li>
+          <li>Karta zgłoszenia w Telegramie z historią: zmiany edytują tę samą wiadomość zamiast dokładać nowe</li>
+          <li>Zgłoszenie w tle: ktoś wypełnił formularz, ale nie potwierdził terminu, a menedżer i tak widzi kontakt</li>
+          <li>Mail do klienta z datą, przyciskiem dołączenia i Dodaj do kalendarza: Google, Apple, Outlook</li>
+          <li>Można obejrzeć, zmienić lub anulować swoje zgłoszenie, a zmiana dociera do Cal.com, Telegrama i panelu</li>
+          <li>Skąd przyszedł odwiedzający i z której strony: UTM, reklama, strona odsyłająca</li>
+          <li>Ochrona przed botami Cloudflare Turnstile</li>
+        </ul>
+      </section>
+
+      <section class="section container" id="docs">
+        <div class="section__head reveal">
+          <h2 class="section__label">Dokumentacja</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Zgodnie z briefem klienta dokumentacja stała się blogiem instrukcji: działy według modułów, każda instrukcja jako osobny artykuł z własnym adresem, wideo YouTube na górze, numerowane kroki ze zrzutami, wyszukiwanie we wszystkich artykułach i zamknięte działy tylko dla klientów</p>
+          <p>Instrukcje może publikować Claude. Na stronie działa serwer MCP, motyw daje mu własne akcje (działy, tworzenie i aktualizacja instrukcji, wgrywanie zrzutów) i osobnego użytkownika, który ma dostęp wyłącznie do dokumentacji. Kto by nie napisał tekstu, strona sama układa go w ten sam format krok po kroku</p>
+          <p>Dla wyszukiwarek i AI: własny title i schema dla każdej instrukcji, mapa strony, robots.txt z dostępem dla GPTBot, ClaudeBot i Perplexity oraz llms.txt z listą wszystkich instrukcji</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-docs.jpg" alt="HubSuite: strona główna dokumentacji z wyszukiwarką i spisem treści" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Dokumentacja: 15 działów i 33 instrukcje na starcie</figcaption>
+      </figure>
+
+      <section class="section container" id="wordpress">
+        <div class="section__head reveal">
+          <h2 class="section__label">WordPress</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Strona jest napisana w kodzie, bez kreatora, a motyw WordPress buduje z niej mój skrypt. Każdy tekst, przycisk, obraz i sekcja dostaje klucz, więc wszystko da się edytować</p>
+          <p>Klient poprawia wszystko wprost na stronie: teksty, przyciski i linki, obrazy i ikony, SEO. Dokumenty edytuje się jak w Google Docs, z importem .docx. Wystarczy ukryć stronę w panelu, a wszystkie przyciski i pozycje menu, które do niej prowadzą, znikają same</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Komunikatory, social media i linki do aplikacji zmienia się w jednym miejscu</li>
+          <li>SEO przez Yoast bez zdublowanych tagów</li>
+          <li>Animacje zasypiają poza ekranem, three.js przycięty do używanych klas, ciężkie dema ładują się dopiero, gdy sekcja jest blisko</li>
+          <li>Przeprowadzka na nowy hosting: kopia strony, DNS, SSL, przekierowania ze starej domeny, poczta nietknięta</li>
+        </ul>
+      </section>
+
+      <section class="section container" id="app">
+        <div class="section__head reveal">
+          <h2 class="section__label">Aplikacja</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>HubSuite ma aplikację mobilną na iOS i Androida z tymi samymi danymi co na komputerze: czaty robocze i zgłoszenia klientów, powiadomienia o nowych leadach i terminach przetargów, sprawdzanie dokumentów przez AI z telefonu, transakcje, zadania i analityka sprzedaży w drodze</p>
+          <p>Na stronie ma własną sekcję: dwa iPhone'y, w których działa ten sam żywy program co na pierwszym ekranie, z proporcjami prawdziwego telefonu, wyspą i paskiem stanu. Obok przyciski App Store i Google Play, a aplikacja jest już w obu sklepach</p>
+          <p>Wersję mobilną samej strony też zrobiłem osobno, a nie tylko zmniejszyłem: własny pierwszy ekran, gdzie nagłówek się wypisuje i jedzie w górę, animacja zajmuje całą szerokość, a przyciski pojawiają się, gdy się skończy</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-app.jpg" alt="HubSuite: sekcja aplikacji z dwoma iPhone'ami i przyciskami sklepów" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Sekcja aplikacji mobilnej</figcaption>
+      </figure>
+
+      <figure class="case-gif container" style="max-width: calc(420px + 2 * clamp(24px, 5vw, 64px))">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-mobile.jpg" alt="HubSuite: pierwszy ekran strony na telefonie" width="780" height="1688" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Strona na telefonie</figcaption>
+      </figure>
+
+      <section class="section container" id="result">
+        <div class="section__head reveal">
+          <h2 class="section__label">Rezultat</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Zamiast landingu i wersji, która się nie podobała, HubSuite ma stronę na ponad dwadzieścia podstron, gdzie produkt pokazuje się sam, i panel, w którym klient prowadzi teksty, zgłoszenia i dokumentację bez programisty</p>
+          <p>Zgłoszenia ze strony rezerwują się w kalendarzu menedżera i od razu trafiają do Telegrama, a dokumentację uzupełnia AI</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Ponad 20 stron i 33 instrukcje w dokumentacji</li>
+          <li>31 scen żywego dema, na komputerze i na telefonie</li>
+          <li>Ciemny i jasny motyw</li>
+          <li>Około pięciu tygodni od pierwszego spotkania do startu na głównej domenie</li>
+        </ul>
+      </section>
+
+      <div class="case-live container reveal">
+        <a class="case-outlink" href="https://hubsuite.net/" target="_blank" rel="noopener">
+          Zobacz stronę na żywo
+          <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal">
+        <span class="footer__cta-label">Jest pomysł?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          <svg class="tg-ico" viewBox="3 4.44 18.02 15.12" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          Kontakt
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="/pl/#about">O mnie</a></li>
+            <li><a href="/pl/#services">Usługi</a></li>
+            <li><a href="/pl/#works">Portfolio</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          Mój czas lokalny:
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="../js/script.js?v=137"></script>
+</body>
+</html>

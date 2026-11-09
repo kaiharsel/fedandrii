@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>HubSuite: Website for an AI ERP and CRM Platform / FED.ANDRII</title>
+  <meta name="description" content="FED.ANDRII case study: the website of HubSuite, an AI platform for ERP, CRM and public tenders. Design, live product demos instead of screenshots, 20+ pages, a custom WordPress theme, demo booking with Cal.com and Telegram, and documentation that AI keeps up to date. Site: hubsuite.net">
+  <meta name="author" content="Andrii Fedyshyn">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://www.fedandrii.me/case-hubsuite">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Case Study: HubSuite, Website for an AI ERP and CRM Platform">
+  <meta property="og:description" content="A live product demo in every hero, 20+ pages, a custom WordPress theme with on-page editing, demo booking and documentation written for AI. Site: hubsuite.net">
+  <meta property="og:url" content="https://www.fedandrii.me/case-hubsuite">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="FED.ANDRII / Design &amp; Development">
+  <meta property="og:image" content="https://www.fedandrii.me/img/og/og-en.jpg?v=6">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FED.ANDRII - Figma, Framer, Webflow, Shopify, WordPress, code">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.fedandrii.me/img/og/og-en.jpg?v=6">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='%23f0eee8' text-anchor='middle'>FA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@600;700;800&amp;family=Onest:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=137">
+  <script>try{if(sessionStorage.getItem("fa-seen"))document.documentElement.classList.add("warm")}catch(e){}</script>
+
+  <!-- Мовні версії сторінки для Google -->
+  <link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-hubsuite">
+  <link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite">
+  <link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite">
+  <link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite">
+  <link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite">
+  <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
+       (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
+       поважати. Інакше посилання на польську версію, надіслане клієнтові,
+       кидало б його на ту мову, яку він колись обрав тут раніше.
+       Пошукових роботів не перекидаємо взагалі. -->
+  <script>(function(){try{
+var K="fa-lang",s=location.pathname.split("/").filter(Boolean);
+var D={uk:"ua",pl:"pl",de:"de"},dirs=["ua","pl","de"],cur="en",k;
+var d=(s.length&&dirs.indexOf(s[0])!==-1)?s.shift():"";
+for(k in D){if(D[k]===d)cur=k;}
+var f=s.pop()||"";if(f==="index.html")f="";
+document.addEventListener("click",function(e){var t=e.target,a=t&&t.closest?t.closest("[data-lang]"):null;
+if(a){try{localStorage.setItem(K,a.getAttribute("data-lang"))}catch(_){}}},true);
+if(cur!=="en")return;
+if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(navigator.userAgent||""))return;
+var w=null;try{w=localStorage.getItem(K)}catch(e){}
+if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
+try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
+  (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
+  (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
+if(!D[w])return;
+location.replace("/"+D[w]+"/"+f);
+}catch(e){}})();</script>
+</head>
+<body class="case-page">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></div>
+    <div class="preloader__count" id="preloaderCount">0%</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="/" class="header__logo has-logo" data-logo="FED.ANDRII"><img class="logo-img" src="img/logo.png" alt="FED.ANDRII" fetchpriority="high" decoding="sync" width="700" height="249"></a>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="/#about" class="nav__link" data-text="About"><span>About</span></a>
+        <a href="/#services" class="nav__link" data-text="Services"><span>Services</span></a>
+        <a href="/#works" class="nav__link" data-text="Portfolio"><span>Portfolio</span></a>
+        <!-- Головна дія меню: у шапці на телефоні кнопки немає, тож вона тут -->
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="nav__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Message on Telegram</span></a>
+
+        <p class="nav__time">
+          <span>My local time</span>
+          <strong data-localtime>--:--</strong>
+        </p>
+      </nav>
+
+      <div class="header__right">
+        <!-- Перемикач мови. Сам список мов складається у js/script.js (масив
+             SITE_LANGS): щоб додати нову мову, досить одного рядка там. Розмітка
+             нижче - запасний варіант на випадок, якщо скрипт не завантажився. -->
+        <div class="lang" data-lang-switch>
+          <button class="lang__btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language / Мова">
+            <span class="lang__cur">EN</span>
+            <svg class="lang__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 9.5l7 7 7-7"/></svg>
+          </button>
+          <ul class="lang__menu">
+            <li><a href="/case-hubsuite" class="lang__item is-on" hreflang="en" data-lang="en" aria-current="page">English</a></li>
+            <li><a href="/ua/case-hubsuite" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
+            <li><a href="/pl/case-hubsuite" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
+            <li><a href="/de/case-hubsuite" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+          </ul>
+        </div>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Contact me</span></a>
+        <button class="burger" id="burger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Індикатор прокручування: живе в шапці й чіпляється за її нижній
+         край, тож лишається впритул до неї при будь-якій її висоті -->
+    <div class="scroll-key" id="scrollKey" aria-hidden="true">
+      <span class="scroll-key__thread"></span>
+    </div>
+  </header>
+
+
+
+
+  <!-- Page navigation, like Notion's floating table of contents -->
+  <nav class="toc" aria-label="Page navigation">
+    <a href="#task" class="toc__item"><span class="toc__label">The task</span><span class="toc__line"></span></a>
+    <a href="#design" class="toc__item"><span class="toc__label">Design</span><span class="toc__line"></span></a>
+    <a href="#demo" class="toc__item"><span class="toc__label">Live demos</span><span class="toc__line"></span></a>
+    <a href="#pages" class="toc__item"><span class="toc__label">Pages</span><span class="toc__line"></span></a>
+    <a href="#leads" class="toc__item"><span class="toc__label">Requests</span><span class="toc__line"></span></a>
+    <a href="#docs" class="toc__item"><span class="toc__label">Documentation</span><span class="toc__line"></span></a>
+    <a href="#wordpress" class="toc__item"><span class="toc__label">WordPress</span><span class="toc__line"></span></a>
+    <a href="#app" class="toc__item"><span class="toc__label">The app</span><span class="toc__line"></span></a>
+    <a href="#result" class="toc__item"><span class="toc__label">The result</span><span class="toc__line"></span></a>
+  </nav>
+  <main>
+    <section class="case-hero container">
+      <a href="/#works" class="case-back">
+        <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 12H4M11 5l-7 7 7 7"/></svg>
+        Back to portfolio
+      </a>
+
+      <h1 class="case-hero__title case-hero__title--lead">HubSuite</h1>
+
+      <div class="case-cover reveal" data-parallax>
+        <img src="/img/hubsuite/hubsuite-cover.jpg" alt="HubSuite" width="1200" height="628">
+      </div>
+
+      <p class="case-lead reveal">A website for an AI ERP and CRM platform: design, live product demos and a WordPress site the client runs on their own</p>
+
+      <div class="case-facts reveal">
+        <div class="case-facts__row">
+          <span class="case-facts__key">Platform</span>
+          <span class="case-facts__val"><svg class="plat-ico plat-ico--stroke" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 3.5l-4 17"/></svg>WordPress, custom theme</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Scope</span>
+          <span class="case-facts__val">Design, animation, 20+ pages, WordPress theme, lead handling, documentation</span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">Site</span>
+          <span class="case-facts__val"><a href="https://hubsuite.net/" target="_blank" rel="noopener">hubsuite.net</a></span>
+        </div>
+        <div class="case-facts__row">
+          <span class="case-facts__key">App</span>
+          <span class="case-facts__val"><a href="https://apps.apple.com/ua/app/hubsuite/id6829011991" target="_blank" rel="noopener">App Store</a>, <a href="https://play.google.com/store/apps/details?id=ua.hubsuite.app" target="_blank" rel="noopener">Google Play</a></span>
+        </div>
+      </div>
+    </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-home.jpg" alt="HubSuite: the home page hero with the system modules" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Home page: the first screen</figcaption>
+      </figure>
+
+      <section class="section container" id="task">
+        <div class="section__head reveal">
+          <h2 class="section__label">The task</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>HubSuite is an ERP, CRM and AI platform for small and mid-sized businesses: 25+ modules, AI agents on the level of ChatGPT and Gemini, monitoring and checking of Prozorro public tenders</p>
+          <p>The company had a simple landing page and a WordPress version of the site by another developer that they did not like: heavy all-caps headings, flat blue and lime, dry, with no animation at all</p>
+          <p>An SEO agency had already approved the home page structure and a meta tag table for every page. They expected a site that looks strong and professional at first sight, with animation, light and dark themes and a proper mobile version</p>
+          <p>And the main thing: show the product itself. The system is big, and it is bought by business owners who need to understand what it does in a minute</p>
+        </div>
+      </section>
+
+      <section class="section container" id="design">
+        <div class="section__head reveal">
+          <h2 class="section__label">Design</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>I started in Figma: six home page layouts, dark and light theme, Ukrainian and English, desktop and phone, with design variables and a clickable prototype</p>
+          <p>After the first review it was clear that static layouts did not carry what the client wanted, which was motion and a live product. So instead of polishing pictures we moved to a live site and kept refining it right in the browser, screen by screen</p>
+          <p>The brand colours stayed: dark blue and lime, with lime only as an accent. Dark is the main theme, light is a full theme with its own shades for every block</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>A stencil typeface in the hero, Geist for headings, Inter for text</li>
+          <li>Soft-cornered cards: light and border follow the cursor, nothing reacts to a finger on a phone</li>
+          <li>A background network that grows as you scroll and narrows into a single cord in the How it works block</li>
+          <li>A 3D logo intro on three.js: about three seconds and only on the first visit</li>
+          <li>A living logo in the header whose nodes react to the cursor</li>
+          <li>Smooth theme switching with View Transitions</li>
+        </ul>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-solution.jpg" alt="HubSuite: an orbit of services around the logo" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">The integrations orbit</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-security.jpg" alt="HubSuite: the security block with a panic button and a permission matrix" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Security: live mini interfaces instead of icons</figcaption>
+      </figure>
+
+      <section class="section container" id="demo">
+        <div class="section__head reveal">
+          <h2 class="section__label">Live demos</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>The key decision of the project: instead of screenshots or a video, the hero runs the product itself. It is HTML and JavaScript rebuilt from screenshots of the client's real system: the cursor opens modules, types in a chat, AI checks a package of tender documents, analytics numbers match between blocks</p>
+          <p>Every inner page has its own scene: tender monitoring, an approval sheet, a lead distribution report, control of ordered items. 31 scenes in total, with a cursor on desktop and finger taps on the phone</p>
+          <p>The points next to the program are synced with it: the one the demo is showing lights up, and a click on a point jumps the demo to that moment</p>
+          <p>Later the client brought their own 3D animations for the home, AI, tenders, industries and modules pages. I built them into the site: they adapt to the light theme, fit a screen of any height and stay sharp, and on a phone they show a zoomed-in part of the scene</p>
+          <p>Every demo uses job titles instead of people's names, and tender participants are made up. No real client data gets onto the site</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-modules.jpg" alt="HubSuite: the modules page hero" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Features: 25+ modules on an orbit</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-ai.jpg" alt="HubSuite: the AI page hero" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">AI: assistants in every process</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-aichat.jpg" alt="HubSuite: an AI lawyer checks a contract in the chat" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">AI chat in the program window</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-tenders.jpg" alt="HubSuite: the tenders page hero" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Tenders: Prozorro, PlayTender and SmartTender in one department</figcaption>
+      </figure>
+
+      <section class="section container" id="pages">
+        <div class="section__head reveal">
+          <h2 class="section__label">Pages</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Every page from the SEO agency's table, plus About and Pricing: a 17-section home page, Features, AI, Tenders, Industries, Pricing, About, Contacts, a blog with articles and an author page, four legal documents, documentation and a 404</p>
+          <p>So that inner pages would not repeat the home page, each one got its own centrepiece:</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Tenders: a document package under review, risks get a status, a readiness ring fills up, the deadline counts down live</li>
+          <li>AI: a query console where AI reads sources in the system one by one and answers with steps</li>
+          <li>Modules: a builder for your own set of modules with a counter</li>
+          <li>Industries: a Sound familiar? self-check and a process drawn as a line with stations</li>
+          <li>Pricing: a 23-row comparison, onboarding and support based on the client's documents</li>
+        </ul>
+
+        <div class="case-text reveal">
+          <p>The visitor's choice is not lost: the plan, module set or industry picked on a page arrives in the request together with the contacts</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-industries.jpg" alt="HubSuite: the industries page hero" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Industries</figcaption>
+      </figure>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-pricing.jpg" alt="HubSuite: pricing plans with a billing switch" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Pricing</figcaption>
+      </figure>
+
+      <section class="section container" id="leads">
+        <div class="section__head reveal">
+          <h2 class="section__label">Requests</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>The Book a demo button opens a booking window like Calendly: a calendar with the managers' free time from Cal.com, details, review, confirmation. You can also skip the time, and a manager calls back</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>The meeting is booked in Cal.com right away, even when the event type requires its own fields</li>
+          <li>A request card in Telegram with history: changes edit the same message instead of piling up new ones</li>
+          <li>A shadow request: if someone filled in the form but did not confirm a time, the manager still sees the contact</li>
+          <li>An email to the person with the date, a join button and Add to calendar: Google, Apple, Outlook</li>
+          <li>People can view, change or cancel their request, and the change reaches Cal.com, Telegram and the admin</li>
+          <li>Where the visitor came from and from which page: UTM, ads, referring site</li>
+          <li>Bot protection with Cloudflare Turnstile</li>
+        </ul>
+      </section>
+
+      <section class="section container" id="docs">
+        <div class="section__head reveal">
+          <h2 class="section__label">Documentation</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Following the client's brief, the documentation became a blog of how-to guides: sections by module, each guide a separate article with its own address, a YouTube video on top, numbered steps with screenshots, search across all articles and private sections for customers only</p>
+          <p>Guides can be published by Claude. The site runs an MCP server, the theme gives it its own actions (sections, creating and updating guides, uploading screenshots) and a separate user that can touch nothing but the documentation. Whoever writes the text, the site turns it into the same step-by-step format</p>
+          <p>For search engines and AI: a title and schema for every guide, a sitemap, robots.txt that allows GPTBot, ClaudeBot and Perplexity, and llms.txt listing every guide</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-docs.jpg" alt="HubSuite: the documentation home with search and contents" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">Documentation: 15 sections and 33 guides at launch</figcaption>
+      </figure>
+
+      <section class="section container" id="wordpress">
+        <div class="section__head reveal">
+          <h2 class="section__label">WordPress</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>The site is hand-coded, without a page builder, and my script builds the WordPress theme from it. Every text, button, image and section gets a key, so all of it can be edited</p>
+          <p>The client edits everything right on the page: texts, buttons and links, images and icons, SEO. Documents are edited like in Google Docs, with .docx import. Hide a page in the admin, and every button and menu item pointing to it disappears on its own</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>Messengers, social links and app links are changed in one place</li>
+          <li>SEO through Yoast without duplicate tags</li>
+          <li>Animations sleep off screen, three.js is trimmed to the classes in use, heavy demos load only when their section is near</li>
+          <li>Move to a new host: site copy, DNS, SSL, redirects from the old domain, email untouched</li>
+        </ul>
+      </section>
+
+      <section class="section container" id="app">
+        <div class="section__head reveal">
+          <h2 class="section__label">The app</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>HubSuite has a mobile app for iOS and Android with the same data as on the desktop: work chats and customer requests, notifications about new leads and tender deadlines, AI document checks from the phone, deals, tasks and sales analytics on the go</p>
+          <p>On the site it has its own section: two iPhones running the same live program as in the hero, with the proportions of a real phone, the island and a status bar. Next to them are the App Store and Google Play buttons, and the app is already in both stores</p>
+          <p>I also built the mobile version of the site itself separately instead of just shrinking it: its own first screen where the heading types out and slides up, the animation takes the full width and the buttons appear once it has played</p>
+        </div>
+      </section>
+
+      <figure class="case-gif container">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-app.jpg" alt="HubSuite: the app section with two iPhones and store buttons" width="1440" height="900" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">The mobile app section</figcaption>
+      </figure>
+
+      <figure class="case-gif container" style="max-width: calc(420px + 2 * clamp(24px, 5vw, 64px))">
+        <div class="case-gif__frame">
+          <img class="case-gif__media" src="/img/hubsuite/hubsuite-mobile.jpg" alt="HubSuite: the site hero on a phone" width="780" height="1688" loading="lazy" decoding="async">
+        </div>
+        <figcaption class="case-gif__cap">The site on a phone</figcaption>
+      </figure>
+
+      <section class="section container" id="result">
+        <div class="section__head reveal">
+          <h2 class="section__label">The result</h2>
+        </div>
+
+        <div class="case-text reveal">
+          <p>Instead of a landing page and a version they did not like, HubSuite has a site of twenty-plus pages where the product shows itself, and an admin where the client runs texts, requests and documentation without a developer</p>
+          <p>Requests from the site are booked into a manager's calendar and land in Telegram at once, and AI keeps the documentation growing</p>
+        </div>
+
+        <ul class="case-list reveal">
+          <li>20+ pages and 33 documentation guides</li>
+          <li>31 live demo scenes, on desktop and on the phone</li>
+          <li>Dark and light theme</li>
+          <li>About five weeks from the first meeting to launch on the main domain</li>
+        </ul>
+      </section>
+
+      <div class="case-live container reveal">
+        <a class="case-outlink" href="https://hubsuite.net/" target="_blank" rel="noopener">
+          View the live site
+          <svg class="cta-arr" width="17" height="15" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cta reveal">
+        <span class="footer__cta-label">Have an idea?</span>
+        <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="footer__cta-link">
+          <svg class="tg-ico" viewBox="3 4.44 18.02 15.12" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          Contact me
+          <svg class="cta-arr" width="38" height="34" viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M15 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__name-marquee" aria-hidden="true">
+      <div class="footer__name-track">
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        <span>Design &amp; Code</span>
+        <svg class="sep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__mid">
+        <div class="footer__col">
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#works">Portfolio</a></li>
+          </ul>
+        </div>
+        <div class="footer__time">
+          My local time:
+          <strong id="localTime" data-localtime>--:--</strong>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/script.js?v=137"></script>
+</body>
+</html>
