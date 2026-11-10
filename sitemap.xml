@@ -64,61 +64,6 @@
 
   <!-- Кейс: Melumé Skinscience -->
   <url>
-    <loc>https://www.fedandrii.me/case-melume</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/ua/case-melume</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/pl/case-melume</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/de/case-melume</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fedandrii.me/ru/case-melume</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.fedandrii.me/case-hubsuite</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
