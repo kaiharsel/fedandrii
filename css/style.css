@@ -3809,6 +3809,14 @@ body[data-hscroll]:not(.hscroll-on) .note-band {
    ставить їй тло сторінки, тому повертаємо чорний окремо, після нього. */
 body[data-hscroll]:not(.hscroll-on) .note-band { background: #000; }
 
+/* Правило вище потрібне телефону, але горизонтального треку немає вже до
+   1024px, а стрічка Портфоліо працює від 769px. На 769-1024 воно перебивало
+   position: sticky у #works: стрічка гортала картки, а сама секція їхала
+   вгору з екрана. Повертаємо прилипання саме там, де є стрічка. */
+@media (min-width: 769px) {
+  body[data-hscroll]:not(.hscroll-on) .works-pin > #works { position: sticky; }
+}
+
 @media (max-width: 700px) {
   /* 2. Привітання розбите на явні рядки під сходинку; при 28px рядок
      «a designer and developer» не влазив у 342px і ламався на два.
