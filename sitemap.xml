@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Чотири мовні версії кожної сторінки. У кожного url перелічені ВСІ його
+<!-- П'ять мовних версій кожної сторінки. У кожного url перелічені ВСІ його
      альтернативи (включно з ним самим) - цього вимагає Google, інакше
      hreflang ігнорується. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -12,6 +12,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/"/>
     <lastmod>2026-09-06</lastmod>
     <priority>1.0</priority>
@@ -22,6 +23,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/"/>
     <lastmod>2026-09-06</lastmod>
     <priority>1.0</priority>
@@ -32,6 +34,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/"/>
     <lastmod>2026-09-06</lastmod>
     <priority>1.0</priority>
@@ -42,6 +45,18 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/"/>
+    <lastmod>2026-09-06</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.fedandrii.me/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/"/>
     <lastmod>2026-09-06</lastmod>
     <priority>1.0</priority>
@@ -54,6 +69,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -64,6 +80,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -74,6 +91,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -84,6 +102,18 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
+    <lastmod>2026-09-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fedandrii.me/ru/case-melume</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-melume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-melume"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-melume"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -94,6 +124,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite"/>
     <lastmod>2026-11-09</lastmod>
     <priority>0.8</priority>
@@ -104,6 +135,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite"/>
     <lastmod>2026-11-09</lastmod>
     <priority>0.8</priority>
@@ -114,6 +146,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite"/>
     <lastmod>2026-11-09</lastmod>
     <priority>0.8</priority>
@@ -124,6 +157,18 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite"/>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fedandrii.me/ru/case-hubsuite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-hubsuite"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-hubsuite"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-hubsuite"/>
     <lastmod>2026-11-09</lastmod>
     <priority>0.8</priority>
@@ -136,6 +181,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -146,6 +192,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -156,6 +203,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>
@@ -166,6 +214,18 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery"/>
+    <lastmod>2026-09-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fedandrii.me/ru/case-confectionery</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fedandrii.me/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery"/>
     <lastmod>2026-09-06</lastmod>
     <priority>0.8</priority>

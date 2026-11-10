@@ -1468,7 +1468,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
   // img/ lives at the site root, so pages under ua/ need to climb one level:
   // a bare "img/logo.png" would resolve to /ua/img/logo.png and 404.
-  var base = location.pathname.indexOf("/ua/") !== -1 ? "../" : "";
+  var base = /^\/(ua|pl|de|ru)\//.test(location.pathname) ? "../" : "";
 
   // png first: it is the file that ships, so a normal load makes no 404.
   // Swap the order if the logo is ever replaced with an svg.
@@ -2016,7 +2016,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
   var tag = document.createElement("span");
   tag.className = "cursor-dot__tag";
-  var PRESS = (document.documentElement.lang || "").indexOf("uk") === 0 ? "Клік" : "Click";
+  var pageLang = document.documentElement.lang || "";
+  var PRESS = pageLang.indexOf("uk") === 0 ? "Клік" : pageLang.indexOf("ru") === 0 ? "Клик" : "Click";
   tag.textContent = PRESS;
   wrap.appendChild(tag);
 
@@ -2358,7 +2359,8 @@ var SITE_LANGS = [
   { code: "en", dir: "", label: "EN", name: "English" },
   { code: "uk", dir: "ua", label: "UA", name: "Українська" },
   { code: "pl", dir: "pl", label: "PL", name: "Polski" },
-  { code: "de", dir: "de", label: "DE", name: "Deutsch" }
+  { code: "de", dir: "de", label: "DE", name: "Deutsch" },
+  { code: "ru", dir: "ru", label: "RU", name: "Русский" }
 ];
 
 (function () {

@@ -8,7 +8,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(ua|pl|de)/index.html",
+      "source": "/:dir(ua|pl|de|ru)/index.html",
       "destination": "/:dir/",
       "permanent": true
     }

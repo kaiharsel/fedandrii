@@ -38,15 +38,16 @@
   <link rel="alternate" hreflang="uk" href="https://www.fedandrii.me/ua/case-confectionery">
   <link rel="alternate" hreflang="pl" href="https://www.fedandrii.me/pl/case-confectionery">
   <link rel="alternate" hreflang="de" href="https://www.fedandrii.me/de/case-confectionery">
+  <link rel="alternate" hreflang="ru" href="https://www.fedandrii.me/ru/case-confectionery">
   <link rel="alternate" hreflang="x-default" href="https://www.fedandrii.me/case-confectionery">
   <!-- Вибір мови. Перекидаємо ЛИШЕ з кореня: якщо в адресі вже названо мову
-       (/ua/, /pl/, /de/), це усвідомлений перехід за посиланням, і його треба
+       (/ua/, /pl/, /de/, /ru/), це усвідомлений перехід за посиланням, і його треба
        поважати. Інакше посилання на польську версію, надіслане клієнтові,
        кидало б його на ту мову, яку він колись обрав тут раніше.
        Пошукових роботів не перекидаємо взагалі. -->
   <script>(function(){try{
 var K="fa-lang",s=location.pathname.split("/").filter(Boolean);
-var D={uk:"ua",pl:"pl",de:"de"},dirs=["ua","pl","de"],cur="en",k;
+var D={uk:"ua",pl:"pl",de:"de",ru:"ru"},dirs=["ua","pl","de","ru"],cur="en",k;
 var d=(s.length&&dirs.indexOf(s[0])!==-1)?s.shift():"";
 for(k in D){if(D[k]===d)cur=k;}
 var f=s.pop()||"";if(f==="index.html")f="";
@@ -57,9 +58,10 @@ if(/bot|crawl|spider|slurp|mediapartners|bingpreview|facebookexternalhit/i.test(
 var w=null;try{w=localStorage.getItem(K)}catch(e){}
 if(!w){var L=(navigator.languages||[navigator.language||""]).join(",").toLowerCase(),z="";
 try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
-w=(/(^|,)uk/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
-  (/(^|,)pl/.test(L)||z==="Europe/Warsaw")?"pl":
-  (/(^|,)de/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":"en";}
+w=(/(^|,)uk\b/.test(L)||z==="Europe/Kyiv"||z==="Europe/Kiev")?"uk":
+  (/(^|,)pl\b/.test(L)||z==="Europe/Warsaw")?"pl":
+  (/(^|,)de\b/.test(L)||z==="Europe/Berlin"||z==="Europe/Vienna"||z==="Europe/Zurich")?"de":
+  (/(^|,)(ru|be|kk)\b/.test(L))?"ru":"en";}
 if(!D[w])return;
 location.replace("/"+D[w]+"/"+f);
 }catch(e){}})();</script>
@@ -104,6 +106,7 @@ location.replace("/"+D[w]+"/"+f);
             <li><a href="/ua/case-confectionery" class="lang__item" hreflang="uk" data-lang="uk">Українська</a></li>
             <li><a href="/pl/case-confectionery" class="lang__item" hreflang="pl" data-lang="pl">Polski</a></li>
             <li><a href="/de/case-confectionery" class="lang__item" hreflang="de" data-lang="de">Deutsch</a></li>
+            <li><a href="/ru/case-confectionery" class="lang__item" hreflang="ru" data-lang="ru">Русский</a></li>
           </ul>
         </div>
         <a href="https://t.me/fed_andrii" target="_blank" rel="noopener" class="header__cta"><svg class="tg-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><span>Contact me</span></a>
@@ -302,6 +305,6 @@ location.replace("/"+D[w]+"/"+f);
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/script.js?v=137"></script>
+  <script src="js/script.js?v=138"></script>
 </body>
 </html>
